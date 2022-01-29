@@ -7,48 +7,57 @@
  * Copyright © 2022 DigiPen Institute of Technology, all rights reserved.
  * 
  * Summary:
- *  Behavior responsible for dispatching events to the Gladiator's 
- *  State Machine.
+ *  Component that receives inputs from the controller and sends the input to
+ *  the character's state machine manager.
  *  
  ******************************************************************************/
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Behavior responsible for dispatching events to the
-/// Gladiator's State Machine.
+/// Component that receives inputs from the controller and sends the input to
+/// the character 's state machine manager.
 /// </summary>
+[RequireComponent(typeof(CharacterStateMachineManager))]
 public class CharacterInputManager : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterStateManager characterMessager;
+    private CharacterStateMachineManager stateMachine { get; set; }
 
-    public void Attack(InputAction.CallbackContext context)
+    private void Awake()
     {
-        characterMessager.Attack();
+        stateMachine = GetComponent<CharacterStateMachineManager>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            characterMessager.Stop();
+            stateMachine.Stop();
             return;
         }
 
-        float direction = context.ReadValue<float>();
-        var eventArgs = new MovementEventArgs(direction);
-
-        characterMessager.Move(eventArgs);
+        stateMachine.Move(new MovementEventArgs(context.ReadValue<float>()));
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        characterMessager.Jump();
+        stateMachine.Jump();
     }
 
     public void Block(InputAction.CallbackContext context)
     {
-        characterMessager.Block();
+        stateMachine.Block();
+    }
+
+    public void Attack(InputAction.CallbackContext context)
+    {
+        stateMachine.Attack();
+    }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+
     }
 }

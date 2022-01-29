@@ -422,7 +422,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
     m_ActionName: Combat/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
     m_ActionName: Combat/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Block
         m_Mode: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
     m_ActionName: Combat/Block[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
     m_ActionName: Combat/Jump[/Keyboard/space,/Keyboard/w]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -502,7 +502,7 @@ MonoBehaviour:
     m_ActionName: Story/Move[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2562988379127612681}
+      - m_Target: {fileID: 4841930123644021922}
         m_TargetAssemblyTypeName: CharacterInputManager, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -531,9 +531,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9011593091044284076}
   - component: {fileID: 7357814624434152150}
+  - component: {fileID: 4841930123644021922}
   - component: {fileID: 2562988379127612681}
-  - component: {fileID: 1832391199379365665}
   - component: {fileID: 3282629183849687295}
+  - component: {fileID: 4812131485618334645}
+  - component: {fileID: 6617164587363381577}
+  - component: {fileID: 743779714275473381}
+  - component: {fileID: 8503585162915806061}
   m_Layer: 6
   m_Name: Gladiator
   m_TagString: Untagged
@@ -573,6 +577,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 4
   JumpVelocity: 5
+--- !u!114 &4841930123644021922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091044284067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810fa269dd478cb478e4b885e9603787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2562988379127612681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,19 +599,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92084550a6b6f5446aebef2e745b0140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterMessager: {fileID: 1832391199379365665}
---- !u!114 &1832391199379365665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9011593091044284067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11dc3acace9fbdf49adc89d2045c7879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &3282629183849687295
@@ -619,6 +622,69 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4812131485618334645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091044284067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &6617164587363381577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091044284067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe58df89b5b74a97a123b5ed2b70422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: f2afd90c6f0298549846c028cb02fe31, type: 2}
+--- !u!114 &743779714275473381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091044284067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe58df89b5b74a97a123b5ed2b70422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: c65dadd6a12efee49805355664a65a19, type: 2}
+--- !u!114 &8503585162915806061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091044284067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe58df89b5b74a97a123b5ed2b70422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 4789e2a67619f7b4b8bdcc2674d1c3fb, type: 2}
 --- !u!1 &9011593091073757303
 GameObject:
   m_ObjectHideFlags: 0
