@@ -33,27 +33,28 @@ public class CharacterInputManager : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         if (context.canceled)
-        {
             stateMachine.Stop();
-            return;
-        }
 
-        stateMachine.Move(new MovementEventArgs(context.ReadValue<float>()));
+        if (context.started)
+            stateMachine.Move(new MovementEventArgs(context.ReadValue<float>()));
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        stateMachine.Jump();
+        if (context.performed)
+            stateMachine.Jump();
     }
 
     public void Block(InputAction.CallbackContext context)
     {
-        stateMachine.Block();
+        if (context.performed)
+            stateMachine.Block();
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
-        stateMachine.Attack();
+        if (context.performed)
+            stateMachine.Attack();
     }
 
     public void Dash(InputAction.CallbackContext context)

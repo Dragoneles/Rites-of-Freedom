@@ -75,6 +75,32 @@ public class Character : MonoBehaviour
         animator.SetTrigger(triggerName);
     }
 
+    public void SetAnimationBool(string boolName, bool value)
+    {
+        animator.SetBool(boolName, value);
+    }
+
+    public bool GetAnimationBool(string boolName)
+    {
+        return animator.GetBool(boolName);
+    }
+
+    public void SetAnimationInt(string intName, int value)
+    {
+        if (animator == null)
+            return;
+
+        animator.SetInteger(intName, value);
+    }
+
+    public int GetAnimationInt(string intName)
+    {
+        if (animator == null)
+            return 0;
+
+        return animator.GetInteger(intName);
+    }
+
     /// <summary>
     /// Flip this character's transform in the X-dimension.
     /// </summary>

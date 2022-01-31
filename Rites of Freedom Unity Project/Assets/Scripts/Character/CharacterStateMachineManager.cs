@@ -12,6 +12,7 @@
  *  
  ******************************************************************************/
 using System;
+using System.Collections;
 using UnityEngine;
 using Unity.VisualScripting;
 
@@ -21,7 +22,14 @@ using Unity.VisualScripting;
 /// </summary>
 public class CharacterStateMachineManager : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("How long the pending inputs last before expiring.")]
+    private float pendingInputDuration = 0.3f;
+
     public bool ControlsLocked { get; private set; } = false;
+
+    private StateMachineCallbackDictionary callbackDictionary = 
+        new StateMachineCallbackDictionary();
 
     /// <summary>
     /// Input operation suspended until controls are unlocked.
@@ -29,44 +37,52 @@ public class CharacterStateMachineManager : MonoBehaviour
     private Action pendingInput { get; set; }
 
     /// <summary>
+    /// Coroutine that handles the expiration of a pending input.
+    /// </summary>
+    private Coroutine pendingInputCoroutine { get; set; }
+
+    /// <summary>
+    /// This loop runs when the player starts a move action and stops when 
+    /// the move action is stopped.
+    /// </summary>
+    private Coroutine movementCoroutine { get; set; }
+    private bool movementStopped { get; set; } = false;
+
+    /// <summary>
+    /// Used to indicate which direction to move in the state machine.
+    /// </summary>
+    private MovementEventArgs movementArgs { get; set; }
+
+    /// <summary>
     /// Set the control lock to true. Stop current movement actions.
     /// </summary>
     public void LockControls()
     {
-        Stop();
-
         ControlsLocked = true;
     }
 
     public void UnlockControls()
     {
-        pendingInput.Invoke();
-        ClearPendingInput();
-
         ControlsLocked = false;
     }
 
     public void Move(MovementEventArgs e)
     {
-        if (ControlsLocked)
-            return;
+        movementArgs = e;
 
-        Trigger(StateEvents.MoveStart, e);
+        movementCoroutine = movementCoroutine ?? StartCoroutine(MovementCoroutine());
     }
 
     public void Stop()
     {
-        if (ControlsLocked)
-            return;
-
-        Trigger(StateEvents.MoveStop);
+        movementStopped = true;
     }
 
     public void Jump()
     {
         if (ControlsLocked)
         {
-            pendingInput = Jump;
+            SetPendingInput(Jump);
             return;
         }
 
@@ -77,22 +93,60 @@ public class CharacterStateMachineManager : MonoBehaviour
     {
         if (ControlsLocked)
         {
-            pendingInput = Attack;
+            SetPendingInput(Attack);
             return;
         }
 
         Trigger(StateEvents.Attack);
+
+        callbackDictionary.AddCallback(
+            StateType.Attack, 
+            () =>
+            {
+                if (pendingInput != null)
+                    return;
+
+                Trigger(StateEvents.AttackStop);
+            });
     }
 
     public void Block()
     {
         if (ControlsLocked)
         {
-            pendingInput = Block;
+            SetPendingInput(Block);
             return;
         }
 
         Trigger(StateEvents.Block);
+    }
+
+    /// <summary>
+    /// Method invoked from visual scripting to signal that a state
+    /// is finished. Runs state callbacks / transitions.
+    /// </summary>
+    public void NotifyStateFinished(StateType state)
+    {
+        InvokeCallbacks(state);
+        RunPendingInput();
+    }
+
+    public void RunPendingInput()
+    {
+        if (pendingInput == null)
+            return;
+
+        pendingInput.Invoke();
+
+        ClearPendingInput();
+    }
+
+    /// <summary>
+    /// Run a state's exit callbacks.
+    /// </summary>
+    private void InvokeCallbacks(StateType state)
+    {
+        callbackDictionary.InvokeCallbacks(state);
     }
 
     private void Trigger(string eventName, params object[] args)
@@ -102,7 +156,54 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     private void ClearPendingInput()
     {
-        pendingInput = null;
+        SetPendingInput(null);
+    }
+
+    private void SetPendingInput(Action input)
+    {
+        pendingInput = input;
+        ResetPendingInputCoroutine();
+    }
+
+    private void ResetPendingInputCoroutine()
+    {
+        if (pendingInputCoroutine != null)
+            StopCoroutine(pendingInputCoroutine);
+
+        if (pendingInput == null)
+            return;
+
+        pendingInputCoroutine = StartCoroutine(PendingInputCoroutine());
+    }
+
+    private IEnumerator MovementCoroutine()
+    {
+        while (!movementStopped)
+        {
+            yield return new WaitForEndOfFrame();
+
+            if (ControlsLocked)
+            {
+                Trigger(StateEvents.MoveStop);
+                continue;
+            }
+
+            Trigger(StateEvents.MoveStart, movementArgs);
+        }
+
+        movementArgs = null;
+        movementCoroutine = null;
+        movementStopped = false;
+        Trigger(StateEvents.MoveStop);
+    }
+
+    private IEnumerator PendingInputCoroutine()
+    {
+        yield return new WaitForSeconds(pendingInputDuration);
+
+        ClearPendingInput();
+
+        pendingInputCoroutine = null;
     }
 }
 
@@ -112,5 +213,6 @@ public static class StateEvents
     public const string MoveStop = "OnMoveStop";
     public const string Jump = "OnJump";
     public const string Attack = "OnAttack";
+    public const string AttackStop = "OnAttackFinished";
     public const string Block = "OnBlock";
 }
