@@ -20,6 +20,7 @@ using Unity.VisualScripting;
 /// Behavior responsible for dispatching events to the
 /// Gladiator's State Machines.
 /// </summary>
+[RequireComponent(typeof(Character))]
 public class CharacterStateMachineManager : MonoBehaviour
 {
     [SerializeField]
@@ -30,6 +31,8 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     private StateMachineCallbackDictionary callbackDictionary = 
         new StateMachineCallbackDictionary();
+
+    private Character character { get; set; }
 
     /// <summary>
     /// Input operation suspended until controls are unlocked.
@@ -42,16 +45,17 @@ public class CharacterStateMachineManager : MonoBehaviour
     private Coroutine pendingInputCoroutine { get; set; }
 
     /// <summary>
-    /// This loop runs when the player starts a move action and stops when 
+    /// This loop runs when the player starts a move action and stops when
     /// the move action is stopped.
     /// </summary>
-    private Coroutine movementCoroutine { get; set; }
     private bool movementStopped { get; set; } = false;
 
-    /// <summary>
-    /// Used to indicate which direction to move in the state machine.
-    /// </summary>
-    private MovementEventArgs movementArgs { get; set; }
+    private void Awake()
+    {
+        character = GetComponent<Character>();
+        character.GroundStateChanged += OnCharacterGroundStateChanged;
+        character.YVelocityChanged += OnCharacterYVelocityChanged;
+    }
 
     /// <summary>
     /// Set the control lock to true. Stop current movement actions.
@@ -66,11 +70,15 @@ public class CharacterStateMachineManager : MonoBehaviour
         ControlsLocked = false;
     }
 
-    public void Move(MovementEventArgs e)
+    public void Move(float direction)
     {
-        movementArgs = e;
+        if (ControlsLocked || direction == 0f)
+        {
+            Trigger(StateEvents.MoveStop);
+            return;
+        }
 
-        movementCoroutine = movementCoroutine ?? StartCoroutine(MovementCoroutine());
+        Trigger(StateEvents.MoveStart, direction);
     }
 
     public void Stop()
@@ -110,15 +118,20 @@ public class CharacterStateMachineManager : MonoBehaviour
             });
     }
 
-    public void Block()
+    public void BlockStart()
     {
         if (ControlsLocked)
         {
-            SetPendingInput(Block);
+            SetPendingInput(BlockStart);
             return;
         }
 
-        Trigger(StateEvents.Block);
+        Trigger(StateEvents.BlockStart);
+    }
+
+    public void BlockStop()
+    {
+        Trigger(StateEvents.BlockStop);
     }
 
     /// <summary>
@@ -176,27 +189,6 @@ public class CharacterStateMachineManager : MonoBehaviour
         pendingInputCoroutine = StartCoroutine(PendingInputCoroutine());
     }
 
-    private IEnumerator MovementCoroutine()
-    {
-        while (!movementStopped)
-        {
-            yield return new WaitForEndOfFrame();
-
-            if (ControlsLocked)
-            {
-                Trigger(StateEvents.MoveStop);
-                continue;
-            }
-
-            Trigger(StateEvents.MoveStart, movementArgs);
-        }
-
-        movementArgs = null;
-        movementCoroutine = null;
-        movementStopped = false;
-        Trigger(StateEvents.MoveStop);
-    }
-
     private IEnumerator PendingInputCoroutine()
     {
         yield return new WaitForSeconds(pendingInputDuration);
@@ -204,6 +196,28 @@ public class CharacterStateMachineManager : MonoBehaviour
         ClearPendingInput();
 
         pendingInputCoroutine = null;
+    }
+
+    protected virtual void OnCharacterGroundStateChanged(object sender, BoolEventArgs e)
+    {
+        if (e == false)
+            return;
+
+        Trigger(StateEvents.Land);
+    }
+
+    protected virtual void OnCharacterYVelocityChanged(object sender, FloatEventArgs e)
+    {
+        if (character.Feet.IsGrounded)
+            return;
+
+        if (e < 0f)
+            Trigger(StateEvents.Fall);
+    }
+
+    protected virtual void OnCharacterBlocked(object sender, EventArgs e)
+    {
+        Trigger(StateEvents.Block);
     }
 }
 
@@ -215,4 +229,8 @@ public static class StateEvents
     public const string Attack = "OnAttack";
     public const string AttackStop = "OnAttackFinished";
     public const string Block = "OnBlock";
+    public const string BlockStart = "OnBlockStart";
+    public const string BlockStop = "OnBlockStop";
+    public const string Fall = "OnFallingStart";
+    public const string Land = "OnFallingStop";
 }

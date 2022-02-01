@@ -11,9 +11,7 @@
  *  
  ******************************************************************************/
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// First-class dictionary used to add callbacks to States on exit.

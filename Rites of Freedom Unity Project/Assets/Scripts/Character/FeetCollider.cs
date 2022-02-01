@@ -11,6 +11,7 @@
  *  touching the ground.
  *  
  ******************************************************************************/
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -20,7 +21,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class FeetCollider : MonoBehaviour
 {
-    public bool IsGrounded => contacts > 0;
+    public event EventHandler<BoolEventArgs> GroundStateChanged;
+
+    public bool IsGrounded { get; private set; } = false;
     private int contacts = 0;
 
     [SerializeField]
@@ -31,14 +34,30 @@ public class FeetCollider : MonoBehaviour
         if (((1 << collision.gameObject.layer) & collisionMask) == 0)
             return;
 
-        contacts++;
+        contacts = Mathf.Max(0, contacts + 1);
+
+        UpdateGroundState();
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (((1 << other.gameObject.layer) & collisionMask) == 0)
+        if (((1 << collision.gameObject.layer) & collisionMask) == 0)
             return;
 
-        contacts--;
+        contacts = Mathf.Max(0, contacts - 1);
+
+        UpdateGroundState();
+    }
+
+    private void UpdateGroundState()
+    {
+        bool previous = IsGrounded;
+
+        IsGrounded = (contacts > 0);
+
+        if (previous == IsGrounded)
+            return;
+
+        GroundStateChanged?.Invoke(this, IsGrounded);
     }
 }

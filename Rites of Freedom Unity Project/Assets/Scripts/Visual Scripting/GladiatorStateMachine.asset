@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530e556d4407947dcae7102ff497587d, type: 3}
+  m_Name: GladiatorStateMachine
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"title":"Gladiator Master State Machine","summary":null,"pan":{"x":-2.0,"y":-78.0},"zoom":1.0,"elements":[{"nest":{"source":"Macro","macro":0,"embed":null},"isStart":true,"position":{"x":-288.0,"y":0.0},"width":170.0,"guid":"5fdca363-6923-4e37-829b-2a16851bff46","$type":"Unity.VisualScripting.SuperState"},{"nest":{"source":"Macro","macro":1,"embed":null},"isStart":true,"position":{"x":-288.0,"y":-60.0},"width":170.0,"guid":"846343dc-1b98-4e1e-8a14-84417e9d4ccf","$type":"Unity.VisualScripting.SuperState"},{"nest":{"source":"Macro","macro":2,"embed":null},"isStart":true,"position":{"x":-288.0,"y":-120.0},"width":170.0,"guid":"0ef276cf-f239-4fea-b911-7ef475eb93a1","$type":"Unity.VisualScripting.SuperState"}],"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: f2afd90c6f0298549846c028cb02fe31, type: 2}
+    - {fileID: 11400000, guid: 4789e2a67619f7b4b8bdcc2674d1c3fb, type: 2}
+    - {fileID: 11400000, guid: c65dadd6a12efee49805355664a65a19, type: 2}

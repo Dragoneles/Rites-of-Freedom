@@ -9,33 +9,33 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "947fa1e9-0818-4340-b265-21d39f43a22d",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Attack",
+                    "type": "PassThrough",
+                    "id": "1e24bc03-13b8-4351-9205-0b7e35168d47",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold"
                 },
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "1e24bc03-13b8-4351-9205-0b7e35168d47",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press"
-                },
-                {
                     "name": "Block",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "4150c8c7-7759-4740-9d2d-f9ffcfa5171c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Hold"
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "bb3cb533-92f0-4290-a586-c470da32846d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap"
+                    "interactions": "Hold"
                 }
             ],
             "bindings": [

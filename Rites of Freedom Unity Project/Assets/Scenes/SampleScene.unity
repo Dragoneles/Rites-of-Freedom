@@ -263,30 +263,38 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1120838133
+--- !u!1001 &1441573700
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7357814624434152150, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: MoveSpeed.value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357814624434152150, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: JumpVelocity.value
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9011593091044284067, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_Name
-      value: Gladiator
+      value: Player_Gladiator
       objectReference: {fileID: 0}
     - target: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -430,5 +438,5 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -10,6 +10,7 @@
  *  Event dispatcher behavior for a playable character's state machine.
  *  
  ******************************************************************************/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,20 +19,40 @@ using UnityEngine;
 /// Event dispatcher behavior for a playable character's state machine.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IAttackable
 {
-    public float MoveSpeed = 4f;
-    public float JumpVelocity = 5f;
+    public event EventHandler<FloatEventArgs> YVelocityChanged;
+    public event EventHandler<BoolEventArgs> GroundStateChanged;
+    public event EventHandler<AttackEventArgs> Blocked;
+    public event EventHandler<AttackEventArgs> Attacked;
+
+    public Vital Health = new Vital(25);
+    public Stat MoveSpeed =  new Stat(4);
+    public Stat JumpVelocity = new Stat(5);
 
     public Rigidbody2D Rigidbody { get; private set; }
-    private Animator animator { get; set; }
+    public FeetCollider Feet { get; private set; }
+    public Animator Animator { get; private set; }
+
+    private float yVelocity { get; set; } = 0f;
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponentInChildren<Animator>();
+        Animator = GetComponentInChildren<Animator>();
+        Feet = GetComponentInChildren<FeetCollider>();
+
+        Feet.GroundStateChanged += OnFeetGroundStateChanged;
     }
 
+    private void Update()
+    {
+        CheckYVelocity();
+    }
+
+    /// <summary>
+    /// Set the character's x velocity based on an input direction.
+    /// </summary>
     public void Move(float direction)
     {
         Vector2 directionVector = new Vector2(direction, 0f);
@@ -41,9 +62,15 @@ public class Character : MonoBehaviour
         Rigidbody.velocity = velocity;
     }
 
+    /// <summary>
+    /// Halt the character's x velocity.
+    /// </summary>
     public void Stop()
     {
         if (Rigidbody == null)
+            return;
+
+        if (!Feet.IsGrounded)
             return;
 
         Vector2 velocity = Rigidbody.velocity;
@@ -52,53 +79,53 @@ public class Character : MonoBehaviour
         Rigidbody.velocity = velocity;
     }
 
-    public void Attack()
+    public void ReceiveAttack(AttackInstance attack)
     {
-
+        
     }
 
-    public void Block()
-    {
-
-    }
-
+    /// <summary>
+    /// Apply an upwards y-velocity to the player.
+    /// </summary>
     public void Jump()
     {
-
+        Vector2 velocity = Rigidbody.velocity;
+        float x = velocity.x;
+        Rigidbody.velocity = new Vector2(x, JumpVelocity);
     }
 
     public void SetAnimationTrigger(string triggerName)
     {
-        if (animator == null)
+        if (Animator == null)
             return;
 
-        animator.SetTrigger(triggerName);
+        Animator.SetTrigger(triggerName);
     }
 
     public void SetAnimationBool(string boolName, bool value)
     {
-        animator.SetBool(boolName, value);
+        Animator.SetBool(boolName, value);
     }
 
     public bool GetAnimationBool(string boolName)
     {
-        return animator.GetBool(boolName);
+        return Animator.GetBool(boolName);
     }
 
     public void SetAnimationInt(string intName, int value)
     {
-        if (animator == null)
+        if (Animator == null)
             return;
 
-        animator.SetInteger(intName, value);
+        Animator.SetInteger(intName, value);
     }
 
     public int GetAnimationInt(string intName)
     {
-        if (animator == null)
+        if (Animator == null)
             return 0;
 
-        return animator.GetInteger(intName);
+        return Animator.GetInteger(intName);
     }
 
     /// <summary>
@@ -132,5 +159,29 @@ public class Character : MonoBehaviour
         float y = transform.localScale.y;
         float z = transform.localScale.z;
         transform.localScale = new Vector3(x, y, z);
+    }
+
+    private void TakeDamage(float amount)
+    {
+        
+    }
+
+    private void CheckYVelocity()
+    {
+        float previousVelocity = yVelocity;
+        float currentVelocity = Rigidbody.velocity.y;
+
+        if (previousVelocity == currentVelocity)
+            return;
+
+        yVelocity = currentVelocity;
+
+        if (previousVelocity.IsPositive() != currentVelocity.IsPositive())
+            YVelocityChanged?.Invoke(this, yVelocity);
+    }
+
+    protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)
+    {
+        GroundStateChanged?.Invoke(this, e);
     }
 }

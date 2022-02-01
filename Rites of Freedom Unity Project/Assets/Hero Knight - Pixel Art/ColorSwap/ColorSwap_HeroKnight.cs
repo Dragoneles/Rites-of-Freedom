@@ -8,11 +8,13 @@ public class ColorSwap_HeroKnight : MonoBehaviour
     [SerializeField] Color[] m_sourceColors;
     [SerializeField] Color[] m_newColors;
 
+    [SerializeField]
+    private bool m_init = false;
+
     // Private member variables
     Texture2D m_colorSwapTex;
     Color[] m_spriteColors; 
     SpriteRenderer m_spriteRenderer;
-    bool m_init = false;
 
     // Initialize values
     void Awake()
