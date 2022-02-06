@@ -24,6 +24,7 @@ public enum StateType
     Attack,
     Block,
     Jump,
+    Flinch,
     Fall,
     Death
 }

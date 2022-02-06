@@ -21,6 +21,7 @@ using UnityEngine;
 public class Vital : Stat
 {
     [SerializeField]
+    [Tooltip("Current value of this vital.")]
     protected int currentValue = 0;
 
     public override int Value => currentValue;
@@ -30,6 +31,22 @@ public class Vital : Stat
     public Vital(int maxValue) : base(maxValue) 
     {
         currentValue = maxValue;
+    }
+
+    /// <summary>
+    /// Add to the vital's current value.
+    /// </summary>
+    public void Add(int value)
+    {
+        SetValue(currentValue + value);
+    }
+
+    /// <summary>
+    /// Subtract from the vital's current value.
+    /// </summary>
+    public void Subtract(int value)
+    {
+        Add(-value);
     }
 
     public override void SetValue(int value)

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
+  m_Name: Footstep
+  m_EditorClassIdentifier: 
+  BaseVolume: 0.35
+  BasePitch: 1
+  StereoPan: 0
+  RandomPitchDown: -0.1
+  RandomPitchUp: 0.1
+  PlayOnAwake: 0
+  Loop: 0
+  Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
+  Variations:
+  - Clip: {fileID: 8300000, guid: 05a08dd4ee0c046a6b56466d5c9aa9b8, type: 3}
+  - Clip: {fileID: 8300000, guid: bc1c11a60c94e439d84d64c56fdd354f, type: 3}
+  - Clip: {fileID: 8300000, guid: 64049f336db3d403dabd0425eb159922, type: 3}
+  - Clip: {fileID: 8300000, guid: aa9d74433c06a41a9b25cc9175d3f3ae, type: 3}
+  - Clip: {fileID: 8300000, guid: f7bff2a24d7d64eb296a8133060bd3e9, type: 3}
+  - Clip: {fileID: 8300000, guid: f626dafe2c3e045cd852e86532182f70, type: 3}
+  - Clip: {fileID: 8300000, guid: 27f4d8a727d874633b0292b089ec9b7c, type: 3}
+  - Clip: {fileID: 8300000, guid: c1eac1c698fc84605adb7e1074fd7d34, type: 3}
+  - Clip: {fileID: 8300000, guid: f54a7e8aabfc8436b965149db8156132, type: 3}
+  - Clip: {fileID: 8300000, guid: 3a06a27039e144e5c853a93d408fd63a, type: 3}

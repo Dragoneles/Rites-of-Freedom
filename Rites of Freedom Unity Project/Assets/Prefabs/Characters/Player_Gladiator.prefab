@@ -73,6 +73,78 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 129
+--- !u!1 &207382713217626338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4292141222530774125}
+  - component: {fileID: 2263392728735673920}
+  - component: {fileID: 1975252103003342905}
+  m_Layer: 8
+  m_Name: CameraAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4292141222530774125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207382713217626338}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9011593091044284076}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2263392728735673920
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207382713217626338}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5}
+  m_EdgeRadius: 0
+--- !u!114 &1975252103003342905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207382713217626338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53353f0872a3c14a828393d344a2ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanBeRemoved: 0
+  Weight: 3
 --- !u!1 &878885189682763008
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +278,21 @@ MonoBehaviour:
   - {fileID: 4556553493349078976}
   onCollision:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
       m_Calls: []
 --- !u!1 &4697632454366448058
 GameObject:
@@ -293,6 +380,21 @@ MonoBehaviour:
   - {fileID: 4556553493349078976}
   onCollision:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
       m_Calls: []
 --- !u!1 &8347601295017363702
 GameObject:
@@ -362,6 +464,21 @@ MonoBehaviour:
   ignoredColliders:
   - {fileID: 4556553493349078976}
   onCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &9011593090420861173
@@ -530,7 +647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9011593091044284076}
-  - component: {fileID: 7357814624434152150}
+  - component: {fileID: 1511416008644732209}
   - component: {fileID: 4841930123644021922}
   - component: {fileID: 2562988379127612681}
   - component: {fileID: 3282629183849687295}
@@ -558,10 +675,11 @@ Transform:
   - {fileID: 9011593090420861174}
   - {fileID: 2655082379059394440}
   - {fileID: 1536983915}
+  - {fileID: 4292141222530774125}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7357814624434152150
+--- !u!114 &1511416008644732209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -573,8 +691,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70978fbb2f678449de711019a1672f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 4
-  JumpVelocity: 5
+  YVelocityChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  GroundStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  LaunchedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  ReceivedAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 0587389d9c6ebb647af1f34dcf02abca, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Flinched:
+    m_PersistentCalls:
+      m_Calls: []
+  Blocked:
+    m_PersistentCalls:
+      m_Calls: []
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
+  Health:
+    value: 35
+    currentValue: 35
+  Stamina:
+    value: 25
+    currentValue: 25
+  MoveSpeed:
+    value: 40
+  JumpVelocity:
+    value: 45
+  AttackSequence:
+    Attacks:
+    - Damage:
+        value: 3
+      StaminaCost:
+        value: 3
+    - Damage:
+        value: 3
+      StaminaCost:
+        value: 3
+    - Damage:
+        value: 5
+      StaminaCost:
+        value: 6
 --- !u!114 &4841930123644021922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92084550a6b6f5446aebef2e745b0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pendingInputDuration: 0.25
+  PendingStateDuration: 0.3
 --- !u!50 &3282629183849687295
 Rigidbody2D:
   serializedVersion: 4
@@ -663,6 +836,7 @@ GameObject:
   - component: {fileID: 9011593091073757296}
   - component: {fileID: 8985574447783745649}
   - component: {fileID: 8372423824516542949}
+  - component: {fileID: 529323923898888279}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -758,3 +932,30 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &529323923898888279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091073757303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0674834ef1aa744b0bb701104690fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stepped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 97507a05cbff75249995f1db87d31a8e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

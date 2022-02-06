@@ -13,8 +13,8 @@
  ******************************************************************************/
 using System;
 using System.Collections;
-using UnityEngine;
 using Unity.VisualScripting;
+using UnityEngine;
 
 /// <summary>
 /// Behavior responsible for dispatching events to the
@@ -23,53 +23,67 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(Character))]
 public class CharacterStateMachineManager : MonoBehaviour
 {
+    public class StateEvents
+    {
+        public const string MoveStart = "OnMoveStart";
+        public const string MoveStop = "OnMoveStop";
+        public const string Jump = "OnJump";
+        public const string Attack = "OnAttack";
+        public const string AttackStop = "OnAttackFinished";
+        public const string Block = "OnBlock";
+        public const string BlockStart = "OnBlockStart";
+        public const string BlockStop = "OnBlockStop";
+        public const string Fall = "OnFallingStart";
+        public const string Land = "OnFallingStop";
+        public const string Flinch = "OnFlinchStart";
+        public const string FlinchStop = "OnFlinchStop";
+        public const string Death = "OnDeath";
+    }
+
     [SerializeField]
     [Tooltip("How long the pending inputs last before expiring.")]
-    private float pendingInputDuration = 0.3f;
+    private float PendingStateDuration = 0.3f;
 
     public bool ControlsLocked { get; private set; } = false;
 
-    private StateMachineCallbackDictionary callbackDictionary = 
+    private StateMachineCallbackDictionary CallbackDictionary = 
         new StateMachineCallbackDictionary();
 
-    private Character character { get; set; }
+    private StateType NextActionState { get; set; } = StateType.Idle;
+    private StateType CurrentActionState { get; set; } = StateType.Idle;
 
-    /// <summary>
-    /// Input operation suspended until controls are unlocked.
-    /// </summary>
-    private Action pendingInput { get; set; }
+    private Character Character { get; set; }
 
     /// <summary>
     /// Coroutine that handles the expiration of a pending input.
     /// </summary>
-    private Coroutine pendingInputCoroutine { get; set; }
-
-    /// <summary>
-    /// This loop runs when the player starts a move action and stops when
-    /// the move action is stopped.
-    /// </summary>
-    private bool movementStopped { get; set; } = false;
+    private Coroutine NextState_Coroutine { get; set; }
 
     private void Awake()
     {
-        character = GetComponent<Character>();
-        character.GroundStateChanged += OnCharacterGroundStateChanged;
-        character.YVelocityChanged += OnCharacterYVelocityChanged;
+        Character = GetComponent<Character>();
+        Character.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
+        Character.YVelocityChanged.AddListener(OnCharacterYVelocityChanged);
+        Character.Flinched.AddListener(OnCharacterFlinched);
+        Character.Died.AddListener(OnCharacterDeath);
     }
 
     /// <summary>
     /// Set the control lock to true. Stop current movement actions.
     /// </summary>
-    public void LockControls()
+    private void LockControls()
     {
         ControlsLocked = true;
     }
 
-    public void UnlockControls()
+    private void UnlockControls()
     {
         ControlsLocked = false;
     }
 
+    /// <summary>
+    /// Switch between movement states based on Direction.
+    /// </summary>
     public void Move(float direction)
     {
         if (ControlsLocked || direction == 0f)
@@ -81,57 +95,68 @@ public class CharacterStateMachineManager : MonoBehaviour
         Trigger(StateEvents.MoveStart, direction);
     }
 
-    public void Stop()
-    {
-        movementStopped = true;
-    }
-
+    /// <summary>
+    /// Enter the Jump state.
+    /// </summary>
     public void Jump()
     {
         if (ControlsLocked)
         {
-            SetPendingInput(Jump);
+            SetNextState(StateType.Jump);
             return;
         }
 
-        Trigger(StateEvents.Jump);
+        SetCurrentActionState(StateType.Jump);
     }
 
+    /// <summary>
+    /// Enter the Attack state.
+    /// </summary>
     public void Attack()
     {
-        if (ControlsLocked)
+        if (ControlsLocked && Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) < 2)
         {
-            SetPendingInput(Attack);
+            SetNextState(StateType.Attack);
             return;
         }
 
-        Trigger(StateEvents.Attack);
-
-        callbackDictionary.AddCallback(
-            StateType.Attack, 
-            () =>
-            {
-                if (pendingInput != null)
-                    return;
-
-                Trigger(StateEvents.AttackStop);
-            });
+        SetCurrentActionState(StateType.Attack);
     }
 
-    public void BlockStart()
+    /// <summary>
+    /// Enter the Block state.
+    /// </summary>
+    public void StartBlocking()
     {
+        if (CurrentActionState == StateType.Block)
+            return;
+
         if (ControlsLocked)
         {
-            SetPendingInput(BlockStart);
+            SetNextState(StateType.Block);
             return;
         }
 
-        Trigger(StateEvents.BlockStart);
+        SetCurrentActionState(StateType.Block);
     }
 
-    public void BlockStop()
+    /// <summary>
+    /// Leave the Block state.
+    /// </summary>
+    public void StopBlocking()
     {
-        Trigger(StateEvents.BlockStop);
+        if (CurrentActionState != StateType.Block)
+            return;
+
+        NotifyStateFinished(StateType.Block);
+    }
+
+    /// <summary>
+    /// Trigger the state machine transition to the flinch state.
+    /// </summary>
+    public void Flinch()
+    {
+        SetCurrentActionState(StateType.Flinch);
     }
 
     /// <summary>
@@ -146,12 +171,46 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     public void RunPendingInput()
     {
-        if (pendingInput == null)
-            return;
+        SetCurrentActionState(NextActionState);
 
-        pendingInput.Invoke();
+        ClearNextState();
+    }
 
-        ClearPendingInput();
+    private void SetCurrentActionState(StateType state)
+    {
+        CurrentActionState = state;
+
+        LockControls();
+
+        switch (CurrentActionState)
+        {
+            case StateType.Attack:
+                Trigger(StateEvents.Attack);
+                break;
+
+            case StateType.Block:
+                Trigger(StateEvents.BlockStart);
+                break;
+
+            case StateType.Jump:
+                Trigger(StateEvents.AttackStop);
+                Trigger(StateEvents.BlockStop);
+                Trigger(StateEvents.FlinchStop);
+                Trigger(StateEvents.Jump);
+                UnlockControls();
+                break;
+
+            case StateType.Flinch:
+                Trigger(StateEvents.Flinch);
+                break;
+
+            default:
+                Trigger(StateEvents.AttackStop);
+                Trigger(StateEvents.BlockStop);
+                Trigger(StateEvents.FlinchStop);
+                UnlockControls();
+                break;
+        }
     }
 
     /// <summary>
@@ -159,7 +218,7 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     private void InvokeCallbacks(StateType state)
     {
-        callbackDictionary.InvokeCallbacks(state);
+        CallbackDictionary.InvokeCallbacks(state);
     }
 
     private void Trigger(string eventName, params object[] args)
@@ -167,35 +226,35 @@ public class CharacterStateMachineManager : MonoBehaviour
         CustomEvent.Trigger(gameObject, eventName, args);
     }
 
-    private void ClearPendingInput()
+    private void ClearNextState()
     {
-        SetPendingInput(null);
+        SetNextState(StateType.Idle);
     }
 
-    private void SetPendingInput(Action input)
+    private void SetNextState(StateType state)
     {
-        pendingInput = input;
-        ResetPendingInputCoroutine();
+        NextActionState = state;
+        ResetNextStateCoroutine();
     }
 
-    private void ResetPendingInputCoroutine()
+    private void ResetNextStateCoroutine()
     {
-        if (pendingInputCoroutine != null)
-            StopCoroutine(pendingInputCoroutine);
+        if (NextState_Coroutine != null)
+            StopCoroutine(NextState_Coroutine);
 
-        if (pendingInput == null)
+        if (NextActionState == StateType.Idle)
             return;
 
-        pendingInputCoroutine = StartCoroutine(PendingInputCoroutine());
+        NextState_Coroutine = StartCoroutine(NextStateCoroutine());
     }
 
-    private IEnumerator PendingInputCoroutine()
+    private IEnumerator NextStateCoroutine()
     {
-        yield return new WaitForSeconds(pendingInputDuration);
+        yield return new WaitForSeconds(PendingStateDuration);
 
-        ClearPendingInput();
+        ClearNextState();
 
-        pendingInputCoroutine = null;
+        NextState_Coroutine = null;
     }
 
     protected virtual void OnCharacterGroundStateChanged(object sender, BoolEventArgs e)
@@ -208,29 +267,25 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     protected virtual void OnCharacterYVelocityChanged(object sender, FloatEventArgs e)
     {
-        if (character.Feet.IsGrounded)
+        if (Character.Feet.IsGrounded)
             return;
 
         if (e < 0f)
             Trigger(StateEvents.Fall);
     }
 
+    protected virtual void OnCharacterFlinched(object sender, EventArgs e)
+    {
+        Flinch();
+    }
+
     protected virtual void OnCharacterBlocked(object sender, EventArgs e)
     {
         Trigger(StateEvents.Block);
     }
-}
 
-public static class StateEvents
-{
-    public const string MoveStart = "OnMoveStart";
-    public const string MoveStop = "OnMoveStop";
-    public const string Jump = "OnJump";
-    public const string Attack = "OnAttack";
-    public const string AttackStop = "OnAttackFinished";
-    public const string Block = "OnBlock";
-    public const string BlockStart = "OnBlockStart";
-    public const string BlockStop = "OnBlockStop";
-    public const string Fall = "OnFallingStart";
-    public const string Land = "OnFallingStop";
+    protected virtual void OnCharacterDeath(object sender, EventArgs e)
+    {
+        Trigger(StateEvents.Death);
+    }
 }

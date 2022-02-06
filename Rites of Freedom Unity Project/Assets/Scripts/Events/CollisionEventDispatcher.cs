@@ -24,12 +24,16 @@ public class CollisionEventDispatcher : MonoBehaviour
     private SmartUnityEvent<CollisionEventArgs> onCollision = 
         new SmartUnityEvent<CollisionEventArgs>();
 
+    [SerializeField]
+    private SmartUnityEvent<CollisionEventArgs> onExit =
+        new SmartUnityEvent<CollisionEventArgs>();
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!includeTriggers)
             return;
 
-        HandleCollision(collision);
+        HandleCollision(collision, onCollision);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,17 +41,34 @@ public class CollisionEventDispatcher : MonoBehaviour
         if (!includeCollisions)
             return;
 
-        HandleCollision(collision.collider);
+        HandleCollision(collision.collider, onCollision);
     }
 
-    private void HandleCollision(Collider2D collider)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!includeTriggers)
+            return;
+
+        HandleCollision(collision, onExit);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!includeCollisions)
+            return;
+
+        HandleCollision(collision.collider, onExit);
+    }
+
+    private void HandleCollision(Collider2D collider, 
+        SmartUnityEvent<CollisionEventArgs> trigger)
     {
         if (ColliderIsValid(collider) == false)
             return;
 
         var eventArgs = new CollisionEventArgs(collider);
 
-        onCollision?.Invoke(this, eventArgs);
+        trigger?.Invoke(this, eventArgs);
     }
 
     private bool ColliderIsValid(Collider2D collision)

@@ -23,33 +23,33 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterStateMachineManager))]
 public class CharacterInputManager : MonoBehaviour
 {
-    private CharacterStateMachineManager stateMachine { get; set; }
+    private CharacterStateMachineManager StateMachine { get; set; }
 
-    private float moveDirection { get; set; } = 0f;
-    private Coroutine moveCoroutine { get; set; }
-    private Coroutine jumpCoroutine { get; set; }
-    private Coroutine attackCoroutine { get; set; }
-    private Coroutine blockCoroutine { get; set; }
+    private float MoveDirection { get; set; } = 0f;
+    private Coroutine Move_Coroutine { get; set; }
+    private Coroutine Jump_Coroutine { get; set; }
+    private Coroutine Attack_Coroutine { get; set; }
+    private Coroutine Block_Coroutine { get; set; }
 
     private void Awake()
     {
-        stateMachine = GetComponent<CharacterStateMachineManager>();
+        StateMachine = GetComponent<CharacterStateMachineManager>();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            moveDirection = 0f;
+            MoveDirection = 0f;
             return;
         }
 
         if (context.performed)
         {
-            moveDirection = context.ReadValue<float>();
+            MoveDirection = context.ReadValue<float>();
 
-            moveCoroutine ??= StartCoroutine(InputCoroutine(
-                () => stateMachine.Move(moveDirection)));
+            Move_Coroutine ??= StartCoroutine(InputCoroutine(
+                () => StateMachine.Move(MoveDirection)));
         }
     }
 
@@ -57,49 +57,49 @@ public class CharacterInputManager : MonoBehaviour
     {
         if (context.canceled)
         {
-            Stop(jumpCoroutine);
-            jumpCoroutine = null;
+            Stop(Jump_Coroutine);
+            Jump_Coroutine = null;
             return;
         }
 
         if (context.started)
-            stateMachine.Jump();
+            StateMachine.Jump();
 
         if (context.performed)
-            jumpCoroutine ??= StartCoroutine(InputCoroutine(stateMachine.Jump));
+            Jump_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Jump));
     }
 
     public void Block(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            Stop(blockCoroutine);
-            blockCoroutine = null;
-            stateMachine.BlockStop();
+            Stop(Block_Coroutine);
+            Block_Coroutine = null;
+            StateMachine.StopBlocking();
             return;
         }
 
         if (context.started)
-            stateMachine.BlockStart();
+            StateMachine.StartBlocking();
 
         if (context.performed)
-            blockCoroutine ??= StartCoroutine(InputCoroutine(stateMachine.BlockStart));
+            Block_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.StartBlocking));
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            Stop(attackCoroutine);
-            attackCoroutine = null;
+            Stop(Attack_Coroutine);
+            Attack_Coroutine = null;
             return;
         }
 
         if (context.started)
-            stateMachine.Attack();
+            StateMachine.Attack();
 
         if (context.performed)
-            attackCoroutine ??= StartCoroutine(InputCoroutine(stateMachine.Attack));
+            Attack_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Attack));
     }
 
     public void Dash(InputAction.CallbackContext context)

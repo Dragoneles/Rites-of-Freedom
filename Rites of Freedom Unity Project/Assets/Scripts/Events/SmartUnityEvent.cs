@@ -11,7 +11,7 @@ using UnityEngine.Events;
 /// The EventArgs type of the event.
 /// </typeparam>
 [Serializable]
-public class SmartUnityEvent<TEventArgs> : UnityEvent<object, TEventArgs> 
+public class SmartUnityEvent<TEventArgs> : UnityEvent<object, TEventArgs>
     where TEventArgs : EventArgs 
 {
 

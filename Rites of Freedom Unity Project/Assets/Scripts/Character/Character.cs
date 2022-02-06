@@ -1,13 +1,13 @@
-/******************************************************************************
+﻿/******************************************************************************
  * 
  * File: Character.cs
  * Author: Joseph Crump
- * Date: 1/25/22
+ * Date: 2/04/22
  * 
- * Copyright � 2022 DigiPen Institute of Technology, all rights reserved.
+ * Copyright © 2022 DigiPen Institute of Technology, all rights reserved.
  * 
  * Summary:
- *  Event dispatcher behavior for a playable character's state machine.
+ *  Base class for characters that can animate and receive attacks.
  *  
  ******************************************************************************/
 using System;
@@ -16,30 +16,94 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Event dispatcher behavior for a playable character's state machine.
+/// Base class for characters that can animate and receive attacks.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour, IAttackable
 {
-    public event EventHandler<FloatEventArgs> YVelocityChanged;
-    public event EventHandler<BoolEventArgs> GroundStateChanged;
-    public event EventHandler<AttackEventArgs> Blocked;
-    public event EventHandler<AttackEventArgs> Attacked;
+    public class AnimatorTriggers
+    {
+        public static string Idle => nameof(Idle);
+        public static string Attack => nameof(Attack);
+        public static string Block => nameof(Block);
+        public static string BlockStart => nameof(BlockStart);
+    }
+    public class AnimatorBooleans
+    {
+        public static string Attacking => nameof(Attacking);
+        public static string Moving => nameof(Moving);
+        public static string Jumping => nameof(Jumping);
+        public static string Falling => nameof(Falling);
+        public static string Blocking => nameof(Blocking);
+        public static string Dead => nameof(Dead);
+    }
+    public class AnimatorIntegers
+    {
+        public static string AttackCount => nameof(AttackCount);
+    }
 
+    [Header("Events")]
+    /// <summary>
+    /// Event invoked when the y velocity of the character changes.
+    /// Used to handle jump/fall animator states.
+    /// </summary>
+    public SmartUnityEvent<FloatEventArgs> YVelocityChanged;
+
+    /// <summary>
+    /// Event invoked when the character touches or leaves the ground.
+    /// "True" EventArgs indicates the character touched the ground.
+    /// </summary>
+    public SmartUnityEvent<BoolEventArgs> GroundStateChanged;
+
+    /// <summary>
+    /// Event invoked when the character attacks another character.
+    /// TriggeringCharacter is the sender.
+    /// </summary>
+    public SmartUnityEvent<AttackEventArgs> LaunchedAttack;
+
+    /// <summary>
+    /// Event invoked when the character receives an attack.
+    /// TriggeringCharacter is the sender.
+    /// </summary>
+    public SmartUnityEvent<AttackEventArgs> ReceivedAttack;
+
+    /// <summary>
+    /// Event invoked when the character flinches from an attack.
+    /// </summary>
+    public SmartUnityEvent<EventArgs> Flinched;
+
+    /// <summary>
+    /// Event invoked when the character blocks an attack.
+    /// </summary>
+    public SmartUnityEvent<AttackEventArgs> Blocked;
+
+    /// <summary>
+    /// Event invoked when a character dies.
+    /// </summary>
+    public SmartUnityEvent<AttackEventArgs> Died;
+
+    [Header("Stats")]
     public Vital Health = new Vital(25);
-    public Stat MoveSpeed =  new Stat(4);
-    public Stat JumpVelocity = new Stat(5);
+    public Vital Stamina = new Vital(25);
+    public Stat MoveSpeed = new Stat(35);
+    public Stat JumpVelocity = new Stat(50);
 
-    public Rigidbody2D Rigidbody { get; private set; }
+    [Header("Weapon")]
+    [SerializeField]
+    private AttackSequence AttackSequence = new AttackSequence();
+
+    public bool IsDead { get; private set; } = false;
+    public bool IsBlocking { get; private set; } = false;
+    private float YVelocity { get; set; } = 0f;
+
     public FeetCollider Feet { get; private set; }
-    public Animator Animator { get; private set; }
-
-    private float yVelocity { get; set; } = 0f;
+    private Rigidbody2D Rigidbody { get; set; }
+    private Animator Animator { get; set; }
 
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponentInChildren<Animator>();
+        Rigidbody = GetComponent<Rigidbody2D>();
         Feet = GetComponentInChildren<FeetCollider>();
 
         Feet.GroundStateChanged += OnFeetGroundStateChanged;
@@ -56,7 +120,7 @@ public class Character : MonoBehaviour, IAttackable
     public void Move(float direction)
     {
         Vector2 directionVector = new Vector2(direction, 0f);
-        Vector2 velocity = directionVector * MoveSpeed;
+        Vector2 velocity = directionVector * (MoveSpeed / 10);
         velocity.y = Rigidbody.velocity.y;
 
         Rigidbody.velocity = velocity;
@@ -79,11 +143,6 @@ public class Character : MonoBehaviour, IAttackable
         Rigidbody.velocity = velocity;
     }
 
-    public void ReceiveAttack(AttackInstance attack)
-    {
-        
-    }
-
     /// <summary>
     /// Apply an upwards y-velocity to the player.
     /// </summary>
@@ -91,41 +150,29 @@ public class Character : MonoBehaviour, IAttackable
     {
         Vector2 velocity = Rigidbody.velocity;
         float x = velocity.x;
-        Rigidbody.velocity = new Vector2(x, JumpVelocity);
+        Rigidbody.velocity = new Vector2(x, (JumpVelocity / 10));
     }
 
-    public void SetAnimationTrigger(string triggerName)
+    /// <summary>
+    /// Event receiver for a weapon collision event (dispatched via animation).
+    /// </summary>
+    public virtual void OnWeaponHit(object sender, CollisionEventArgs e)
     {
-        if (Animator == null)
+        // First try the GameObject itself
+        IAttackable target = e.GameObject.GetComponent<IAttackable>();
+
+        // then try its parent
+        if (target == null)
+            target = e.GameObject.GetComponentInParent<IAttackable>();
+
+        // then try its children
+        if (target == null)
+            target = e.GameObject.GetComponentInChildren<IAttackable>();
+
+        if (target == null)
             return;
 
-        Animator.SetTrigger(triggerName);
-    }
-
-    public void SetAnimationBool(string boolName, bool value)
-    {
-        Animator.SetBool(boolName, value);
-    }
-
-    public bool GetAnimationBool(string boolName)
-    {
-        return Animator.GetBool(boolName);
-    }
-
-    public void SetAnimationInt(string intName, int value)
-    {
-        if (Animator == null)
-            return;
-
-        Animator.SetInteger(intName, value);
-    }
-
-    public int GetAnimationInt(string intName)
-    {
-        if (Animator == null)
-            return 0;
-
-        return Animator.GetInteger(intName);
+        Attack(target);
     }
 
     /// <summary>
@@ -161,23 +208,97 @@ public class Character : MonoBehaviour, IAttackable
         transform.localScale = new Vector3(x, y, z);
     }
 
-    private void TakeDamage(float amount)
+    /// <summary>
+    /// Handle an incoming attack instance, either blocking the attack or
+    /// taking damage.
+    /// </summary>
+    public void ReceiveAttack(AttackInstance attack)
     {
-        
+        if (IsDead)
+            return;
+
+        TakeDamage(attack.Damage);
+
+        ReceivedAttack?.Invoke(this, new AttackEventArgs(attack, this));
+
+        if (Health <= 0 && !IsDead)
+        {
+            Died?.Invoke(this, new AttackEventArgs(attack, this));
+            IsDead = true;
+            return;
+        }
+
+        if (!IsDead)
+            Flinched?.Invoke(this, EventArgs.Empty);
+    }
+
+    #region Animator Methods
+    public bool GetAnimationBool(string boolName)
+    {
+        if (Animator == null)
+            return false;
+
+        return Animator.GetBool(boolName);
+    }
+
+    public int GetAnimationInt(string intName)
+    {
+        if (Animator == null)
+            return 0;
+
+        return Animator.GetInteger(intName);
+    }
+
+    public void SetAnimationBool(string boolName, bool value)
+    {
+        if (Animator == null)
+            return;
+
+        Animator.SetBool(boolName, value);
+    }
+
+    public void SetAnimationInt(string intName, int value)
+    {
+        if (Animator == null)
+            return;
+
+        Animator.SetInteger(intName, value);
+    }
+
+    public void SetAnimationTrigger(string triggerName)
+    {
+        if (Animator == null)
+            return;
+
+        Animator.SetTrigger(triggerName);
+    }
+    #endregion
+
+    /// <summary>
+    /// Use the character's weapon to attack a target.
+    /// </summary>
+    private void Attack(IAttackable target)
+    {
+        target.ReceiveAttack(AttackSequence.GetAttackFrom(this));
+    }
+
+    private void TakeDamage(int amount)
+    {
+        Health.Subtract(amount);
     }
 
     private void CheckYVelocity()
     {
-        float previousVelocity = yVelocity;
+        float previousVelocity = YVelocity;
         float currentVelocity = Rigidbody.velocity.y;
 
         if (previousVelocity == currentVelocity)
             return;
 
-        yVelocity = currentVelocity;
+        YVelocity = currentVelocity;
 
         if (previousVelocity.IsPositive() != currentVelocity.IsPositive())
-            YVelocityChanged?.Invoke(this, yVelocity);
+            YVelocityChanged?.Invoke(this, YVelocity);
     }
 
     protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)

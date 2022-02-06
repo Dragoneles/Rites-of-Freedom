@@ -19,14 +19,14 @@ public class AttackInstance
     /// <summary>
     /// Amount of damage dealt by the attack.
     /// </summary>
-    public readonly float Damage;
+    public readonly int Damage;
 
     /// <summary>
     /// The character invoking the attack.
     /// </summary>
     public readonly Character Attacker;
 
-    public AttackInstance(float damage, Character attacker)
+    public AttackInstance(int damage, Character attacker)
     {
         Damage = damage;
         Attacker = attacker;
