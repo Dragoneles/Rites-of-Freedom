@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <uie:Toolbar>
+        <uie:ToolbarMenu display-tooltip-when-elided="true" text="Assets" name="Assets" />
+    </uie:Toolbar>
+    <AI.BehaviorTree.Editor.SplitView fixed-pane-initial-dimension="300">
+        <ui:VisualElement name="Left-panel">
+            <AI.BehaviorTree.Editor.SplitView orientation="Vertical" fixed-pane-initial-dimension="150">
+                <ui:VisualElement name="Inspector-panel">
+                    <ui:Label text="Inspector" display-tooltip-when-elided="true" name="Inspector-label" style="align-items: auto; justify-content: flex-start; -unity-text-align: upper-center; background-color: rgb(37, 37, 37);" />
+                    <AI.BehaviorTree.Editor.InspectorView style="flex-grow: 1; margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Blackboard-panel">
+                    <ui:Label text="Blackboard" display-tooltip-when-elided="true" name="Blackboard-label" style="background-color: rgb(37, 37, 37); -unity-text-align: upper-center;" />
+                    <ui:IMGUIContainer name="blackboard" style="flex-grow: 1; margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;" />
+                </ui:VisualElement>
+            </AI.BehaviorTree.Editor.SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="Right-panel">
+            <ui:Label text="Behavior Tree" display-tooltip-when-elided="true" name="PanelLabel" tabindex="0" focusable="false" style="align-items: auto; justify-content: flex-start; -unity-text-align: upper-left; background-color: rgb(37, 37, 37); margin-left: 0; -unity-slice-left: 0;" />
+            <ui:IMGUIContainer name="Blackboard" style="flex-grow: 1;">
+                <AI.BehaviorTree.Editor.BehaviorTreeView focusable="true" style="flex-grow: 1; -unity-text-align: upper-center; flex-shrink: 0; background-color: rgb(56, 56, 56);" />
+            </ui:IMGUIContainer>
+        </ui:VisualElement>
+    </AI.BehaviorTree.Editor.SplitView>
+</ui:UXML>

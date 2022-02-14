@@ -78,6 +78,16 @@ public class Character : MonoBehaviour, IAttackable
     public SmartUnityEvent<AttackEventArgs> Blocked;
 
     /// <summary>
+    /// Event invoked when the character rolls.
+    /// </summary>
+    public SmartUnityEvent<EventArgs> Rolled;
+
+    /// <summary>
+    /// Event invoked when the character finishes rolling.
+    /// </summary>
+    public SmartUnityEvent<EventArgs> RollFinished;
+
+    /// <summary>
     /// Event invoked when a character dies.
     /// </summary>
     public SmartUnityEvent<AttackEventArgs> Died;
@@ -85,8 +95,18 @@ public class Character : MonoBehaviour, IAttackable
     [Header("Stats")]
     public Vital Health = new Vital(25);
     public Vital Stamina = new Vital(25);
+
+    [Tooltip("Movement speed (measured in 1/10 unit per point).")]
     public Stat MoveSpeed = new Stat(35);
+
+    [Tooltip("Jump force (measured in 1/10 unit per point).")]
     public Stat JumpVelocity = new Stat(50);
+
+    [Tooltip("Speed of the roll (measured in 1/10 unit per point).")]
+    public Stat RollSpeed = new Stat(40);
+
+    [Tooltip("Length of a roll in milliseconds.")]
+    public Stat RollDuration = new Stat(70);
 
     [Header("Weapon")]
     [SerializeField]
@@ -124,6 +144,20 @@ public class Character : MonoBehaviour, IAttackable
         velocity.y = Rigidbody.velocity.y;
 
         Rigidbody.velocity = velocity;
+    }
+
+    /// <summary>
+    /// Set the character's x velocity based on an input direction.
+    /// </summary>
+    public void Roll(float direction)
+    {
+        if (direction.IsNegative())
+            FaceLeft();
+        else if (direction.IsPositive())
+            FaceRight();
+
+        float speed = RollSpeed / 10f;
+        StartCoroutine(RollCoroutine(direction * speed));
     }
 
     /// <summary>
@@ -232,6 +266,54 @@ public class Character : MonoBehaviour, IAttackable
             Flinched?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Returns true if the character is left of the specified point.
+    /// </summary>
+    public bool IsLeftOfPoint(Vector2 point)
+    {
+        return IsLeftOfPoint(point.x);
+    }
+
+    /// <summary>
+    /// Returns true if the character is left of the specified point.
+    /// </summary>
+    public bool IsLeftOfPoint(float point)
+    {
+        return transform.position.x < point;
+    }
+
+    /// <summary>
+    /// Returns true if the character is left of the specified point.
+    /// </summary>
+    public bool IsRightOfPoint(Vector2 point)
+    {
+        return IsRightOfPoint(point.x);
+    }
+
+    /// <summary>
+    /// Returns true if the character is left of the specified point.
+    /// </summary>
+    public bool IsRightOfPoint(float point)
+    {
+        return transform.position.x > point;
+    }
+
+    /// <summary>
+    /// Returns true if the character is facing the specified point.
+    /// </summary>
+    public bool IsFacingPoint(Vector2 point)
+    {
+        return IsFacingPoint(point.x);
+    }
+
+    /// <summary>
+    /// Returns true if the character is facing the specified point.
+    /// </summary>
+    public bool IsFacingPoint(float point)
+    {
+        return IsLeftOfPoint(point) == transform.localScale.x.IsPositive();
+    }
+
     #region Animator Methods
     public bool GetAnimationBool(string boolName)
     {
@@ -299,6 +381,31 @@ public class Character : MonoBehaviour, IAttackable
 
         if (previousVelocity.IsPositive() != currentVelocity.IsPositive())
             YVelocityChanged?.Invoke(this, YVelocity);
+    }
+
+    private IEnumerator RollCoroutine(float speed)
+    {
+        Rolled?.Invoke(this, EventArgs.Empty);
+
+        float timer = RollDuration / 100f;
+
+        while (timer > 0f)
+        {
+            yield return new WaitForEndOfFrame();
+
+            timer -= Time.deltaTime;
+
+            Vector2 velocity = new Vector2(speed, 0f);
+            velocity.y = Rigidbody.velocity.y;
+
+            Rigidbody.velocity = velocity;
+        }
+
+        Stop();
+
+        RollFinished?.Invoke(this, EventArgs.Empty);
+
+        yield return null;
     }
 
     protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)

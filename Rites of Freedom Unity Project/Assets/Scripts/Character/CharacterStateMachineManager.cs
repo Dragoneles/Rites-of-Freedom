@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Behavior responsible for dispatching events to the
@@ -28,6 +29,7 @@ public class CharacterStateMachineManager : MonoBehaviour
         public const string MoveStart = "OnMoveStart";
         public const string MoveStop = "OnMoveStop";
         public const string Jump = "OnJump";
+        public const string Roll = "OnRoll";
         public const string Attack = "OnAttack";
         public const string AttackStop = "OnAttackFinished";
         public const string Block = "OnBlock";
@@ -74,11 +76,17 @@ public class CharacterStateMachineManager : MonoBehaviour
     private void LockControls()
     {
         ControlsLocked = true;
+        OnControlsLocked();
     }
 
     private void UnlockControls()
     {
         ControlsLocked = false;
+    }
+
+    private void OnControlsLocked()
+    {
+        Trigger(StateEvents.MoveStop);
     }
 
     /// <summary>
@@ -107,6 +115,22 @@ public class CharacterStateMachineManager : MonoBehaviour
         }
 
         SetCurrentActionState(StateType.Jump);
+    }
+
+    /// <summary>
+    /// Enter the Roll state.
+    /// </summary>
+    public void Roll(float direction)
+    {
+        if (ControlsLocked)
+        {
+            SetNextState(StateType.Roll);
+            return;
+        }
+
+        CallbackDictionary.AddCallback(StateType.Roll, UnlockControls);
+
+        SetCurrentActionState(StateType.Roll);
     }
 
     /// <summary>
@@ -204,6 +228,13 @@ public class CharacterStateMachineManager : MonoBehaviour
                 Trigger(StateEvents.Flinch);
                 break;
 
+            case StateType.Roll:
+                Trigger(StateEvents.AttackStop);
+                Trigger(StateEvents.BlockStop);
+                Trigger(StateEvents.FlinchStop);
+                Trigger(StateEvents.Roll);
+                break;
+
             default:
                 Trigger(StateEvents.AttackStop);
                 Trigger(StateEvents.BlockStop);
@@ -287,5 +318,8 @@ public class CharacterStateMachineManager : MonoBehaviour
     protected virtual void OnCharacterDeath(object sender, EventArgs e)
     {
         Trigger(StateEvents.Death);
+
+        GetComponentInChildren<PlayerInput>().enabled = false;
+        GetComponentInChildren<EnemyBehaviorTree>().enabled = false;
     }
 }

@@ -26,7 +26,9 @@ public class CharacterInputManager : MonoBehaviour
     private CharacterStateMachineManager StateMachine { get; set; }
 
     private float MoveDirection { get; set; } = 0f;
+    private float RollDirection { get; set; } = 0f;
     private Coroutine Move_Coroutine { get; set; }
+    private Coroutine Roll_Coroutine { get; set; }
     private Coroutine Jump_Coroutine { get; set; }
     private Coroutine Attack_Coroutine { get; set; }
     private Coroutine Block_Coroutine { get; set; }
@@ -102,9 +104,23 @@ public class CharacterInputManager : MonoBehaviour
             Attack_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Attack));
     }
 
-    public void Dash(InputAction.CallbackContext context)
+    public void Roll(InputAction.CallbackContext context)
     {
+        if (context.canceled)
+        {
+            Stop(Roll_Coroutine);
+            Roll_Coroutine = null;
+            RollDirection = 0f;
+            return;
+        }
 
+        if (context.performed)
+        {
+            RollDirection = context.ReadValue<float>();
+
+            Roll_Coroutine ??= StartCoroutine(InputCoroutine(
+                () => StateMachine.Roll(RollDirection)));
+        }
     }
 
     private void Stop(Coroutine coroutine)

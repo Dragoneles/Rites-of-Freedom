@@ -20,8 +20,8 @@ public class StatPropertyDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        var value = property.FindPropertyRelative("value");
-        int input = value.intValue;
-        value.intValue = EditorGUI.IntField(position, label, input);
+        EditorGUI.BeginProperty(position, label, property);
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("value"), label);
+        EditorGUI.EndProperty();
     }
 }
