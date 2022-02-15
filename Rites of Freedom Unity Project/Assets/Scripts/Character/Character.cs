@@ -44,6 +44,11 @@ public class Character : MonoBehaviour, IAttackable
 
     [Header("Events")]
     /// <summary>
+    /// Event invoked when the character's health value changes.
+    /// </summary>
+    public SmartUnityEvent<VitalChangedEventArgs> HealthChanged;
+
+    /// <summary>
     /// Event invoked when the y velocity of the character changes.
     /// Used to handle jump/fall animator states.
     /// </summary>
@@ -115,6 +120,7 @@ public class Character : MonoBehaviour, IAttackable
     public bool IsDead { get; private set; } = false;
     public bool IsBlocking { get; private set; } = false;
     private float YVelocity { get; set; } = 0f;
+    public Vector2 Position { get => transform.position; }
 
     public FeetCollider Feet { get; private set; }
     private Rigidbody2D Rigidbody { get; set; }
@@ -127,6 +133,7 @@ public class Character : MonoBehaviour, IAttackable
         Feet = GetComponentInChildren<FeetCollider>();
 
         Feet.GroundStateChanged += OnFeetGroundStateChanged;
+        Health.ValueChanged += OnHealthValueChanged;
     }
 
     private void Update()
@@ -251,6 +258,12 @@ public class Character : MonoBehaviour, IAttackable
         if (IsDead)
             return;
 
+        if (IsBlocking && IsFacingPoint(attack.Attacker.Position))
+        {
+            BlockAttack(attack);
+            return;
+        }
+
         TakeDamage(attack.Damage);
 
         ReceivedAttack?.Invoke(this, new AttackEventArgs(attack, this));
@@ -263,7 +276,23 @@ public class Character : MonoBehaviour, IAttackable
         }
 
         if (!IsDead)
-            Flinched?.Invoke(this, EventArgs.Empty);
+            Flinch();
+    }
+
+    /// <summary>
+    /// Play the "Hurt" animation and lock the character's controls.
+    /// </summary>
+    public void Flinch()
+    {
+        Flinched?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Set whether or not the character is considered to be blocking.
+    /// </summary>
+    public void SetBlockState(bool value)
+    {
+        IsBlocking = value;
     }
 
     /// <summary>
@@ -361,7 +390,20 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     private void Attack(IAttackable target)
     {
-        target.ReceiveAttack(AttackSequence.GetAttackFrom(this));
+        AttackInstance attackInstance = AttackSequence.GetAttackFrom(this);
+
+        target.ReceiveAttack(attackInstance);
+
+        LaunchedAttack.Invoke(this, new AttackEventArgs(attackInstance, this));
+    }
+
+    private void BlockAttack(AttackInstance attack)
+    {
+        Character attacker = attack.Attacker;
+
+        Blocked.Invoke(this, new AttackEventArgs(attack, this));
+
+        attacker.Flinch();
     }
 
     private void TakeDamage(int amount)
@@ -411,5 +453,16 @@ public class Character : MonoBehaviour, IAttackable
     protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)
     {
         GroundStateChanged?.Invoke(this, e);
+    }
+
+    protected virtual void OnHealthValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        Vital health = sender as Vital;
+
+        if (health == null)
+            return;
+
+        var eventArgs = new VitalChangedEventArgs(health, e.PreviousValue, e.CurrentValue);
+        HealthChanged?.Invoke(this, eventArgs);
     }
 }

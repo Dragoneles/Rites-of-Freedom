@@ -165,8 +165,23 @@ MonoBehaviour:
   Guid: fe9a90459deed874e8f86f7fbba61c01
   Position: {x: 147.99995, y: 234}
   children:
+  - {fileID: -1326066622713029590}
   - {fileID: 9004800853193938441}
   - {fileID: 8836718905808353576}
+--- !u!114 &-1326066622713029590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1f34fddd0107449a5ad90dedecc8ae, type: 3}
+  m_Name: EnemyAliveNode
+  m_EditorClassIdentifier: 
+  Guid: 3ce22dfe409a5ff4baaa23bdab848edd
+  Position: {x: -610.054, y: 386.00006}
 --- !u!114 &-618424500680975691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +253,7 @@ MonoBehaviour:
     - {fileID: -6592976157969712971}
     - {fileID: -2389392879686271585}
     - {fileID: 7649632336317349508}
+    - {fileID: -1326066622713029590}
 --- !u!114 &63614097546135028
 MonoBehaviour:
   m_ObjectHideFlags: 0

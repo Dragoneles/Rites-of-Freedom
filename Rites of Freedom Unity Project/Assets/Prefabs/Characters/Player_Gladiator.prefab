@@ -691,6 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd70978fbb2f678449de711019a1672f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   YVelocityChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -720,6 +723,24 @@ MonoBehaviour:
       m_Calls: []
   Blocked:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 73aad5876166bdc43937757b006120b6, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  Rolled:
+    m_PersistentCalls:
+      m_Calls: []
+  RollFinished:
+    m_PersistentCalls:
       m_Calls: []
   Died:
     m_PersistentCalls:
@@ -734,6 +755,10 @@ MonoBehaviour:
     value: 40
   JumpVelocity:
     value: 45
+  RollSpeed:
+    value: 40
+  RollDuration:
+    value: 70
   AttackSequence:
     Attacks:
     - Damage:

@@ -15,8 +15,6 @@
  *  
  ******************************************************************************/
 using AI.BehaviorTree;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -24,6 +22,10 @@ using UnityEngine;
 /// </summary>
 public class EnemyBehaviorTree : BehaviorTreeMachine
 {
+    public const string Self = nameof(self);
+    public const string Target = nameof(target);
+    public const string StateMachine = nameof(stateMachine);
+
     [SerializeField]
     private Character self;
 
@@ -43,8 +45,4 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
         blackboard.Set(nameof(target), target);
         blackboard.Set(nameof(stateMachine), stateMachine);
     }
-
-    public static string Self => nameof(self);
-    public static string Target => nameof(target);
-    public static string StateMachine => nameof(stateMachine);
 }

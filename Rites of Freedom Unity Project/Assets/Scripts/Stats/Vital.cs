@@ -10,6 +10,7 @@
  *  Type of stat that can be depleted.
  *  
  ******************************************************************************/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,11 @@ using UnityEngine;
 /// <summary>
 /// Type of stat that can be depleted.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class Vital : Stat
 {
+    public event EventHandler<ValueChangedEventArgs> ValueChanged;
+
     [SerializeField]
     [Tooltip("Current value of this vital.")]
     protected int currentValue = 0;
@@ -51,7 +54,17 @@ public class Vital : Stat
 
     public override void SetValue(int value)
     {
+        int previousValue = this.Value;
+
         currentValue = Mathf.Clamp(value, 0, MaxValue);
+
+        int newValue = this.Value;
+
+        if (previousValue != newValue)
+        {
+            var eventArgs = new ValueChangedEventArgs(previousValue, newValue);
+            ValueChanged?.Invoke(this, eventArgs);
+        }
     }
 
     public static implicit operator int(Vital vital)

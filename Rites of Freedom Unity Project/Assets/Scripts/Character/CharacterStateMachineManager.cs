@@ -64,9 +64,11 @@ public class CharacterStateMachineManager : MonoBehaviour
     private void Awake()
     {
         Character = GetComponent<Character>();
+
         Character.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
         Character.YVelocityChanged.AddListener(OnCharacterYVelocityChanged);
         Character.Flinched.AddListener(OnCharacterFlinched);
+        Character.Blocked.AddListener(OnCharacterBlocked);
         Character.Died.AddListener(OnCharacterDeath);
     }
 
@@ -319,7 +321,26 @@ public class CharacterStateMachineManager : MonoBehaviour
     {
         Trigger(StateEvents.Death);
 
-        GetComponentInChildren<PlayerInput>().enabled = false;
-        GetComponentInChildren<EnemyBehaviorTree>().enabled = false;
+        DisableInputBehaviors();
+    }
+
+    private void DisableInputBehaviors()
+    {
+        DisablePlayerInput();
+        DisableAIBehaviorTree();
+    }
+
+    private void DisableAIBehaviorTree()
+    {
+        var behaviorTree = GetComponentInChildren<EnemyBehaviorTree>();
+        if (behaviorTree)
+            behaviorTree.enabled = false;
+    }
+
+    private void DisablePlayerInput()
+    {
+        var playerInput = GetComponentInChildren<PlayerInput>();
+        if (playerInput)
+            playerInput.enabled = false;
     }
 }
