@@ -32,11 +32,18 @@ namespace AI.BehaviorTree
         protected Transform transform { get => gameObject.transform; }
         protected Blackboard blackboard { get => Tree.Blackboard; }
 
-        public virtual Node Clone(BehaviorTree tree)
+        private bool initialized { get; set; } = false;
+        private bool cancelled { get; set; } = false;
+
+        public virtual Node Clone()
         {
             Node node = Instantiate(this);
-            node.Tree = tree;
             return node;
+        }
+
+        public virtual void SetTree(BehaviorTree tree)
+        {
+            Tree = tree;
         }
 
         public void SetInactive()
@@ -44,20 +51,30 @@ namespace AI.BehaviorTree
             State = NodeState.Inactive;
         }
 
+        /// <summary>
+        /// Cancel the node's process and reset it.
+        /// </summary>
+        public void CancelProcess()
+        {
+            cancelled = true;
+        }
+
         public IEnumerator Process()
         {
+            Initialize();
+
             State = NodeState.Running;
 
             Start();
 
-            while (State == NodeState.Running)
+            while (State == NodeState.Running && !cancelled)
             {
-                if (NodeSucceeded())
+                if (CheckNodeSucceeded())
                 {
                     State = NodeState.Success;
                     break;
                 }
-                if (NodeFailed())
+                if (CheckNodeFailed())
                 {
                     State = NodeState.Failure;
                     break;
@@ -69,10 +86,52 @@ namespace AI.BehaviorTree
             ResetNode();
         }
 
-        protected virtual void Start() { }
+        private void Initialize()
+        {
+            if (initialized)
+                return;
+
+            OnInitialize();
+
+            initialized = true;
+        }
+
+        private void ResetNode()
+        {
+            cancelled = false;
+
+            OnReset();
+        }
+
+        /// <summary>
+        /// Run is invoked each tick that the node is processed.
+        /// </summary>
         protected virtual IEnumerator Run() { yield return null; }
-        protected abstract bool NodeFailed();
-        protected abstract bool NodeSucceeded();
-        protected virtual void ResetNode() { }
+
+        /// <summary>
+        /// Conditions that indicate that the node failed.
+        /// </summary>
+        protected abstract bool CheckNodeFailed();
+
+        /// <summary>
+        /// Conditions that indicate that the node succeeded.
+        /// </summary>
+        protected abstract bool CheckNodeSucceeded();
+
+        /// <summary>
+        /// Start is invoked whenever the node beings processing.
+        /// </summary>
+        protected virtual void Start() { }
+
+        /// <summary>
+        /// Initialize is called only when the node is processed for 
+        /// the first time.
+        /// </summary>
+        protected virtual void OnInitialize() { }
+
+        /// <summary>
+        /// Reset is invoked whenever the node finishes processing.
+        /// </summary>
+        protected virtual void OnReset() { }
     }
 }

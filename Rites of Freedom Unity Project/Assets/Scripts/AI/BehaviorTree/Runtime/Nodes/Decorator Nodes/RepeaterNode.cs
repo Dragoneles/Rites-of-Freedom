@@ -31,16 +31,16 @@ namespace AI.BehaviorTree
 
         private int repeatsFinished { get; set; } = 0;
 
-        protected override bool NodeFailed() => false;
+        protected override bool CheckNodeFailed() => false;
 
-        protected override bool NodeSucceeded()
+        protected override bool CheckNodeSucceeded()
         {
             return (repeatsFinished == repeats);
         }
 
-        protected override void ResetNode()
+        protected override void OnReset()
         {
-            base.ResetNode();
+            base.OnReset();
 
             repeatsFinished = 0;
         }

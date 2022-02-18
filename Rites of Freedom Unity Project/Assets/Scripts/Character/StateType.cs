@@ -10,9 +10,6 @@
  *  Enumerator for keying different character states.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Enumerator for keying different character states.

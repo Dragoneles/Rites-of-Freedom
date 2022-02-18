@@ -20,12 +20,12 @@ namespace AI.BehaviorTree
     /// </summary>
     public class NotNode : DecoratorNode
     {
-        protected override bool NodeFailed()
+        protected override bool CheckNodeFailed()
         {
             return (Child.State == NodeState.Success);
         }
 
-        protected override bool NodeSucceeded()
+        protected override bool CheckNodeSucceeded()
         {
             return (Child.State == NodeState.Failure);
         }

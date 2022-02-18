@@ -10,9 +10,6 @@
  *  Leaf node that tells the AI to attack.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using AI.BehaviorTree;
 
 /// <summary>
@@ -20,20 +17,26 @@ using AI.BehaviorTree;
 /// </summary>
 public class AttackNode : LeafNode
 {
-    protected override bool NodeFailed()
-    {
-        return blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine).ControlsLocked;
-    }
+    private CharacterStateMachineManager stateMachine { get; set; }
 
-    protected override bool NodeSucceeded()
+    protected override void OnInitialize()
     {
-        return !blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine).ControlsLocked;
+        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
     }
 
     protected override void Start()
     {
-        var stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
-
         stateMachine.Attack();
+    }
+
+    protected override bool CheckNodeFailed()
+    {
+        return !CheckNodeSucceeded();
+    }
+
+    protected override bool CheckNodeSucceeded()
+    {
+        return stateMachine.NextActionState == StateType.Attack || 
+            stateMachine.CurrentActionState == StateType.Attack;
     }
 }

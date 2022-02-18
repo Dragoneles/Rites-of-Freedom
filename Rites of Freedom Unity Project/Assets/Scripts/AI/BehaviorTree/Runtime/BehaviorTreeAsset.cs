@@ -37,18 +37,9 @@ namespace AI.BehaviorTree
         /// </summary>
         public Node CreateNode(Type type)
         {
-            return CreateNode(type, Vector2.zero);
-        }
-
-        /// <summary>
-        /// Create a new node of the specified type.
-        /// </summary>
-        public Node CreateNode(Type type, Vector2 position)
-        {
             Node node = ScriptableObject.CreateInstance(type) as Node;
             node.name = type.Name;
             node.Guid = GUID.Generate().ToString();
-            node.Position = position;
 
             Undo.RecordObject(this, "Behavior Tree (Create Node)");
             Tree.AddNode(node);
@@ -60,8 +51,22 @@ namespace AI.BehaviorTree
             return node;
         }
 
+        /// <summary>
+        /// Create a new node of the specified type.
+        /// </summary>
+        public Node CreateNode(Type type, Node parent)
+        {
+            Node node = CreateNode(type);
+            AddChild(parent, node);
+
+            return node;
+        }
+
         public void DeleteNode(Node node)
         {
+            if (node == null)
+                return;
+
             Undo.RecordObject(this, "Behavior Tree (Delete Node)");
             Tree.RemoveNode(node);
 

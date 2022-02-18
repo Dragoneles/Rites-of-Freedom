@@ -23,12 +23,12 @@ namespace AI.BehaviorTree
     {
         private Node selectedChild { get; set; }
 
-        protected override bool NodeFailed()
+        protected override bool CheckNodeFailed()
         {
             return selectedChild.State == NodeState.Failure;
         }
 
-        protected override bool NodeSucceeded()
+        protected override bool CheckNodeSucceeded()
         {
             return selectedChild.State == NodeState.Success;
         }

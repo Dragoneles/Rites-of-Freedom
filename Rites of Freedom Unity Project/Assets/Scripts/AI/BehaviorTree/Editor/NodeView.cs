@@ -12,6 +12,7 @@
  *  
  ******************************************************************************/
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -27,24 +28,27 @@ namespace AI.BehaviorTree.Editor
     public class NodeView : GraphNode
     {
         public Action<NodeView> Selected;
+        public Action<NodeView> Unselected;
 
-        public Node node;
+        public Node Node;
 
         public Port Input;
         public Port Output;
 
-        public NodeView(Node node) : base("Assets/Scripts/AI/BehaviorTree/Editor/NodeView.uxml")
+        private GraphView graph { get; set; }
+
+        public NodeView(Node node, GraphView graph) : base("Assets/Scripts/AI/BehaviorTree/Editor/NodeView.uxml")
         {
-            this.node = node;
+            this.graph = graph;
+
+            this.Node = node;
             title = node.name.Replace("Node", string.Empty);
             viewDataKey = node.Guid;
 
             style.left = node.Position.x;
             style.top = node.Position.y;
 
-            float height = GetPosition().size.y;
-            float width = NodeViewUtility.NodeWidth;
-            SetPosition(new Rect(node.Position, new Vector2(width, height)));
+            SetPosition(new Rect(node.Position, new Vector2(GetWidth(), GetHeight())));
 
             CreateInputPorts();
             CreateOutputPorts();
@@ -56,29 +60,137 @@ namespace AI.BehaviorTree.Editor
         {
             base.SetPosition(newPos);
 
-            Undo.RecordObject(node, "Behavior Tree (Set Position)");
+            Node.Position.x = newPos.xMin;
+            Node.Position.y = newPos.yMin;
 
-            node.Position.x = newPos.xMin;
-            node.Position.y = newPos.yMin;
+            EditorUtility.SetDirty(Node);
+        }
 
-            EditorUtility.SetDirty(node);
+        public void UpdatePosition(Vector2 position)
+        {
+            Vector2 size = new Vector2(style.width.value.value, GetHeight());
+
+            SetPosition(new Rect(position, size));
+
+            float yOffset = GetHeight() + NodeViewUtility.verticalGap;
+
+            if (Node is CompositeNode composite)
+            {
+                int childCount = composite.ChildCount;
+
+                float width = GetWidth();
+
+                List<Node> children = composite.GetChildren();
+
+                float previousNodeWidth = 0f;
+                float sumPreviousNodeWidths = 0f;
+                for (int i = 0; i < children.Count; i++)
+                {
+                    NodeView childNodeView = graph.GetNodeByGuid(children[i].Guid) as NodeView;
+                    float childNodeWidth = childNodeView.GetWidth();
+
+                    float xOffset = -width / 2;
+                    xOffset += (NodeViewUtility.horizontalGap * i);
+                    xOffset += sumPreviousNodeWidths;
+                    xOffset += childNodeWidth / 2;
+
+                    previousNodeWidth = childNodeWidth;
+                    sumPreviousNodeWidths += Mathf.Max(previousNodeWidth, NodeViewUtility.width);
+
+                    Vector2 childPosition = position + new Vector2(xOffset, yOffset);
+                    childNodeView.UpdatePosition(childPosition);
+                }
+            }
+            else if (Node is DecoratorNode decorator)
+            {
+                if (decorator.Child == null)
+                    return;
+
+                NodeView childNodeView = graph.GetNodeByGuid(decorator.Child.Guid) as NodeView;
+                Vector2 childPosition = position + new Vector2(0f, yOffset);
+                childNodeView.UpdatePosition(childPosition);
+            }
+            else if (Node is RootNode root)
+            {
+                if (root.Child == null)
+                    return;
+
+                NodeView childNodeView = graph.GetNodeByGuid(root.Child.Guid) as NodeView;
+                Vector2 childPosition = position + new Vector2(0f, yOffset);
+                childNodeView.UpdatePosition(childPosition);
+            }
+        }
+
+        public float GetWidth()
+        {
+            float width = 0f;
+
+            if (Node is CompositeNode composite)
+            {
+                int childCount = composite.ChildCount;
+
+                foreach (Node childNode in composite.GetChildren())
+                {
+                    if (childNode == null)
+                        continue;
+
+                    NodeView childNodeView = graph.GetNodeByGuid(childNode.Guid) as NodeView;
+
+                    if (childNodeView != null)
+                        width += childNodeView.GetWidth();
+                }
+
+                width += ((childCount - 1) * NodeViewUtility.horizontalGap);
+
+                if (childCount > 0)
+                    return width;
+            }
+            else if (Node is DecoratorNode decorator)
+            {
+                if (decorator.Child != null)
+                {
+                    NodeView childNodeView = graph.GetNodeByGuid(decorator.Child.Guid) as NodeView;
+
+                    if (childNodeView != null)
+                        return childNodeView.GetWidth();
+                }
+            }
+            else if (Node is RootNode root)
+            {
+                if (root.Child != null)
+                {
+                    NodeView childNodeView = graph.GetNodeByGuid(root.Child.Guid) as NodeView;
+
+                    if (childNodeView != null)
+                        return childNodeView.GetWidth();
+                }
+            }
+
+            width = NodeViewUtility.width;
+
+            return width;
+        }
+
+        public float GetHeight()
+        {
+            return NodeViewUtility.height;
         }
 
         private void SetupClasses()
         {
-            if (node is LeafNode)
+            if (Node is LeafNode)
             {
                 AddToClassList("leaf");
             }
-            else if (node is CompositeNode)
+            else if (Node is CompositeNode)
             {
                 AddToClassList("composite");
             }
-            else if (node is DecoratorNode)
+            else if (Node is DecoratorNode)
             {
                 AddToClassList("decorator");
             }
-            else if (node is RootNode)
+            else if (Node is RootNode)
             {
                 AddToClassList("root");
             }
@@ -86,7 +198,7 @@ namespace AI.BehaviorTree.Editor
 
         private void CreateInputPorts()
         {
-            if (node is RootNode)
+            if (Node is RootNode)
                 return;
 
             Input = InstantiatePort(
@@ -105,11 +217,11 @@ namespace AI.BehaviorTree.Editor
 
         private void CreateOutputPorts()
         {
-            if (node is LeafNode)
+            if (Node is LeafNode)
             {
                 // No output node
             }
-            else if (node is CompositeNode)
+            else if (Node is CompositeNode)
             {
                 Output = InstantiatePort(
                     Orientation.Vertical,
@@ -117,7 +229,7 @@ namespace AI.BehaviorTree.Editor
                     Port.Capacity.Multi,
                     typeof(bool));
             }
-            else if (node is DecoratorNode)
+            else if (Node is DecoratorNode)
             {
                 Output = InstantiatePort(
                     Orientation.Vertical,
@@ -125,7 +237,7 @@ namespace AI.BehaviorTree.Editor
                     Port.Capacity.Single,
                     typeof(bool));
             }
-            else if (node is RootNode)
+            else if (Node is RootNode)
             {
                 Output = InstantiatePort(
                     Orientation.Vertical,
@@ -145,6 +257,11 @@ namespace AI.BehaviorTree.Editor
         public override void OnSelected()
         {
             Selected?.Invoke(this);
+        }
+
+        public override void OnUnselected()
+        {
+            Unselected?.Invoke(this);
         }
     }
 }

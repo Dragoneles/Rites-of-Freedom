@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 128
 --- !u!1 &207382713217626338
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92084550a6b6f5446aebef2e745b0140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PendingStateDuration: 0.3
+  InputMemoryDuration: 0.3
 --- !u!50 &3282629183849687295
 Rigidbody2D:
   serializedVersion: 4

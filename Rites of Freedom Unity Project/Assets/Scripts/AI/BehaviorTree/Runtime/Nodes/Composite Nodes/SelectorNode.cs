@@ -22,7 +22,7 @@ namespace AI.BehaviorTree
         private int index = 0;
         private Node currentChild => children[index];
 
-        protected override bool NodeFailed()
+        protected override bool CheckNodeFailed()
         {
             foreach (Node child in children)
             {
@@ -33,7 +33,7 @@ namespace AI.BehaviorTree
             return true;
         }
 
-        protected override bool NodeSucceeded()
+        protected override bool CheckNodeSucceeded()
         {
             foreach (Node child in children)
             {
@@ -63,9 +63,9 @@ namespace AI.BehaviorTree
                 index = 0;
         }
 
-        protected override void ResetNode()
+        protected override void OnReset()
         {
-            base.ResetNode();
+            base.OnReset();
 
             index = 0;
         }

@@ -11,7 +11,6 @@
  *  
  ******************************************************************************/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.BehaviorTree
@@ -24,17 +23,22 @@ namespace AI.BehaviorTree
         [HideInInspector]
         public Node Child;
 
-        protected override bool NodeFailed()
+        public override Node Clone()
         {
-            return false;
+            RootNode node = base.Clone() as RootNode;
+            node.Child = Child.Clone();
+
+            return node;
         }
 
-        protected override bool NodeSucceeded()
+        public override void SetTree(BehaviorTree tree)
         {
-            return false;
+            base.SetTree(tree);
+
+            Child.SetTree(tree);
         }
 
-        protected override void ResetNode()
+        protected override void OnReset()
         {
             Child.SetInactive();
             SetInactive();
@@ -45,12 +49,24 @@ namespace AI.BehaviorTree
             yield return Child.Process();
         }
 
-        public override Node Clone(BehaviorTree tree)
+        protected override bool CheckNodeFailed()
         {
-            RootNode node = base.Clone(tree) as RootNode;
-            node.Child = Child.Clone(tree);
+            if (Child.State == NodeState.Failure)
+            {
+                Debug.Log("Root node failed");
+            }
 
-            return node;
+            return Child.State == NodeState.Failure;
+        }
+
+        protected override bool CheckNodeSucceeded()
+        {
+            if (Child.State == NodeState.Success)
+            {
+                Debug.Log("Root node succeeded");
+            }
+
+            return Child.State == NodeState.Success;
         }
     }
 }

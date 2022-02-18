@@ -69,7 +69,7 @@ namespace AI.BehaviorTree.Editor
             inspector = root.Query<InspectorView>();
             blackboard = root.Query<IMGUIContainer>();
 
-            treeView.NodeSelected = OnNodeSelected;
+            treeView.SelectionChanged += OnSelectionChanged;
 
             // Force the selection refresh on create
             OnSelectionChange();
@@ -116,9 +116,12 @@ namespace AI.BehaviorTree.Editor
             treeView.PopulateView(treeAsset);
         }
 
-        private void OnNodeSelected(NodeView node)
+        private void OnSelectionChanged(Node[] selectedObjects)
         {
-            inspector.Update(node);
+            if (selectedObjects.Length == 0)
+                return;
+
+            inspector.Update(selectedObjects);
         }
 
         protected virtual void OnAssetChanged(ScriptableObject asset)

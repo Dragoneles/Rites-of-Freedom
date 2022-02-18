@@ -10,9 +10,6 @@
  *  Static utility class for NodeView elements.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace AI.BehaviorTree.Editor
 {
@@ -21,7 +18,9 @@ namespace AI.BehaviorTree.Editor
     /// </summary>
     public static class NodeViewUtility
     {
-        public const float NodeWidth = 60f;
-        public const float NodeSpacing = 10f;
+        public const float height = 100f;
+        public const float width = 120f;
+        public const float verticalGap = 25f;
+        public const float horizontalGap = 15f;
     }
 }

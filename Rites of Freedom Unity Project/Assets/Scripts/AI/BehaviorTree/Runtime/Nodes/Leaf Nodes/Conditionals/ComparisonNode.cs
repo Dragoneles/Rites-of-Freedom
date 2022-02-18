@@ -29,12 +29,12 @@ namespace AI.BehaviorTree
         [SerializeField]
         private ComparisonType comparisonType = ComparisonType.Equal;
 
-        protected override bool NodeSucceeded()
+        protected override bool CheckNodeSucceeded()
         {
             return comparablePair.Evaluate(comparisonType);
         }
 
-        protected override bool NodeFailed()
+        protected override bool CheckNodeFailed()
         {
             return !comparablePair.Evaluate(comparisonType);
         }

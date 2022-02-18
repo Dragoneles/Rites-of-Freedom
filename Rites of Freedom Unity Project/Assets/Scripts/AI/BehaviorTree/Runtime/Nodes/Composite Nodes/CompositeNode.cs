@@ -47,15 +47,25 @@ namespace AI.BehaviorTree
             return children;
         }
 
-        public override Node Clone(BehaviorTree tree)
+        public override Node Clone()
         {
-            CompositeNode node = base.Clone(tree) as CompositeNode;
-            node.children = children.ConvertAll(c => c.Clone(tree));
+            CompositeNode node = base.Clone() as CompositeNode;
+            node.children = children.ConvertAll(c => c.Clone());
 
             return node;
         }
 
-        protected override void ResetNode()
+        public override void SetTree(BehaviorTree tree)
+        {
+            base.SetTree(tree);
+
+            foreach (Node child in children)
+            {
+                child.SetTree(tree);
+            }
+        }
+
+        protected override void OnReset()
         {
             foreach (Node child in children)
             {

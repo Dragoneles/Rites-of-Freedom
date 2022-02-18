@@ -11,38 +11,33 @@
  *  
  ******************************************************************************/
 using AI.BehaviorTree;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Node that tells the AI to face their opponent.
 /// </summary>
 public class FaceEnemyNode : LeafNode
 {
-    protected override bool NodeFailed()
-    {
-        return !IsFacingTarget();
-    }
+    private Character self { get; set; }
+    private Character target { get; set; }
 
-    protected override bool NodeSucceeded()
+    protected override void OnInitialize()
     {
-        return IsFacingTarget();
+        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
+        target = blackboard.Get<Character>(EnemyBehaviorTree.Target);
     }
 
     protected override void Start()
     {
-        var self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
-
-        if (IsFacingTarget() == false)
-            self.Flip();
+        self.FacePoint(target.Position);
     }
 
-    private bool IsFacingTarget()
+    protected override bool CheckNodeFailed()
     {
-        var enemy = blackboard.Get<Character>(EnemyBehaviorTree.Target);
-        var self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
+        return !self.IsFacingPoint(target.Position);
+    }
 
-        return (self.IsFacingPoint(enemy.transform.position));
+    protected override bool CheckNodeSucceeded()
+    {
+        return self.IsFacingPoint(target.Position);
     }
 }

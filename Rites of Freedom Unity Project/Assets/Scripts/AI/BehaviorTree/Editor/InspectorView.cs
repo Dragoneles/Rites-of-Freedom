@@ -24,20 +24,39 @@ namespace AI.BehaviorTree.Editor
 
         private UnityEditor.Editor editor;
 
-        public InspectorView()
-        {
+        public InspectorView() { }
 
-        }
-
-        public void Update(NodeView nodeView)
+        public void Update(Object targetObject)
         {
             Clear();
 
             Object.DestroyImmediate(editor);
-            editor = UnityEditor.Editor.CreateEditor(nodeView.node);
+            editor = UnityEditor.Editor.CreateEditor(targetObject);
 
             IMGUIContainer container = new IMGUIContainer(
-                () => 
+                () =>
+                {
+                    if (!editor.target)
+                        return;
+
+                    editor.OnInspectorGUI();
+                });
+
+            Add(container);
+        }
+
+        public void Update(Node[] targetObjects)
+        {
+            Clear();
+
+            Object.DestroyImmediate(editor);
+            editor = UnityEditor.Editor.CreateEditor(targetObjects);
+
+            if (editor == null)
+                return;
+
+            IMGUIContainer container = new IMGUIContainer(
+                () =>
                 {
                     if (!editor.target)
                         return;

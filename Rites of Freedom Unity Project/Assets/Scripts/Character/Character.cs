@@ -23,23 +23,23 @@ public class Character : MonoBehaviour, IAttackable
 {
     public class AnimatorTriggers
     {
-        public static string Idle => nameof(Idle);
-        public static string Attack => nameof(Attack);
-        public static string Block => nameof(Block);
-        public static string BlockStart => nameof(BlockStart);
+        public const string Idle = nameof(Idle);
+        public const string Attack = nameof(Attack);
+        public const string Block = nameof(Block);
+        public const string BlockStart = nameof(BlockStart);
     }
     public class AnimatorBooleans
     {
-        public static string Attacking => nameof(Attacking);
-        public static string Moving => nameof(Moving);
-        public static string Jumping => nameof(Jumping);
-        public static string Falling => nameof(Falling);
-        public static string Blocking => nameof(Blocking);
-        public static string Dead => nameof(Dead);
+        public const string Attacking = nameof(Attacking);
+        public const string Moving = nameof(Moving);
+        public const string Jumping = nameof(Jumping);
+        public const string Falling = nameof(Falling);
+        public const string Blocking = nameof(Blocking);
+        public const string Dead = nameof(Dead);
     }
     public class AnimatorIntegers
     {
-        public static string AttackCount => nameof(AttackCount);
+        public const string AttackCount = nameof(AttackCount);
     }
 
     [Header("Events")]
@@ -341,6 +341,25 @@ public class Character : MonoBehaviour, IAttackable
     public bool IsFacingPoint(float point)
     {
         return IsLeftOfPoint(point) == transform.localScale.x.IsPositive();
+    }
+
+    /// <summary>
+    /// Flip the character's facing direction to face the specified point.
+    /// </summary>
+    public void FacePoint(Vector2 point)
+    {
+        FacePoint(point.x);
+    }
+
+    /// <summary>
+    /// Flip the character's facing direction to face the specified point.
+    /// </summary>
+    public void FacePoint(float point)
+    {
+        if (IsLeftOfPoint(point))
+            FaceRight();
+        else if (IsRightOfPoint(point))
+            FaceLeft();
     }
 
     #region Animator Methods

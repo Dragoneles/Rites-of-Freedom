@@ -10,11 +10,9 @@
  *  Object driving the AI through nodes and conditionals.
  *  
  ******************************************************************************/
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace AI.BehaviorTree
 {
@@ -31,13 +29,15 @@ namespace AI.BehaviorTree
         public GameObject gameObject { get => machine.gameObject; }
 
         [SerializeField]
+        [HideInInspector]
         protected List<Node> nodes = new List<Node>();
 
         public BehaviorTree() { }
 
         public BehaviorTree(BehaviorTree other)
         {
-            RootNode = other.RootNode.Clone(this) as RootNode;
+            RootNode = other.RootNode.Clone() as RootNode;
+            RootNode.SetTree(this);
         }
 
         /// <summary>

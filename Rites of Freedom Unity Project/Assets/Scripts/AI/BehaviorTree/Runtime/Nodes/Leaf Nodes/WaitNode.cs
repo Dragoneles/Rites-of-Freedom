@@ -26,8 +26,8 @@ namespace AI.BehaviorTree
 
         private bool doneWaiting { get; set; } = false;
 
-        protected override bool NodeSucceeded() => doneWaiting;
-        protected override bool NodeFailed() => false;
+        protected override bool CheckNodeSucceeded() => doneWaiting;
+        protected override bool CheckNodeFailed() => false;
 
         protected override IEnumerator Run()
         {
@@ -35,7 +35,7 @@ namespace AI.BehaviorTree
             doneWaiting = true;
         }
 
-        protected override void ResetNode()
+        protected override void OnReset()
         {
             doneWaiting = false;
         }

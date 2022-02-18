@@ -27,7 +27,9 @@ namespace AI.BehaviorTree.Editor
     {
         public new class UxmlFactory : UxmlFactory<BehaviorTreeView, UxmlTraits> { }
 
-        public Action<NodeView> NodeSelected;
+        public Action<Node[]> SelectionChanged;
+
+        private List<NodeView> selectedNodeViews = new List<NodeView>();
 
         private BehaviorTreeAsset tree;
 
@@ -37,7 +39,6 @@ namespace AI.BehaviorTree.Editor
 
             this.AddManipulator(new ContentZoomer());
             this.AddManipulator(new ContentDragger());
-            this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
 
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/AI/BehaviorTree/Editor/BehaviorTreeEditor.uss");
@@ -61,8 +62,52 @@ namespace AI.BehaviorTree.Editor
                 tree.RootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
             }
 
-            CreateNodes(tree);
+            CreateNodeViews(tree);
             CreateEdges(tree);
+
+            RearrangeNodes();
+        }
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            return ports
+                .ToList()
+                .Where((endPort) =>
+                    endPort.direction != startPort.direction &&
+                    endPort.node != startPort.node)
+                .ToList();
+        }
+
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            if (selectedNodeViews.Count == 0)
+                return;
+
+            AppendCreateActions(evt);
+
+            evt.menu.AppendAction($"Delete", (a) => DeleteSelection());
+        }
+
+        private void AppendCreateActions(ContextualMenuPopulateEvent evt)
+        {
+            NodeView firstSelectedNodeView = selectedNodeViews[0];
+
+            if (firstSelectedNodeView.Node is LeafNode)
+                return;
+
+            List<Type> types = GetConstructableNodeTypes();
+
+            foreach (Type type in types)
+            {
+                Vector2 mousePosition = evt.localMousePosition;
+
+                string baseName = type.BaseType.Name.Replace("Node", " Node");
+                string typeName = type.Name.Replace("Node", string.Empty);
+
+                evt.menu.AppendAction(
+                    $"Add Child/{baseName}/{typeName}",
+                    (a) => CreateNode(type, firstSelectedNodeView.Node));
+            }
         }
 
         private void OnUndoRedo()
@@ -86,62 +131,68 @@ namespace AI.BehaviorTree.Editor
             }
         }
 
-        private void CreateNodes(BehaviorTreeAsset tree)
+        private Edge CreateEdge(NodeView parent, NodeView child)
         {
+            Edge edge = parent.Output.ConnectTo(child.Input);
+
+            AddElement(edge);
+
+            return edge;
+        }
+
+        private void CreateNodeViews(BehaviorTreeAsset tree)
+        {
+            bool doNotRearrange = false;
+
             foreach (Node node in tree.Nodes)
             {
-                CreateNodeView(node);
+                CreateNodeView(node, doNotRearrange);
             }
+
+            RearrangeNodes();
         }
 
-        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        private NodeView CreateNodeView(Node node, bool rearrangeAfterCreate = true)
         {
-            return ports
-                .ToList()
-                .Where((endPort) =>
-                    endPort.direction != startPort.direction &&
-                    endPort.node != startPort.node)
-                .ToList();
+            NodeView nodeView = new NodeView(node, this);
+            nodeView.Selected += OnNodeViewSelected;
+            nodeView.Unselected += OnNodeViewUnselected;
+
+            AddElement(nodeView);
+
+            if (rearrangeAfterCreate)
+                RearrangeNodes();
+
+            return nodeView;
         }
 
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        private void RearrangeNodes()
+        {
+            var rootNodeView = GetNodeByGuid(tree.RootNode.Guid) as NodeView;
+
+            rootNodeView.UpdatePosition(Vector2.zero);
+        }
+
+        private static List<Type> GetConstructableNodeTypes()
         {
             var types = TypeCache.GetTypesDerivedFrom<Node>().ToList();
 
             types.RemoveAll((o) => !o.CanBeConstructed());
             types.Remove(typeof(RootNode));
 
-            foreach (Type type in types)
-            {
-                Vector2 mousePosition = evt.localMousePosition;
+            var sortedTypes = types
+                .OrderBy((o => o.BaseType.Name))
+                .ThenBy(o => o.Name)
+                .ToList();
 
-                evt.menu.AppendAction(
-                    $"[{type.BaseType.Name}] {type.Name}",
-                    (a) => CreateNode(type, mousePosition));
-            }
+            return sortedTypes;
         }
 
-        private void CreateNode(Type type, Vector2 position)
+        private void CreateNode(Type type, Node parent)
         {
-            Node node = tree.CreateNode(type, position);
-            CreateNodeView(node);
-        }
-
-        private void CreateNodeView(Node node)
-        {
-            NodeView nodeView = new NodeView(node);
-            nodeView.Selected = NodeSelected;
-
-            AddElement(nodeView);
-        }
-
-        private void CreateEdge(NodeView parent, NodeView child)
-        {
-            Edge edge = new Edge();
-            edge.output = parent.Output;
-            edge.input = child.Input;
-
-            AddElement(edge);
+            Node node = tree.CreateNode(type, parent);
+            NodeView nodeView = CreateNodeView(node);
+            CreateEdge(GetNodeByGuid(parent.Guid) as NodeView, nodeView);
         }
 
         private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
@@ -153,7 +204,7 @@ namespace AI.BehaviorTree.Editor
 
             if (graphViewChange.edgesToCreate != null)
             {
-                CreateEdges(graphViewChange);
+                HandleEdgesCreated(graphViewChange);
             }
 
             return graphViewChange;
@@ -163,48 +214,90 @@ namespace AI.BehaviorTree.Editor
         {
             foreach (var element in graphViewChange.elementsToRemove)
             {
-                Edge edge = element as Edge;
+                TryRemoveEdge(element);
+                TryRemoveNode(element);
+            }
 
-                if (edge != null)
-                {
-                    NodeView parentView = edge.output.node as NodeView;
-                    NodeView childView = edge.input.node as NodeView;
+            RearrangeNodes();
+        }
 
-                    tree.RemoveChild(parentView.node, childView.node);
+        private void TryRemoveNode(GraphElement element)
+        {
+            NodeView nodeView = element as NodeView;
 
-                    continue;
-                }
-
-                NodeView nodeView = element as NodeView;
-
-                if (nodeView != null)
-                {
-                    tree.DeleteNode(nodeView.node);
-
-                    continue;
-                }
+            if (nodeView != null)
+            {
+                tree.DeleteNode(nodeView.Node);
             }
         }
 
-        private void CreateEdges(GraphViewChange graphViewChange)
+        private void TryRemoveEdge(GraphElement element)
+        {
+            Edge edge = element as Edge;
+
+            if (edge != null)
+            {
+                NodeView parentView = edge.output.node as NodeView;
+                NodeView childView = edge.input.node as NodeView;
+
+                tree.RemoveChild(parentView.Node, childView.Node);
+            }
+        }
+
+        private void HandleEdgesCreated(GraphViewChange graphViewChange)
         {
             foreach (var edge in graphViewChange.edgesToCreate)
             {
-                CreateEdge(edge);
+                HandleEdgeCreated(edge);
             }
         }
 
-        private void CreateEdge(Edge edge)
+        private void HandleEdgeCreated(Edge edge)
         {
             NodeView parentView = edge.output.node as NodeView;
             NodeView childView = edge.input.node as NodeView;
 
-            tree.AddChild(parentView.node, childView.node);
+            tree.AddChild(parentView.Node, childView.Node);
+
+            Add(edge);
         }
 
         private NodeView GetNodeView(Node node)
         {
             return GetNodeByGuid(node.Guid) as NodeView;
+        }
+
+        private List<Node> GetNodesFromSelection()
+        {
+            List<Node> nodes = new List<Node>();
+
+            foreach (NodeView nodeView in selectedNodeViews)
+            {
+                nodes.Add(nodeView.Node);
+            }
+
+            return nodes;
+        }
+
+        private void UpdateSelection()
+        {
+            List<Node> selectedNodes = GetNodesFromSelection();
+
+            SelectionChanged?.Invoke(selectedNodes.ToArray());
+        }
+
+        protected virtual void OnNodeViewSelected(NodeView nodeView)
+        {
+            selectedNodeViews.Add(nodeView);
+
+            UpdateSelection();
+        }
+
+        protected virtual void OnNodeViewUnselected(NodeView nodeView)
+        {
+            selectedNodeViews.Remove(nodeView);
+
+            UpdateSelection();
         }
     }
 }

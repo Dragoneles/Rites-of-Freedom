@@ -17,14 +17,14 @@ using AI.BehaviorTree;
 /// </summary>
 public class EnemyAliveNode : LeafNode
 {
-    protected override bool NodeFailed()
+    protected override bool CheckNodeFailed()
     {
         Character enemy = blackboard.Get<Character>(EnemyBehaviorTree.Target);
 
         return enemy.IsDead;
     }
 
-    protected override bool NodeSucceeded()
+    protected override bool CheckNodeSucceeded()
     {
         Character enemy = blackboard.Get<Character>(EnemyBehaviorTree.Target);
 

@@ -44,22 +44,24 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     [SerializeField]
     [Tooltip("How long the pending inputs last before expiring.")]
-    private float PendingStateDuration = 0.3f;
+    private float InputMemoryDuration = 0.3f;
 
-    public bool ControlsLocked { get; private set; } = false;
+    public bool InputLocked { get; private set; } = false;
 
     private StateMachineCallbackDictionary CallbackDictionary = 
         new StateMachineCallbackDictionary();
 
-    private StateType NextActionState { get; set; } = StateType.Idle;
-    private StateType CurrentActionState { get; set; } = StateType.Idle;
+    public StateType NextActionState { get; private set; } = StateType.Idle;
+    public StateType CurrentActionState { get; private set; } = StateType.Idle;
 
     private Character Character { get; set; }
 
     /// <summary>
     /// Coroutine that handles the expiration of a pending input.
     /// </summary>
-    private Coroutine NextState_Coroutine { get; set; }
+    private Coroutine InputMemoryCoroutineInstance { get; set; }
+
+    private Coroutine InputLockCoroutineInstance { get; set; }
 
     private void Awake()
     {
@@ -73,30 +75,11 @@ public class CharacterStateMachineManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Set the control lock to true. Stop current movement actions.
-    /// </summary>
-    private void LockControls()
-    {
-        ControlsLocked = true;
-        OnControlsLocked();
-    }
-
-    private void UnlockControls()
-    {
-        ControlsLocked = false;
-    }
-
-    private void OnControlsLocked()
-    {
-        Trigger(StateEvents.MoveStop);
-    }
-
-    /// <summary>
     /// Switch between movement states based on Direction.
     /// </summary>
     public void Move(float direction)
     {
-        if (ControlsLocked || direction == 0f)
+        if (InputLocked || direction == 0f)
         {
             Trigger(StateEvents.MoveStop);
             return;
@@ -106,11 +89,19 @@ public class CharacterStateMachineManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Instruct the state machine to stop moving.
+    /// </summary>
+    public void StopMoving()
+    {
+        Move(0f);
+    }
+
+    /// <summary>
     /// Enter the Jump state.
     /// </summary>
     public void Jump()
     {
-        if (ControlsLocked)
+        if (InputLocked)
         {
             SetNextState(StateType.Jump);
             return;
@@ -124,13 +115,13 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     public void Roll(float direction)
     {
-        if (ControlsLocked)
+        if (InputLocked)
         {
             SetNextState(StateType.Roll);
             return;
         }
 
-        CallbackDictionary.AddCallback(StateType.Roll, UnlockControls);
+        CallbackDictionary.AddCallback(StateType.Roll, UnlockInputs);
 
         SetCurrentActionState(StateType.Roll);
     }
@@ -140,7 +131,7 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        if (ControlsLocked && Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) < 2)
+        if (InputLocked && Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) < 2)
         {
             SetNextState(StateType.Attack);
             return;
@@ -157,7 +148,7 @@ public class CharacterStateMachineManager : MonoBehaviour
         if (CurrentActionState == StateType.Block)
             return;
 
-        if (ControlsLocked)
+        if (InputLocked)
         {
             SetNextState(StateType.Block);
             return;
@@ -183,6 +174,7 @@ public class CharacterStateMachineManager : MonoBehaviour
     public void Flinch()
     {
         SetCurrentActionState(StateType.Flinch);
+        ClearNextState();
     }
 
     /// <summary>
@@ -195,18 +187,26 @@ public class CharacterStateMachineManager : MonoBehaviour
         RunPendingInput();
     }
 
-    public void RunPendingInput()
+    /// <summary>
+    /// Set the control lock to true. Stop current movement actions.
+    /// </summary>
+    public void LockInputs(float lockDuration)
     {
-        SetCurrentActionState(NextActionState);
+        StopInputLockCoroutine();
 
-        ClearNextState();
+        InputLockCoroutineInstance = StartCoroutine(InputLockCoroutine(lockDuration));
+    }
+
+    private void UnlockInputs()
+    {
+        StopInputLockCoroutine();
+
+        InputLocked = false;
     }
 
     private void SetCurrentActionState(StateType state)
     {
         CurrentActionState = state;
-
-        LockControls();
 
         switch (CurrentActionState)
         {
@@ -221,19 +221,18 @@ public class CharacterStateMachineManager : MonoBehaviour
             case StateType.Jump:
                 Trigger(StateEvents.AttackStop);
                 Trigger(StateEvents.BlockStop);
-                Trigger(StateEvents.FlinchStop);
                 Trigger(StateEvents.Jump);
-                UnlockControls();
                 break;
 
             case StateType.Flinch:
+                Trigger(StateEvents.BlockStop);
+                Trigger(StateEvents.MoveStop);
                 Trigger(StateEvents.Flinch);
                 break;
 
             case StateType.Roll:
                 Trigger(StateEvents.AttackStop);
                 Trigger(StateEvents.BlockStop);
-                Trigger(StateEvents.FlinchStop);
                 Trigger(StateEvents.Roll);
                 break;
 
@@ -241,9 +240,16 @@ public class CharacterStateMachineManager : MonoBehaviour
                 Trigger(StateEvents.AttackStop);
                 Trigger(StateEvents.BlockStop);
                 Trigger(StateEvents.FlinchStop);
-                UnlockControls();
+                UnlockInputs();
                 break;
         }
+    }
+
+    private void RunPendingInput()
+    {
+        SetCurrentActionState(NextActionState);
+
+        ClearNextState();
     }
 
     /// <summary>
@@ -272,22 +278,60 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     private void ResetNextStateCoroutine()
     {
-        if (NextState_Coroutine != null)
-            StopCoroutine(NextState_Coroutine);
+        if (InputMemoryCoroutineInstance != null)
+            StopCoroutine(InputMemoryCoroutineInstance);
 
         if (NextActionState == StateType.Idle)
             return;
 
-        NextState_Coroutine = StartCoroutine(NextStateCoroutine());
+        InputMemoryCoroutineInstance = StartCoroutine(NextStateCoroutine());
+    }
+
+    private void StopInputLockCoroutine()
+    {
+        if (InputLockCoroutineInstance != null)
+        {
+            StopCoroutine(InputLockCoroutineInstance);
+            InputLockCoroutineInstance = null;
+        }
+    }
+
+    private void DisableInputBehaviors()
+    {
+        DisablePlayerInput();
+        DisableAIBehaviorTree();
+    }
+
+    private void DisableAIBehaviorTree()
+    {
+        var behaviorTree = GetComponentInChildren<EnemyBehaviorTree>();
+        if (behaviorTree)
+            behaviorTree.enabled = false;
+    }
+
+    private void DisablePlayerInput()
+    {
+        var playerInput = GetComponentInChildren<PlayerInput>();
+        if (playerInput)
+            playerInput.enabled = false;
+    }
+
+    private IEnumerator InputLockCoroutine(float lockDuration)
+    {
+        InputLocked = true;
+
+        yield return new WaitForSeconds(lockDuration);
+
+        UnlockInputs();
     }
 
     private IEnumerator NextStateCoroutine()
     {
-        yield return new WaitForSeconds(PendingStateDuration);
+        yield return new WaitForSeconds(InputMemoryDuration);
 
         ClearNextState();
 
-        NextState_Coroutine = null;
+        InputMemoryCoroutineInstance = null;
     }
 
     protected virtual void OnCharacterGroundStateChanged(object sender, BoolEventArgs e)
@@ -322,25 +366,5 @@ public class CharacterStateMachineManager : MonoBehaviour
         Trigger(StateEvents.Death);
 
         DisableInputBehaviors();
-    }
-
-    private void DisableInputBehaviors()
-    {
-        DisablePlayerInput();
-        DisableAIBehaviorTree();
-    }
-
-    private void DisableAIBehaviorTree()
-    {
-        var behaviorTree = GetComponentInChildren<EnemyBehaviorTree>();
-        if (behaviorTree)
-            behaviorTree.enabled = false;
-    }
-
-    private void DisablePlayerInput()
-    {
-        var playerInput = GetComponentInChildren<PlayerInput>();
-        if (playerInput)
-            playerInput.enabled = false;
     }
 }

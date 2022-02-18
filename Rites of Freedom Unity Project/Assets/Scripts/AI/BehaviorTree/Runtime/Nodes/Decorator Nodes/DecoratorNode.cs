@@ -29,15 +29,22 @@ namespace AI.BehaviorTree
             Child = null;
         }
 
-        public override Node Clone(BehaviorTree tree)
+        public override Node Clone()
         {
-            DecoratorNode node = base.Clone(tree) as DecoratorNode;
-            node.Child = Child.Clone(tree);
+            DecoratorNode node = base.Clone() as DecoratorNode;
+            node.Child = Child.Clone();
 
             return node;
         }
 
-        protected override void ResetNode()
+        public override void SetTree(BehaviorTree tree)
+        {
+            base.SetTree(tree);
+
+            Child.SetTree(tree);
+        }
+
+        protected override void OnReset()
         {
             Child.SetInactive();
         }
