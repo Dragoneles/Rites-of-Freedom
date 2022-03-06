@@ -23,6 +23,7 @@ namespace AI.BehaviorTree
         public int ChildCount { get => children.Count; }
 
         [SerializeField]
+        [HideInInspector]
         protected List<Node> children = new List<Node>();
 
         /// <summary>
@@ -63,6 +64,53 @@ namespace AI.BehaviorTree
             {
                 child.SetTree(tree);
             }
+        }
+
+        /// <summary>
+        /// Swap a child node's position in the child list with the child
+        /// at the index before it.
+        /// </summary>
+        public void MoveChildLeft(Node child)
+        {
+            if (ChildCount == 0)
+                return;
+
+            if (!children.Contains(child))
+                return;
+
+            if (children[0] == child)
+                return;
+
+            Node previousChild = children[children.IndexOf(child) - 1];
+            SwapChildren(child, previousChild);
+        }
+
+        /// <summary>
+        /// Swap a child node's position in the child list with the child
+        /// at the index after it.
+        /// </summary>
+        public void MoveChildRight(Node child)
+        {
+            if (ChildCount == 0)
+                return;
+
+            if (!children.Contains(child))
+                return;
+
+            if (children[ChildCount - 1] == child)
+                return;
+
+            Node previousChild = children[children.IndexOf(child) + 1];
+            SwapChildren(child, previousChild);
+        }
+
+        private void SwapChildren(Node childA, Node childB)
+        {
+            int childAIndex = children.IndexOf(childA);
+            int childBIndex = children.IndexOf(childB);
+
+            children[childBIndex] = childA;
+            children[childAIndex] = childB;
         }
 
         protected override void OnReset()

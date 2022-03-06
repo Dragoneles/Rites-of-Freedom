@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
+  m_Name: BGM_Pits
+  m_EditorClassIdentifier: 
+  BaseVolume: 0.45
+  BasePitch: 1
+  StereoPan: 0
+  RandomPitchDown: 0
+  RandomPitchUp: 0
+  PlayOnAwake: 1
+  Loop: 1
+  Mixer: {fileID: 1706496663997938563, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
+  Variations:
+  - Clip: {fileID: 8300000, guid: e6203b2c85de4c240a42967822e0bd71, type: 3}

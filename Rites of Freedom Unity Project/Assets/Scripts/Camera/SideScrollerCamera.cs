@@ -11,7 +11,7 @@
  *  x-axis.
  *  
  ******************************************************************************/
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,6 +61,7 @@ public class SideScrollerCamera : MonoBehaviour
             return;
 
         Anchors.Add(anchor);
+        anchor.Disabled += OnAnchorDisabled;
     }
 
     /// <summary>
@@ -72,6 +73,7 @@ public class SideScrollerCamera : MonoBehaviour
             return;
 
         Anchors.Remove(anchor);
+        anchor.Disabled -= OnAnchorDisabled;
     }
 
     /// <summary>
@@ -110,5 +112,15 @@ public class SideScrollerCamera : MonoBehaviour
         }
 
         return sum;
+    }
+
+    protected virtual void OnAnchorDisabled(object sender, EventArgs e)
+    {
+        CameraAnchor anchor = sender as CameraAnchor;
+
+        if (anchor == null)
+            return;
+
+        RemoveAnchor(anchor);
     }
 }

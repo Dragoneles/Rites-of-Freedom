@@ -39,13 +39,21 @@ namespace AI.BehaviorTree
         {
             Node node = ScriptableObject.CreateInstance(type) as Node;
             node.name = type.Name;
+#if UNITY_EDITOR
             node.Guid = GUID.Generate().ToString();
+#endif
 
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Behavior Tree (Create Node)");
+#endif
             Tree.AddNode(node);
 
+#if UNITY_EDITOR
             AssetDatabase.AddObjectToAsset(node, this);
+#endif
+#if UNITY_EDITOR
             Undo.RegisterCreatedObjectUndo(node, "Behavior Tree (Create Node)");
+#endif
             Changed?.Invoke(this);
 
             return node;
@@ -67,10 +75,15 @@ namespace AI.BehaviorTree
             if (node == null)
                 return;
 
+#if UNITY_EDITOR
             Undo.RecordObject(this, "Behavior Tree (Delete Node)");
+#endif
+
             Tree.RemoveNode(node);
 
+#if UNITY_EDITOR
             Undo.DestroyObjectImmediate(node);
+#endif
 
             Changed?.Invoke(this);
         }
@@ -79,21 +92,33 @@ namespace AI.BehaviorTree
         {
             if (parent is CompositeNode compositeNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(compositeNode, "Behavior Tree (Add Child)");
+#endif
                 compositeNode.AddChild(child);
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(compositeNode);
+#endif
             }
             else if (parent is DecoratorNode decoratorNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(decoratorNode, "Behavior Tree (Add Child)");
+#endif
                 decoratorNode.Child = child;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(decoratorNode);
+#endif
             }
             else if (parent is RootNode rootNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(rootNode, "Behavior Tree (Add Child)");
+#endif
                 rootNode.Child = child;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(rootNode);
+#endif
             }
 
             Changed?.Invoke(this);
@@ -103,21 +128,33 @@ namespace AI.BehaviorTree
         {
             if (parent is CompositeNode compositeNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(compositeNode, "Behavior Tree (Remove Child)");
+#endif
                 compositeNode.RemoveChild(child);
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(compositeNode);
+#endif
             }
             else if (parent is DecoratorNode decoratorNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(decoratorNode, "Behavior Tree (Remove Child)");
+#endif
                 decoratorNode.ClearChild();
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(decoratorNode);
+#endif
             }
             else if (parent is RootNode rootNode)
             {
+#if UNITY_EDITOR
                 Undo.RecordObject(rootNode, "Behavior Tree (Remove Child)");
+#endif
                 rootNode.Child = null;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(rootNode);
+#endif
             }
 
             Changed?.Invoke(this);

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: ShowHide_Controls
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[{"key":"input","label":null,"summary":null,"hideLabel":true}],"controlOutputDefinitions":[{"key":"output","label":null,"summary":null,"hideLabel":true}],"valueInputDefinitions":[{"hasDefaultValue":false,"defaultValue":{"$content":false,"$type":"System.Boolean"},"_type":"System.Boolean","key":"inValue","label":"","summary":null,"hideLabel":true}],"valueOutputDefinitions":[],"title":"Show/Hide
+      Controls","summary":"Enable or Disable the Controls canvas.","pan":{"x":-13.0,"y":0.0},"zoom":1.0,"elements":[{"chainable":false,"member":{"name":"SetActive","parameterTypes":["System.Boolean"],"targetType":"UnityEngine.GameObject","targetTypeName":"UnityEngine.GameObject","$version":"A"},"defaultValues":{"target":null,"%value":{"$content":false,"$type":"System.Boolean"}},"position":{"x":-192.0,"y":-132.0},"guid":"b0e86234-1251-4840-8a70-127e63337b03","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"12"},{"specifyFallback":false,"kind":"Scene","defaultValues":{"name":{"$content":"ControlsCanvas","$type":"System.String"}},"position":{"x":-192.0,"y":0.0},"guid":"a7b64d52-7ae8-449a-8d6a-8bf1ec74ac24","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"15"},{"defaultValues":{},"position":{"x":-404.0,"y":-128.0},"guid":"cd61e6c1-7ad3-4998-be97-7eb0e6ad899a","$version":"A","$type":"Unity.VisualScripting.GraphInput","$id":"17"},{"defaultValues":{},"position":{"x":36.0,"y":-132.0},"guid":"adcddd33-fc23-4f4d-bf10-a60ea92781be","$version":"A","$type":"Unity.VisualScripting.GraphOutput","$id":"19"},{"sourceUnit":{"$ref":"17"},"sourceKey":"input","destinationUnit":{"$ref":"12"},"destinationKey":"enter","guid":"b6ed93ae-559a-408e-aeec-8b0dd6345706","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"12"},"sourceKey":"exit","destinationUnit":{"$ref":"19"},"destinationKey":"output","guid":"4f7f392c-3679-4234-b6e1-acc0e22c6a5b","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"value","destinationUnit":{"$ref":"12"},"destinationKey":"target","guid":"0ce72a07-25c7-4e8b-8472-035326a71450","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"inValue","destinationUnit":{"$ref":"12"},"destinationKey":"%value","guid":"5e0dd34c-4d7c-4185-8deb-c402544a6f16","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

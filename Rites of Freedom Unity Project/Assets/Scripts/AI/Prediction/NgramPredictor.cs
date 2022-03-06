@@ -13,13 +13,120 @@
  ******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
 /// Behavior that monitors a character's actions, analyzes their patterns, and 
 /// predicts what will happen next.
 /// </summary>
-public class NgramPredictor : MonoBehaviour
+public class NGramPredictor : MonoBehaviour
 {
-    
+    /// <summary>
+    /// The action that is predicted to be next.
+    /// </summary>
+    public NGramAction PredictedAction { get; private set; }
+
+    [SerializeField]
+    private NGramInvoker monitoredNGramInvoker;
+
+    [SerializeField]
+    private List<NGramAction> observedNGramActions = new List<NGramAction>();
+
+    [SerializeField]
+    [Tooltip("Max remembered history of invoked actions.")]
+    private int memorySize = 20;
+
+    [SerializeField]
+    [Min(0)]
+    [Tooltip("Max number of consecutive actions that are considered in the prediction.")]
+    private int sequenceLength = 3;
+
+    private List<NGramAction> actionHistory = new List<NGramAction>();
+
+    private void Start()
+    {
+        RegisterNGramInvokeEvents();
+    }
+
+    private void OnDestroy()
+    {
+        DeregisterNGramInvokeEvents();
+    }
+
+    private void LogActionInvocation(NGramAction action)
+    {
+        if (actionHistory.Count > memorySize)
+            actionHistory.RemoveAt(0);
+
+        actionHistory.Add(action);
+
+        UpdatePrediction();
+    }
+
+    private void UpdatePrediction()
+    {
+        List<NGramAction> mostRecentSequence = GetRecentActionSequence();
+
+        PredictedAction = GetMostLikelyActionBasedOnSequence(mostRecentSequence);
+    }
+
+    private List<NGramAction> GetRecentActionSequence()
+    {
+        int sequenceEndIndex = actionHistory.Count - 1;
+        int sequenceStartIndex = sequenceEndIndex - sequenceLength;
+
+        if (sequenceStartIndex < 0)
+            return new List<NGramAction>();
+
+        List<NGramAction> sequence = actionHistory.GetRange(sequenceStartIndex, sequenceLength);
+
+        return sequence;
+    }
+
+    private NGramAction GetMostLikelyActionBasedOnSequence(List<NGramAction> sequence)
+    {
+        if (actionHistory.Count == 0)
+            return observedNGramActions.GetRandom();
+
+        List<NGramAction> possiblePredictions = new List<NGramAction>();
+
+        for (int i = 0; i < actionHistory.Count; i++)
+        {
+            if (i + sequenceLength >= actionHistory.Count)
+                continue;
+
+            if (actionHistory.IndexMatchesSequence(i, sequence))
+            {
+                possiblePredictions.Add(actionHistory[i + sequenceLength]);
+            }
+        }
+
+        if (possiblePredictions.Count == 0)
+            return observedNGramActions.GetRandom();
+
+        List<NGramAction> modes = possiblePredictions.Mode();
+
+        return modes.GetRandom();
+    }
+
+    private void RegisterNGramInvokeEvents()
+    {
+        monitoredNGramInvoker.Invoked += OnNGramActionInvoked;
+    }
+
+    private void DeregisterNGramInvokeEvents()
+    {
+        monitoredNGramInvoker.Invoked -= OnNGramActionInvoked;
+    }
+
+    protected virtual void OnNGramActionInvoked(object sender, NGramActionInvokedEventArgs e)
+    {
+        NGramAction action = e.Action;
+
+        if (action == null)
+            return;
+
+        LogActionInvocation(action);
+    }
 }

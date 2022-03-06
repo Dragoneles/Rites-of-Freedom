@@ -1,0 +1,522 @@
+Using pre-set license
+Built from '2021.2/staging' branch; Version is '2021.2.4f1 (99ba6aa4c552) revision 10074730'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19044.1526; Version 2009; 64bit' Language: 'en' Physical Memory: 32611 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.2.4f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker7
+-projectPath
+D:/DigiPen/6_2022_Spring/DES303/Rites-of-Freedom/Rites of Freedom Unity Project
+-logFile
+Logs/AssetImportWorker7.log
+-srvPort
+64558
+Successfully changed project path to: D:/DigiPen/6_2022_Spring/DES303/Rites-of-Freedom/Rites of Freedom Unity Project
+D:/DigiPen/6_2022_Spring/DES303/Rites-of-Freedom/Rites of Freedom Unity Project
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 118.81 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.2.4f1 (99ba6aa4c552)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/DigiPen/6_2022_Spring/DES303/Rites-of-Freedom/Rites of Freedom Unity Project/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 Ti (ID=0x1b82)
+    Vendor:   NVIDIA
+    VRAM:     8079 MB
+    Driver:   27.21.14.5671
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56820
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.2.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005674 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 98.24 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.516 seconds
+Domain Reload Profiling:
+	ReloadAssembly (516ms)
+		BeginReloadAssembly (57ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (397ms)
+			LoadAssemblies (56ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (77ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (22ms)
+			SetupLoadedEditorAssemblies (256ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (12ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (98ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (109ms)
+				ProcessInitializeOnLoadMethodAttributes (35ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003889 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 127.02 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0003f] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:48 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in D:\DigiPen\6_2022_Spring\DES303\Rites-of-Freedom\Rites of Freedom Unity Project\Library\PackageCache\com.unity.visualscripting@1.7.5\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Completed reload, in  2.174 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2175ms)
+		BeginReloadAssembly (130ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (15ms)
+		EndReloadAssembly (1972ms)
+			LoadAssemblies (67ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (281ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (97ms)
+			SetupLoadedEditorAssemblies (1417ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (127ms)
+				BeforeProcessingInitializeOnLoad (126ms)
+				ProcessInitializeOnLoadAttributes (1090ms)
+				ProcessInitializeOnLoadMethodAttributes (57ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.05 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5867 Unused Serialized files (Serialized files now loaded: 1)
+Unloading 43 unused Assets / (1.1 MB). Loaded Objects now: 6325.
+Memory consumption went from 226.3 MB to 225.2 MB.
+Total: 9.020800 ms (FindLiveObjects: 0.381600 ms CreateObjectMapping: 0.353800 ms MarkObjects: 8.107500 ms  DeleteObjects: 0.177100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 239474.492260 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_04.wav
+  artifactKey: Guid(a0535aac5a8b2aa42bdc5e203b4abf07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_04.wav using Guid(a0535aac5a8b2aa42bdc5e203b4abf07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '650605863a184d9f6773ab3c01be6df4') in 0.109909 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_07.wav
+  artifactKey: Guid(9c97be0eb47731846a8b73fba4893010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_07.wav using Guid(9c97be0eb47731846a8b73fba4893010) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2abcdea6ed91b86551a3808aef385bb8') in 0.010091 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Walking 1_07.wav
+  artifactKey: Guid(ed6472327e1a649419cd602f9c3ecfd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Walking 1_07.wav using Guid(ed6472327e1a649419cd602f9c3ecfd2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c948aa8b213c9bf731663ba7093b505') in 0.008060 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_08.wav
+  artifactKey: Guid(8060ca5daa0692a429be74c208a603d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_08.wav using Guid(8060ca5daa0692a429be74c208a603d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3143e98a26afa5b5a84c68f0ef90269') in 0.009838 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Walking 2_06.wav
+  artifactKey: Guid(4ac440552603da8499bc5d4e7181da5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Walking 2_06.wav using Guid(4ac440552603da8499bc5d4e7181da5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8d9d25435f468cae09ccfebfe05135a') in 0.009797 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 2_02.wav
+  artifactKey: Guid(67e69088073bcdb44a1a83bbd58f5dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 2_02.wav using Guid(67e69088073bcdb44a1a83bbd58f5dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a975038898d2b2dcddf0ce53309139d3') in 0.012815 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_05.wav
+  artifactKey: Guid(2114dfcd25348764f8d920e713e01395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Foley Armor Heavy/Heavy Armor Running 1_05.wav using Guid(2114dfcd25348764f8d920e713e01395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22c36c281dfda5e665cf3eb6ebbc8cfb') in 0.009856 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.871642 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_04.wav
+  artifactKey: Guid(65daa0d82fdfe264d99fab3ee3c1f802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_04.wav using Guid(65daa0d82fdfe264d99fab3ee3c1f802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ab185f93b95d6c101944fd3b9153511') in 0.009126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 1_05.wav
+  artifactKey: Guid(b791a41fc71403f49be5b1bf0147bcdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 1_05.wav using Guid(b791a41fc71403f49be5b1bf0147bcdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a049f7123d5cdc3a6262c7e37b98259a') in 0.010238 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_06.wav
+  artifactKey: Guid(a8f57e255f83c4444bf4cb9025f2831d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_06.wav using Guid(a8f57e255f83c4444bf4cb9025f2831d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfd1449b633034b51157a071d51feb29') in 0.010212 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_09.wav
+  artifactKey: Guid(b612deb15da21ac44991441faa69ac0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_09.wav using Guid(b612deb15da21ac44991441faa69ac0e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70346c38040d8375c4c00eef61ebda7b') in 0.009602 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 3_03.wav
+  artifactKey: Guid(78f8e871087b6984689671991d5fc774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 3_03.wav using Guid(78f8e871087b6984689671991d5fc774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63c57f942e0dc031ebbe68247ad45f41') in 0.010572 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_03.wav
+  artifactKey: Guid(599f599d7a1bb574596cf9cecfffb75b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_03.wav using Guid(599f599d7a1bb574596cf9cecfffb75b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ca71990f5dea74f187f1166894808fa') in 0.010527 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 1_04.wav
+  artifactKey: Guid(fc1be82e3f2ce8f47b4a5fd4ee14cc39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 1_04.wav using Guid(fc1be82e3f2ce8f47b4a5fd4ee14cc39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fa054a4acd72add1ade128155a72910') in 0.010554 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_04.wav
+  artifactKey: Guid(318631e453d1de74c9a2ef238e1d7fa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_04.wav using Guid(318631e453d1de74c9a2ef238e1d7fa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48aba021f7fb0d86808c2e6d114da389') in 0.009587 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 2_04.wav
+  artifactKey: Guid(bffd7522c260b254e8d0bf3c3fba37e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 2_04.wav using Guid(bffd7522c260b254e8d0bf3c3fba37e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53c12fd8b4e67d4fd3292e9f0935f53a') in 0.010179 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_09.wav
+  artifactKey: Guid(36bbb715219809543af0a755c44808dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_09.wav using Guid(36bbb715219809543af0a755c44808dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '027bf1d71ae41b63a9b84b2e75b4f153') in 0.009408 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_03.wav
+  artifactKey: Guid(17f92bb2ad676ff4ca528c31c71e89bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_03.wav using Guid(17f92bb2ad676ff4ca528c31c71e89bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63d62138f26a9baaf4dde87dd22c4ec6') in 0.011286 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_05.wav
+  artifactKey: Guid(3685aecd678e0c74eb9da621cc69fe09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_05.wav using Guid(3685aecd678e0c74eb9da621cc69fe09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25f4553a94d9978a754672d08a7556e3') in 0.009772 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_05.wav
+  artifactKey: Guid(89067852ddf53174b8fb9171dcbbe112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Light Armor Grass Running 1_05.wav using Guid(89067852ddf53174b8fb9171dcbbe112) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '071184525ece22d15e585d1b673d9262') in 0.010396 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 3_10.wav
+  artifactKey: Guid(84cdd8b4fef7ae14e93be5c810afddd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 3_10.wav using Guid(84cdd8b4fef7ae14e93be5c810afddd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e875ffa1a426af6256153ed4f2cb2323') in 0.009149 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 3_10.wav
+  artifactKey: Guid(8d49242f1a7a1324ba3d55b24c19b54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 3_10.wav using Guid(8d49242f1a7a1324ba3d55b24c19b54b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd74eecee2638c94cdc93aea863bbe4ea') in 0.009665 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_02.wav
+  artifactKey: Guid(70c50d7e037132f449b09630a48b55e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_02.wav using Guid(70c50d7e037132f449b09630a48b55e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87cfd495a046db64fe9fa7a74991c151') in 0.009655 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_10.wav
+  artifactKey: Guid(ebb5184dcb66f3f439b48e8cad1cc739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 1_10.wav using Guid(ebb5184dcb66f3f439b48e8cad1cc739) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d882a6f14ea9157900b5484a79e45a7') in 0.009227 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_04.wav
+  artifactKey: Guid(6cd6146a0d1bf0d4b90dca8021d09efc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Walking 2_04.wav using Guid(6cd6146a0d1bf0d4b90dca8021d09efc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a0c19f6239dea392369f6d41a579baf') in 0.008462 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_09.wav
+  artifactKey: Guid(c2e0290ceadb1304e96e6760b97ef4d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Footsteps/Armored Grass Surface/Heavy Armor Grass Running 2_09.wav using Guid(c2e0290ceadb1304e96e6760b97ef4d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '079f06d137f2a692a1b79628e86ec36a') in 0.008677 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.733003 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 1_4.wav
+  artifactKey: Guid(e32176aa1e54833478bdd74705322fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 1_4.wav using Guid(e32176aa1e54833478bdd74705322fb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bfadb2945dec9d1a41fcfa7770281b5') in 0.009579 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_4.wav
+  artifactKey: Guid(750bdf2cf8c151d468e2cae619075a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_4.wav using Guid(750bdf2cf8c151d468e2cae619075a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ecc7dd60e642c8c43516b042ac39c37') in 0.008671 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 7_2.wav
+  artifactKey: Guid(ec3379140c4be6c47a552c0b6e9ec5d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 7_2.wav using Guid(ec3379140c4be6c47a552c0b6e9ec5d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cf42e02b4a2dd5905e7f4c59fd6468e') in 0.010242 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_5.wav
+  artifactKey: Guid(fe2cd2299f3ce5a46addbb5f1f179434) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_5.wav using Guid(fe2cd2299f3ce5a46addbb5f1f179434) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'beab1590be2e3d2600df79a1dd95941d') in 0.010442 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 2_5.wav
+  artifactKey: Guid(56f1f35ffe50aef49b125db465fe80ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 2_5.wav using Guid(56f1f35ffe50aef49b125db465fe80ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00333e81732b3483de40dfc4097d146e') in 0.012558 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Light Armor 2_01.wav
+  artifactKey: Guid(f0fd40ea8cb8acf498db4875c27a9204) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Light Armor 2_01.wav using Guid(f0fd40ea8cb8acf498db4875c27a9204) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf11fb11c4b68d244ad74225ee77c5c5') in 0.009657 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 8_1.wav
+  artifactKey: Guid(d273cfd5711f36d42a62b5619fa69bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 8_1.wav using Guid(d273cfd5711f36d42a62b5619fa69bdd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8acab19a5b31375d356ef15dd610c4f') in 0.009624 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 2_04.wav
+  artifactKey: Guid(25ff226ced6233b40a33b807be8120b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 2_04.wav using Guid(25ff226ced6233b40a33b807be8120b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba5aa6c4e24ed5317c847fbaab152f38') in 0.011283 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_3.wav
+  artifactKey: Guid(ca39370b97d4a5e4690147c5ecb0e6cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_3.wav using Guid(ca39370b97d4a5e4690147c5ecb0e6cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3f5d3d03ef0f9f90e92eb424fa76074') in 0.009827 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 7_1.wav
+  artifactKey: Guid(ffbb38a6dbd717240a39a27c0affb634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 7_1.wav using Guid(ffbb38a6dbd717240a39a27c0affb634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35407714a0b3d610778dcc6d27d93a57') in 0.009616 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_2.wav
+  artifactKey: Guid(5a2bc3cf325c637458f675d7a4ebb3ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_2.wav using Guid(5a2bc3cf325c637458f675d7a4ebb3ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d8926117501f89b46481ac574f994e0') in 0.009965 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 1_2.wav
+  artifactKey: Guid(648a49a9e4ddd2d4fa24cae77adafc27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 1_2.wav using Guid(648a49a9e4ddd2d4fa24cae77adafc27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bd022eff06b3a7dc651f283df7d4447') in 0.008039 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_2.wav
+  artifactKey: Guid(6147f0fe8d15ea643ba5083c2639696a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 4_2.wav using Guid(6147f0fe8d15ea643ba5083c2639696a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd60fa56b2956edc09d201d6ef4ae9e77') in 0.009618 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Light Armor 2_05.wav
+  artifactKey: Guid(d25a8e7974bb73b468149806c5470722) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Light Armor 2_05.wav using Guid(d25a8e7974bb73b468149806c5470722) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '578e2f25ba8564edc476ea5a058fc37a') in 0.009161 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 3_2.wav
+  artifactKey: Guid(6aeb1f047fd075c42bb924e48d74ddb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 3_2.wav using Guid(6aeb1f047fd075c42bb924e48d74ddb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '756b7ae283b5d2f021348d1b849bceb9') in 0.010204 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 2_05.wav
+  artifactKey: Guid(6ac88b11e5b94cf4a93aaa739e7b7fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 2_05.wav using Guid(6ac88b11e5b94cf4a93aaa739e7b7fe4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba8ac7db31cc0062d485f9cf1bc9652d') in 0.009248 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_1.wav
+  artifactKey: Guid(9f3b376b7050d3247b650739515cf544) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Blunt Swing 2_1.wav using Guid(9f3b376b7050d3247b650739515cf544) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a6f31fa45e508a627866942307e2b8a') in 0.011370 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 6_2.wav
+  artifactKey: Guid(3a4f7ed1bd6682248bcf7626b0782a76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 6_2.wav using Guid(3a4f7ed1bd6682248bcf7626b0782a76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '691ebc6c8c354d603bccbe1c6be0814e') in 0.009857 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 1_05.wav
+  artifactKey: Guid(d58a7ec62be121d41a554d38d79829c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Dash Heavy Armor 1_05.wav using Guid(d58a7ec62be121d41a554d38d79829c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c902c69803dceba2bb1ddb372169a72b') in 0.010725 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.568783 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 10_5.wav
+  artifactKey: Guid(834a348b895d6c043929abf50dcb01ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Metal Weapon Swing 10_5.wav using Guid(834a348b895d6c043929abf50dcb01ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f49e3e1f1c0a3f13eeaad6bc69ae8398') in 0.010064 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 1_1.wav
+  artifactKey: Guid(da0a7393c8e00b44991a57f5abf73fe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 1_1.wav using Guid(da0a7393c8e00b44991a57f5abf73fe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '045aef5ef740836a18521eda51c474bd') in 0.009640 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 1_5.wav
+  artifactKey: Guid(95b2ae6017e86f74384c763ae9aa0048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 1_5.wav using Guid(95b2ae6017e86f74384c763ae9aa0048) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0c8419d354fee539e8f7f0b469dc48c') in 0.010101 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 2_1.wav
+  artifactKey: Guid(400915b29d6df8f43b39fcdef4d18ecc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 2_1.wav using Guid(400915b29d6df8f43b39fcdef4d18ecc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edf72c7c116338fb48d0d472cbd28b7f') in 0.009966 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.143581 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 3_5.wav
+  artifactKey: Guid(9b5efd2eca22e8d43bbc59c476b3e873) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 3_5.wav using Guid(9b5efd2eca22e8d43bbc59c476b3e873) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6faa4c82f9c81d38ed2506f889090ff') in 0.010972 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 6_1.wav
+  artifactKey: Guid(be0b1235bbfbd234b8656a4d0f4aa396) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 6_1.wav using Guid(be0b1235bbfbd234b8656a4d0f4aa396) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '680786226de2f8e7f94e7ca080ac08ec') in 0.010162 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 5_5.wav
+  artifactKey: Guid(dbc2a1897286fe34b960e05b8aefd695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 5_5.wav using Guid(dbc2a1897286fe34b960e05b8aefd695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3751032cd677dab0742f7f07b6b42050') in 0.011560 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 4_2.wav
+  artifactKey: Guid(fa794213037387841994d2df01c8b936) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 4_2.wav using Guid(fa794213037387841994d2df01c8b936) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0dba19cfecc9f0cc29d368957093a07') in 0.009769 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.344324 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 6_5.wav
+  artifactKey: Guid(15f763e04207bea469d09a4dff17010e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 6_5.wav using Guid(15f763e04207bea469d09a4dff17010e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adc907920f93f69f9b27648fde6bace0') in 0.009629 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 8_2.wav
+  artifactKey: Guid(64ca6cce50e72c54482197319f6d1a79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 8_2.wav using Guid(64ca6cce50e72c54482197319f6d1a79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ae5dd8b44f8e301744299b0bb2e1ff8') in 0.009349 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 8_3.wav
+  artifactKey: Guid(1813f707f7bc59643b26d9b81f92fd9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 8_3.wav using Guid(1813f707f7bc59643b26d9b81f92fd9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e48ddd8b1280b882aa3ec2345c29349') in 0.010395 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 7_5.wav
+  artifactKey: Guid(9705e74cceccf784288cc3635c225ccf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Medieval Combat Sounds/Swings and Whoosh/Whoosh 7_5.wav using Guid(9705e74cceccf784288cc3635c225ccf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f185e012d930fe2dd48ef788a6f7267d') in 0.007725 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

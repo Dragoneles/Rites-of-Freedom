@@ -25,13 +25,15 @@ public class CharacterInputManager : MonoBehaviour
 {
     private CharacterStateMachineManager StateMachine { get; set; }
 
-    private float MoveDirection { get; set; } = 0f;
-    private float RollDirection { get; set; } = 0f;
-    private Coroutine Move_Coroutine { get; set; }
-    private Coroutine Roll_Coroutine { get; set; }
-    private Coroutine Jump_Coroutine { get; set; }
-    private Coroutine Attack_Coroutine { get; set; }
-    private Coroutine Block_Coroutine { get; set; }
+    [SerializeField]
+    private ActionTypes allowedActions = ActionTypes.Story;
+
+    private float moveDirection { get; set; } = 0f;
+    private Coroutine move_Coroutine { get; set; }
+    private Coroutine roll_Coroutine { get; set; }
+    private Coroutine jump_Coroutine { get; set; }
+    private Coroutine attack_Coroutine { get; set; }
+    private Coroutine block_Coroutine { get; set; }
 
     private void Awake()
     {
@@ -40,27 +42,33 @@ public class CharacterInputManager : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (!allowedActions.HasFlag(ActionTypes.Move))
+            return;
+
         if (context.canceled)
         {
-            MoveDirection = 0f;
+            moveDirection = 0f;
             return;
         }
 
         if (context.performed)
         {
-            MoveDirection = context.ReadValue<float>();
+            moveDirection = context.ReadValue<float>();
 
-            Move_Coroutine ??= StartCoroutine(InputCoroutine(
-                () => StateMachine.Move(MoveDirection)));
+            move_Coroutine ??= StartCoroutine(InputCoroutine(
+                () => StateMachine.Move(moveDirection)));
         }
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (!allowedActions.HasFlag(ActionTypes.Jump))
+            return;
+
         if (context.canceled)
         {
-            Stop(Jump_Coroutine);
-            Jump_Coroutine = null;
+            Stop(jump_Coroutine);
+            jump_Coroutine = null;
             return;
         }
 
@@ -68,15 +76,18 @@ public class CharacterInputManager : MonoBehaviour
             StateMachine.Jump();
 
         if (context.performed)
-            Jump_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Jump));
+            jump_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Jump));
     }
 
     public void Block(InputAction.CallbackContext context)
     {
+        if (!allowedActions.HasFlag(ActionTypes.Block))
+            return;
+
         if (context.canceled)
         {
-            Stop(Block_Coroutine);
-            Block_Coroutine = null;
+            Stop(block_Coroutine);
+            block_Coroutine = null;
             StateMachine.StopBlocking();
             return;
         }
@@ -85,15 +96,18 @@ public class CharacterInputManager : MonoBehaviour
             StateMachine.StartBlocking();
 
         if (context.performed)
-            Block_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.StartBlocking));
+            block_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.StartBlocking));
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
+        if (!allowedActions.HasFlag(ActionTypes.Attack))
+            return;
+
         if (context.canceled)
         {
-            Stop(Attack_Coroutine);
-            Attack_Coroutine = null;
+            Stop(attack_Coroutine);
+            attack_Coroutine = null;
             return;
         }
 
@@ -101,25 +115,28 @@ public class CharacterInputManager : MonoBehaviour
             StateMachine.Attack();
 
         if (context.performed)
-            Attack_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Attack));
+            attack_Coroutine ??= StartCoroutine(InputCoroutine(StateMachine.Attack));
     }
 
     public void Roll(InputAction.CallbackContext context)
     {
+        if (!allowedActions.HasFlag(ActionTypes.Roll))
+            return;
+
         if (context.canceled)
         {
-            Stop(Roll_Coroutine);
-            Roll_Coroutine = null;
-            RollDirection = 0f;
+            Stop(roll_Coroutine);
+            roll_Coroutine = null;
             return;
         }
 
+        if (context.started)
+            StateMachine.Roll();
+
         if (context.performed)
         {
-            RollDirection = context.ReadValue<float>();
-
-            Roll_Coroutine ??= StartCoroutine(InputCoroutine(
-                () => StateMachine.Roll(RollDirection)));
+            roll_Coroutine ??= StartCoroutine(InputCoroutine(
+                () => StateMachine.Roll()));
         }
     }
 

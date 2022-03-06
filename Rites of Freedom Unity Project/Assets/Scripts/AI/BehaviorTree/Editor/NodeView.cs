@@ -22,7 +22,7 @@ using GraphNode = UnityEditor.Experimental.GraphView.Node;
 namespace AI.BehaviorTree.Editor
 {
     /// <summary>
-    /// Extension of Node in the experimental UI builder API for use in the 
+    /// Extension of Node in the experimental UI builder API for use in the
     /// behavior tree window.
     /// </summary>
     public class NodeView : GraphNode
@@ -35,9 +35,11 @@ namespace AI.BehaviorTree.Editor
         public Port Input;
         public Port Output;
 
-        private GraphView graph { get; set; }
+        private BehaviorTreeView graph { get; set; }
 
-        public NodeView(Node node, GraphView graph) : base("Assets/Scripts/AI/BehaviorTree/Editor/NodeView.uxml")
+        private List<ContextMenuElement> additionalContextMenuElements = new List<ContextMenuElement>();
+
+        public NodeView(Node node, BehaviorTreeView graph) : base("Assets/Scripts/AI/BehaviorTree/Editor/NodeView.uxml")
         {
             this.graph = graph;
 
@@ -176,6 +178,102 @@ namespace AI.BehaviorTree.Editor
             return NodeViewUtility.height;
         }
 
+        public override void OnSelected()
+        {
+            Selected?.Invoke(this);
+        }
+
+        public override void OnUnselected()
+        {
+            Unselected?.Invoke(this);
+        }
+
+        public void RegisterChildNodeView(NodeView childNodeView)
+        {
+            CompositeNode composite = Node as CompositeNode;
+            if (composite == null)
+                return;
+
+            if (composite.ChildCount < 2)
+                return;
+
+            Node childNode = childNodeView.Node;
+
+            var moveLeftAction = new ContextMenuElement("Move Left",
+                // Menu action
+                (a) =>
+                {
+                    Undo.RecordObject(composite, "Behavior Tree (Move Child)");
+                    composite.MoveChildLeft(childNode);
+                    graph.RearrangeNodes();
+                },
+                // Status callback
+                (a) =>
+                {
+                    if (childNode == composite.GetChildren()[0])
+                        return DropdownMenuAction.Status.Disabled;
+
+                    return DropdownMenuAction.Status.Normal;
+                });
+
+            var moveRightAction = new ContextMenuElement("Move Right",
+                // Menu action
+                (a) =>
+                {
+                    Undo.RecordObject(composite, "Behavior Tree (Move Child)");
+                    composite.MoveChildRight(childNode);
+                    graph.RearrangeNodes();
+                },
+                // Status callback
+                (a) =>
+                {
+                    if (composite.ChildCount == 0)
+                        return DropdownMenuAction.Status.Normal;
+
+                    if (childNode == composite.GetChildren()[composite.ChildCount - 1])
+                        return DropdownMenuAction.Status.Disabled;
+
+                    return DropdownMenuAction.Status.Normal;
+                });
+
+            childNodeView.AddContextMenuElement(moveLeftAction);
+            childNodeView.AddContextMenuElement(moveRightAction);
+        }
+
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            base.BuildContextualMenu(evt);
+
+            foreach (var action in additionalContextMenuElements)
+            {
+                evt.menu.AppendAction(action.Name, action.Action, action.StatusCallback);
+            }
+
+            evt.menu.AppendSeparator();
+        }
+
+        /// <summary>
+        /// Add an additional dropdown element to this node's context menu.
+        /// </summary>
+        public void AddContextMenuElement(ContextMenuElement element)
+        {
+            if (additionalContextMenuElements.Contains(element))
+                return;
+
+            additionalContextMenuElements.Add(element);
+        }
+
+        /// <summary>
+        /// Remove a dropdown element from this node's context menu.
+        /// </summary>
+        public void RemoveContextMenuElement(ContextMenuElement element)
+        {
+            if (!additionalContextMenuElements.Contains(element))
+                return;
+
+            additionalContextMenuElements.Remove(element);
+        }
+
         private void SetupClasses()
         {
             if (Node is LeafNode)
@@ -252,16 +350,6 @@ namespace AI.BehaviorTree.Editor
                 Output.style.flexDirection = FlexDirection.ColumnReverse;
                 outputContainer.Add(Output);
             }
-        }
-
-        public override void OnSelected()
-        {
-            Selected?.Invoke(this);
-        }
-
-        public override void OnUnselected()
-        {
-            Unselected?.Invoke(this);
         }
     }
 }

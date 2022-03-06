@@ -31,7 +31,7 @@ namespace AI.BehaviorTree.Editor
 
         private List<NodeView> selectedNodeViews = new List<NodeView>();
 
-        private BehaviorTreeAsset tree;
+        private BehaviorTreeAsset behaviorTreeAsset;
 
         public BehaviorTreeView()
         {
@@ -49,7 +49,7 @@ namespace AI.BehaviorTree.Editor
 
         public void PopulateView(BehaviorTreeAsset tree)
         {
-            this.tree = tree;
+            this.behaviorTreeAsset = tree;
 
             graphViewChanged -= OnGraphViewChanged;
 
@@ -78,6 +78,10 @@ namespace AI.BehaviorTree.Editor
                 .ToList();
         }
 
+        /// <summary>
+        /// BehaviorTreeView contextual menu. If nodes are selected, provides
+        /// options to create children nodes or delete selected nodes.
+        /// </summary>
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             if (selectedNodeViews.Count == 0)
@@ -86,6 +90,64 @@ namespace AI.BehaviorTree.Editor
             AppendCreateActions(evt);
 
             evt.menu.AppendAction($"Delete", (a) => DeleteSelection());
+        }
+
+        /// <summary>
+        /// Override for the delete operation. Ignores deletion of RootNode and
+        /// recursively deletes child nodes.
+        /// </summary>
+        public override EventPropagation DeleteSelection()
+        {
+            NodeView rootNodeView = GetNodeViewOfNode(behaviorTreeAsset.RootNode);
+            if (selection.Contains(rootNodeView))
+                selection.Remove(rootNodeView);
+
+            var additionalElementsToDelete = new List<GraphElement>();
+            foreach (ISelectable selectedItem in selection)
+            {
+                NodeView selectedNode = selectedItem as NodeView;
+                if (selectedNode == null)
+                    continue;
+
+                additionalElementsToDelete.AddRange(GetChildrenOfNodeView(selectedNode));
+            }
+
+            selection.AddRange(additionalElementsToDelete);
+
+            return base.DeleteSelection();
+        }
+
+        /// <summary>
+        /// Repositions all nodes in the tree based on their hierarchy.
+        /// </summary>
+        public void RearrangeNodes()
+        {
+            var rootNodeView = GetNodeByGuid(behaviorTreeAsset.RootNode.Guid) as NodeView;
+
+            rootNodeView.UpdatePosition(Vector2.zero);
+        }
+
+        private List<NodeView> GetChildrenOfNodeView(NodeView nodeView)
+        {
+            List<NodeView> childNodes = new List<NodeView>();
+
+            if (nodeView.Node is DecoratorNode decoratorNode)
+            {
+                NodeView childNodeView = GetNodeViewOfNode(decoratorNode.Child);
+                childNodes.Add(childNodeView);
+                childNodes.AddRange(GetChildrenOfNodeView(childNodeView));
+            }
+            else if (nodeView.Node is CompositeNode compositeNode)
+            {
+                foreach (Node childNode in compositeNode.GetChildren())
+                {
+                    NodeView childNodeView = GetNodeViewOfNode(childNode);
+                    childNodes.Add(childNodeView);
+                    childNodes.AddRange(GetChildrenOfNodeView(childNodeView));
+                }
+            }
+
+            return childNodes;
         }
 
         private void AppendCreateActions(ContextualMenuPopulateEvent evt)
@@ -112,19 +174,18 @@ namespace AI.BehaviorTree.Editor
 
         private void OnUndoRedo()
         {
-            PopulateView(tree);
-            AssetDatabase.SaveAssets();
+            PopulateView(behaviorTreeAsset);
         }
 
         private void CreateEdges(BehaviorTreeAsset tree)
         {
             foreach (Node node in tree.Nodes)
             {
-                NodeView parentView = GetNodeView(node);
+                NodeView parentView = GetNodeViewOfNode(node);
 
                 foreach (Node child in tree.GetChildrenOf(node))
                 {
-                    NodeView childView = GetNodeView(child);
+                    NodeView childView = GetNodeViewOfNode(child);
 
                     CreateEdge(parentView, childView);
                 }
@@ -134,6 +195,8 @@ namespace AI.BehaviorTree.Editor
         private Edge CreateEdge(NodeView parent, NodeView child)
         {
             Edge edge = parent.Output.ConnectTo(child.Input);
+
+            parent.RegisterChildNodeView(child);
 
             AddElement(edge);
 
@@ -166,13 +229,6 @@ namespace AI.BehaviorTree.Editor
             return nodeView;
         }
 
-        private void RearrangeNodes()
-        {
-            var rootNodeView = GetNodeByGuid(tree.RootNode.Guid) as NodeView;
-
-            rootNodeView.UpdatePosition(Vector2.zero);
-        }
-
         private static List<Type> GetConstructableNodeTypes()
         {
             var types = TypeCache.GetTypesDerivedFrom<Node>().ToList();
@@ -190,7 +246,7 @@ namespace AI.BehaviorTree.Editor
 
         private void CreateNode(Type type, Node parent)
         {
-            Node node = tree.CreateNode(type, parent);
+            Node node = behaviorTreeAsset.CreateNode(type, parent);
             NodeView nodeView = CreateNodeView(node);
             CreateEdge(GetNodeByGuid(parent.Guid) as NodeView, nodeView);
         }
@@ -212,13 +268,13 @@ namespace AI.BehaviorTree.Editor
 
         private void RemoveElements(GraphViewChange graphViewChange)
         {
-            foreach (var element in graphViewChange.elementsToRemove)
+            foreach (GraphElement element in graphViewChange.elementsToRemove)
             {
                 TryRemoveEdge(element);
                 TryRemoveNode(element);
             }
 
-            RearrangeNodes();
+            PopulateView(behaviorTreeAsset);
         }
 
         private void TryRemoveNode(GraphElement element)
@@ -227,7 +283,10 @@ namespace AI.BehaviorTree.Editor
 
             if (nodeView != null)
             {
-                tree.DeleteNode(nodeView.Node);
+                if (nodeView.Node is RootNode)
+                    return;
+
+                behaviorTreeAsset.DeleteNode(nodeView.Node);
             }
         }
 
@@ -240,7 +299,7 @@ namespace AI.BehaviorTree.Editor
                 NodeView parentView = edge.output.node as NodeView;
                 NodeView childView = edge.input.node as NodeView;
 
-                tree.RemoveChild(parentView.Node, childView.Node);
+                behaviorTreeAsset.RemoveChild(parentView.Node, childView.Node);
             }
         }
 
@@ -257,12 +316,14 @@ namespace AI.BehaviorTree.Editor
             NodeView parentView = edge.output.node as NodeView;
             NodeView childView = edge.input.node as NodeView;
 
-            tree.AddChild(parentView.Node, childView.Node);
+            behaviorTreeAsset.AddChild(parentView.Node, childView.Node);
+
+            parentView.RegisterChildNodeView(childView);
 
             Add(edge);
         }
 
-        private NodeView GetNodeView(Node node)
+        private NodeView GetNodeViewOfNode(Node node)
         {
             return GetNodeByGuid(node.Guid) as NodeView;
         }

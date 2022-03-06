@@ -21,6 +21,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class CameraAnchor : MonoBehaviour
 {
+    public event EventHandler Disabled;
+
     public Vector2 Position => transform.position;
 
     [SerializeField]
@@ -32,6 +34,11 @@ public class CameraAnchor : MonoBehaviour
     private float Weight = 1f;
 
     public float GetWeight() => Weight;
+
+    private void OnDisable()
+    {
+        Disabled?.Invoke(this, EventArgs.Empty);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

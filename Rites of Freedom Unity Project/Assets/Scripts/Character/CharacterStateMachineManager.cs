@@ -30,6 +30,7 @@ public class CharacterStateMachineManager : MonoBehaviour
         public const string MoveStop = "OnMoveStop";
         public const string Jump = "OnJump";
         public const string Roll = "OnRoll";
+        public const string RollStop = "OnRollFinished";
         public const string Attack = "OnAttack";
         public const string AttackStop = "OnAttackFinished";
         public const string Block = "OnBlock";
@@ -69,8 +70,8 @@ public class CharacterStateMachineManager : MonoBehaviour
 
         Character.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
         Character.YVelocityChanged.AddListener(OnCharacterYVelocityChanged);
-        Character.Flinched.AddListener(OnCharacterFlinched);
         Character.Blocked.AddListener(OnCharacterBlocked);
+        Character.Flinched.AddListener(OnCharacterFlinched);
         Character.Died.AddListener(OnCharacterDeath);
     }
 
@@ -113,15 +114,13 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// <summary>
     /// Enter the Roll state.
     /// </summary>
-    public void Roll(float direction)
+    public void Roll()
     {
         if (InputLocked)
         {
             SetNextState(StateType.Roll);
             return;
         }
-
-        CallbackDictionary.AddCallback(StateType.Roll, UnlockInputs);
 
         SetCurrentActionState(StateType.Roll);
     }
@@ -131,7 +130,10 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        if (InputLocked && Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) < 2)
+        if (Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) >= 2)
+            return;
+
+        if (InputLocked)
         {
             SetNextState(StateType.Attack);
             return;
@@ -149,10 +151,7 @@ public class CharacterStateMachineManager : MonoBehaviour
             return;
 
         if (InputLocked)
-        {
-            SetNextState(StateType.Block);
             return;
-        }
 
         SetCurrentActionState(StateType.Block);
     }
@@ -162,9 +161,6 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     public void StopBlocking()
     {
-        if (CurrentActionState != StateType.Block)
-            return;
-
         NotifyStateFinished(StateType.Block);
     }
 
@@ -204,11 +200,19 @@ public class CharacterStateMachineManager : MonoBehaviour
         InputLocked = false;
     }
 
-    private void SetCurrentActionState(StateType state)
+    private void SetCurrentActionState(StateType newState)
     {
-        CurrentActionState = state;
+        StateType previousActionState = CurrentActionState;
 
-        switch (CurrentActionState)
+        CurrentActionState = newState;
+
+        HandleStateExit(previousActionState);
+        HandleStateEnter(newState);
+    }
+
+    private void HandleStateEnter(StateType enteredState)
+    {
+        switch (enteredState)
         {
             case StateType.Attack:
                 Trigger(StateEvents.Attack);
@@ -219,20 +223,15 @@ public class CharacterStateMachineManager : MonoBehaviour
                 break;
 
             case StateType.Jump:
-                Trigger(StateEvents.AttackStop);
-                Trigger(StateEvents.BlockStop);
                 Trigger(StateEvents.Jump);
                 break;
 
             case StateType.Flinch:
-                Trigger(StateEvents.BlockStop);
                 Trigger(StateEvents.MoveStop);
                 Trigger(StateEvents.Flinch);
                 break;
 
             case StateType.Roll:
-                Trigger(StateEvents.AttackStop);
-                Trigger(StateEvents.BlockStop);
                 Trigger(StateEvents.Roll);
                 break;
 
@@ -240,7 +239,36 @@ public class CharacterStateMachineManager : MonoBehaviour
                 Trigger(StateEvents.AttackStop);
                 Trigger(StateEvents.BlockStop);
                 Trigger(StateEvents.FlinchStop);
+                Trigger(StateEvents.RollStop);
                 UnlockInputs();
+                break;
+        }
+    }
+
+    private void HandleStateExit(StateType exitedState)
+    {
+        switch (exitedState)
+        {
+            case StateType.Attack:
+                if (CurrentActionState != StateType.Attack)
+                    Trigger(StateEvents.AttackStop);
+                break;
+
+            case StateType.Block:
+                Trigger(StateEvents.BlockStop);
+                break;
+
+            case StateType.Jump:
+                break;
+
+            case StateType.Roll:
+                Trigger(StateEvents.RollStop);
+                break;
+
+            case StateType.Flinch:
+                break;
+
+            default:
                 break;
         }
     }
@@ -262,7 +290,7 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     private void Trigger(string eventName, params object[] args)
     {
-        CustomEvent.Trigger(gameObject, eventName, args);
+        Unity.VisualScripting.CustomEvent.Trigger(gameObject, eventName, args);
     }
 
     private void ClearNextState()
@@ -363,6 +391,8 @@ public class CharacterStateMachineManager : MonoBehaviour
 
     protected virtual void OnCharacterDeath(object sender, EventArgs e)
     {
+        StopMoving();
+
         Trigger(StateEvents.Death);
 
         DisableInputBehaviors();

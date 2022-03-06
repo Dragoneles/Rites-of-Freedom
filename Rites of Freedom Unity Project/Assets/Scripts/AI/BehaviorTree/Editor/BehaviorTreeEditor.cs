@@ -127,7 +127,13 @@ namespace AI.BehaviorTree.Editor
         protected virtual void OnAssetChanged(ScriptableObject asset)
         {
             EditorUtility.SetDirty(asset);
+            hasUnsavedChanges = true;
+        }
+
+        public override void SaveChanges()
+        {
             AssetDatabase.SaveAssets();
+            base.SaveChanges();
         }
     }
 }

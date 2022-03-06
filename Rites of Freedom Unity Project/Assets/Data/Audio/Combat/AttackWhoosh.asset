@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
+  m_Name: AttackWhoosh
+  m_EditorClassIdentifier: 
+  BaseVolume: 0.3
+  BasePitch: 1
+  StereoPan: 0
+  RandomPitchDown: -0.1
+  RandomPitchUp: 0.1
+  PlayOnAwake: 0
+  Loop: 0
+  Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
+  Variations:
+  - Clip: {fileID: 8300000, guid: c4e4a16ec1a025a40917a97f0026bd51, type: 3}
+  - Clip: {fileID: 8300000, guid: 4e291481178c8d74aabb20d8d30ed775, type: 3}
+  - Clip: {fileID: 8300000, guid: 39b00e221adda7f4890ff7bc7e37f2b4, type: 3}
+  - Clip: {fileID: 8300000, guid: 1a05d1ace4d35be4093f0142aeb1617f, type: 3}
+  - Clip: {fileID: 8300000, guid: 856ae8afa274b3440a02e8c1ba92f185, type: 3}
+  - Clip: {fileID: 8300000, guid: 70138205a8b284441b2c9d7c20d277c7, type: 3}
+  - Clip: {fileID: 8300000, guid: 2b754bd4218a6d24583005cc5635e7b7, type: 3}
+  - Clip: {fileID: 8300000, guid: 884b01db2fba2b44e96fc0f57394ba59, type: 3}
+  - Clip: {fileID: 8300000, guid: 4fa969f2477647141a3f334b32be6495, type: 3}
+  - Clip: {fileID: 8300000, guid: 15610f9056badf3499a95a75079a464c, type: 3}
+  - Clip: {fileID: 8300000, guid: 386a55b72e8483243a999dc3b226373e, type: 3}
+  - Clip: {fileID: 8300000, guid: 01bd6e06d32f2314a8db4663c73fc7d3, type: 3}
+  - Clip: {fileID: 8300000, guid: 98f06f1a9a8efad4eb987cf255ad8db0, type: 3}

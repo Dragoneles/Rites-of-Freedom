@@ -25,6 +25,7 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     public const string Self = nameof(self);
     public const string Target = nameof(target);
     public const string StateMachine = nameof(stateMachine);
+    public const string Predictor = nameof(predictor);
 
     [SerializeField]
     private Character self;
@@ -35,6 +36,9 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     [SerializeField]
     private CharacterStateMachineManager stateMachine;
 
+    [SerializeField]
+    private NGramPredictor predictor;
+
     private Blackboard blackboard => tree.Blackboard;
 
     protected override void Awake()
@@ -44,5 +48,6 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
         blackboard.Set(nameof(self), self);
         blackboard.Set(nameof(target), target);
         blackboard.Set(nameof(stateMachine), stateMachine);
+        blackboard.Set(nameof(predictor), predictor);
     }
 }

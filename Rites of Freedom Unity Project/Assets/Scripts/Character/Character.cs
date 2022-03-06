@@ -64,7 +64,7 @@ public class Character : MonoBehaviour, IAttackable
     /// Event invoked when the character attacks another character.
     /// TriggeringCharacter is the sender.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> LaunchedAttack;
+    public SmartUnityEvent<AttackEventArgs> DeliveredAttack;
 
     /// <summary>
     /// Event invoked when the character receives an attack.
@@ -83,6 +83,11 @@ public class Character : MonoBehaviour, IAttackable
     public SmartUnityEvent<AttackEventArgs> Blocked;
 
     /// <summary>
+    /// Event invoked when the character dodges an attack by rolling.
+    /// </summary>
+    public SmartUnityEvent<AttackEventArgs> Dodged;
+
+    /// <summary>
     /// Event invoked when the character rolls.
     /// </summary>
     public SmartUnityEvent<EventArgs> Rolled;
@@ -95,7 +100,12 @@ public class Character : MonoBehaviour, IAttackable
     /// <summary>
     /// Event invoked when a character dies.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> Died;
+    public SmartUnityEvent<EventArgs> Died;
+
+    /// <summary>
+    /// Event invoked when the character lands.
+    /// </summary>
+    public SmartUnityEvent<EventArgs> Landed;
 
     [Header("Stats")]
     public Vital Health = new Vital(25);
@@ -119,6 +129,7 @@ public class Character : MonoBehaviour, IAttackable
 
     public bool IsDead { get; private set; } = false;
     public bool IsBlocking { get; private set; } = false;
+    public bool IsRolling { get; private set; } = false;
     private float YVelocity { get; set; } = 0f;
     public Vector2 Position { get => transform.position; }
 
@@ -139,6 +150,14 @@ public class Character : MonoBehaviour, IAttackable
     private void Update()
     {
         CheckYVelocity();
+    }
+
+    /// <summary>
+    /// Kill this character via cheat.
+    /// </summary>
+    public void CheatKill()
+    {
+        TakeDamage(999999);
     }
 
     /// <summary>
@@ -228,14 +247,42 @@ public class Character : MonoBehaviour, IAttackable
     }
 
     /// <summary>
+    /// Get the direction that the player is currently facing.
+    /// </summary>
+    public float GetFacingDirection()
+    {
+        float right = 1f;
+        float left = -1f;
+
+        if (transform.localScale.x.IsPositive())
+            return right;
+
+        return left;
+    }
+
+    /// <summary>
+    /// Tell the character to face a specified direction.
+    /// </summary>
+    public void FaceDirection(float direction)
+    {
+        direction = Mathf.Clamp(direction, Direction.Left, Direction.Right);
+        direction = Mathf.Round(direction);
+
+        if (direction == 0f)
+            return;
+
+        float x = Mathf.Abs(transform.localScale.x);
+        float y = transform.localScale.y;
+        float z = transform.localScale.z;
+        transform.localScale = new Vector3(x * direction, y, z);
+    }
+
+    /// <summary>
     /// Set this character's local X scale to face left.
     /// </summary>
     public void FaceLeft()
     {
-        float x = Mathf.Abs(transform.localScale.x);
-        float y = transform.localScale.y;
-        float z = transform.localScale.z;
-        transform.localScale = new Vector3(-x, y, z);
+        FaceDirection(Direction.Left);
     }
 
     /// <summary>
@@ -243,10 +290,7 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     public void FaceRight()
     {
-        float x = Mathf.Abs(transform.localScale.x);
-        float y = transform.localScale.y;
-        float z = transform.localScale.z;
-        transform.localScale = new Vector3(x, y, z);
+        FaceDirection(Direction.Right);
     }
 
     /// <summary>
@@ -264,16 +308,15 @@ public class Character : MonoBehaviour, IAttackable
             return;
         }
 
+        if (IsRolling)
+        {
+            DodgeAttack(attack);
+            return;
+        }
+
         TakeDamage(attack.Damage);
 
         ReceivedAttack?.Invoke(this, new AttackEventArgs(attack, this));
-
-        if (Health <= 0 && !IsDead)
-        {
-            Died?.Invoke(this, new AttackEventArgs(attack, this));
-            IsDead = true;
-            return;
-        }
 
         if (!IsDead)
             Flinch();
@@ -413,7 +456,7 @@ public class Character : MonoBehaviour, IAttackable
 
         target.ReceiveAttack(attackInstance);
 
-        LaunchedAttack.Invoke(this, new AttackEventArgs(attackInstance, this));
+        DeliveredAttack.Invoke(this, new AttackEventArgs(attackInstance, this));
     }
 
     private void BlockAttack(AttackInstance attack)
@@ -425,9 +468,21 @@ public class Character : MonoBehaviour, IAttackable
         attacker.Flinch();
     }
 
+    private void DodgeAttack(AttackInstance attack)
+    {
+        Dodged.Invoke(this, new AttackEventArgs(attack, this));
+    }
+
     private void TakeDamage(int amount)
     {
         Health.Subtract(amount);
+
+        if (Health <= 0 && !IsDead)
+        {
+            Died?.Invoke(this, EventArgs.Empty);
+            IsDead = true;
+            return;
+        }
     }
 
     private void CheckYVelocity()
@@ -448,6 +503,8 @@ public class Character : MonoBehaviour, IAttackable
     {
         Rolled?.Invoke(this, EventArgs.Empty);
 
+        IsRolling = true;
+
         float timer = RollDuration / 100f;
 
         while (timer > 0f)
@@ -464,6 +521,8 @@ public class Character : MonoBehaviour, IAttackable
 
         Stop();
 
+        IsRolling = false;
+
         RollFinished?.Invoke(this, EventArgs.Empty);
 
         yield return null;
@@ -472,6 +531,9 @@ public class Character : MonoBehaviour, IAttackable
     protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)
     {
         GroundStateChanged?.Invoke(this, e);
+
+        if (e)
+            Landed?.Invoke(this, EventArgs.Empty);
     }
 
     protected virtual void OnHealthValueChanged(object sender, ValueChangedEventArgs e)

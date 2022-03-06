@@ -12,16 +12,16 @@ public class ColorSwap_HeroKnight : MonoBehaviour
     private bool m_init = false;
 
     // Private member variables
-    Texture2D m_colorSwapTex;
-    Color[] m_spriteColors; 
-    SpriteRenderer m_spriteRenderer;
+    private Texture2D m_colorSwapTex;
+    private Color[] m_spriteColors; 
+    private SpriteRenderer m_spriteRenderer;
 
     // Initialize values
     void Awake()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         InitColorSwapTex();
-        
+
         SwapDemoColors();
     }
 
@@ -31,6 +31,7 @@ public class ColorSwap_HeroKnight : MonoBehaviour
     {
         if (m_init)
         {
+            InitColorSwapTex();
             SwapDemoColors();
         }
     }
@@ -52,10 +53,10 @@ public class ColorSwap_HeroKnight : MonoBehaviour
         int g = (c >> 8) & 0x000000FF;
         int b = c & 0x000000FF;
 
-        Color ret = ColorFromIntRGB(r, g, b);
-        ret.a = alpha;
+        Color color = ColorFromIntRGB(r, g, b);
+        color.a = alpha;
 
-        return ret;
+        return color;
     }
 
     public static Color ColorFromIntRGB(int r, int g, int b)
@@ -73,7 +74,10 @@ public class ColorSwap_HeroKnight : MonoBehaviour
 
         colorSwapTex.Apply();
 
-        m_spriteRenderer.material.SetTexture("_SwapTex", colorSwapTex);
+        if (m_spriteRenderer == null)
+            m_spriteRenderer = GetComponent<SpriteRenderer>();
+
+        m_spriteRenderer.sharedMaterial.SetTexture("_SwapTex", colorSwapTex);
 
         m_spriteColors = new Color[colorSwapTex.width];
         m_colorSwapTex = colorSwapTex;
