@@ -21,25 +21,32 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour, IAttackable
 {
-    public class AnimatorTriggers
-    {
-        public const string Idle = nameof(Idle);
-        public const string Attack = nameof(Attack);
-        public const string Block = nameof(Block);
-        public const string BlockStart = nameof(BlockStart);
-    }
-    public class AnimatorBooleans
+    public static class AnimatorBooleans
     {
         public const string Attacking = nameof(Attacking);
         public const string Moving = nameof(Moving);
         public const string Jumping = nameof(Jumping);
         public const string Falling = nameof(Falling);
         public const string Blocking = nameof(Blocking);
+        public const string Grounded = nameof(Grounded);
         public const string Dead = nameof(Dead);
     }
-    public class AnimatorIntegers
+    public static class AnimatorIntegers
     {
         public const string AttackCount = nameof(AttackCount);
+    }
+    public static class AnimatorFloats
+    {
+        public const string AttackAnimSpeed = nameof(AttackAnimSpeed);
+        public const string JumpDirection = nameof(JumpDirection);
+    }
+    public static class AnimatorTriggers
+    {
+        public const string Idle = nameof(Idle);
+        public const string LightAttack = nameof(LightAttack);
+        public const string HeavyAttack = nameof(HeavyAttack);
+        public const string Block = nameof(Block);
+        public const string BlockStart = nameof(BlockStart);
     }
 
     [Header("Events")]
@@ -108,8 +115,14 @@ public class Character : MonoBehaviour, IAttackable
     public SmartUnityEvent<EventArgs> Landed;
 
     [Header("Stats")]
-    public Vital Health = new Vital(25);
-    public Vital Stamina = new Vital(25);
+    public Vital Health = new Vital(100);
+    public Vital Stamina = new Vital(80);
+
+    [Tooltip("Rate that stamina regenerates per second.")]
+    public Stat StaminaRegen = new Stat(30);
+
+    [Tooltip("Rate thta stamina regenerates per second while blocking.")]
+    public Stat StaminaRegenWhileBlocking = new Stat(15);
 
     [Tooltip("Movement speed (measured in 1/10 unit per point).")]
     public Stat MoveSpeed = new Stat(35);
@@ -134,14 +147,18 @@ public class Character : MonoBehaviour, IAttackable
     public Vector2 Position { get => transform.position; }
 
     public FeetCollider Feet { get; private set; }
+    public CharacterInputManager Input { get; private set; }
     private Rigidbody2D Rigidbody { get; set; }
     private Animator Animator { get; set; }
+    private SpriteHandler SpriteHandler { get; set; }
 
     private void Awake()
     {
-        Animator = GetComponentInChildren<Animator>();
-        Rigidbody = GetComponent<Rigidbody2D>();
         Feet = GetComponentInChildren<FeetCollider>();
+        Input = GetComponentInChildren<CharacterInputManager>();
+        Rigidbody = GetComponent<Rigidbody2D>();
+        Animator = GetComponentInChildren<Animator>();
+        SpriteHandler = GetComponentInChildren<SpriteHandler>();
 
         Feet.GroundStateChanged += OnFeetGroundStateChanged;
         Health.ValueChanged += OnHealthValueChanged;
@@ -150,6 +167,7 @@ public class Character : MonoBehaviour, IAttackable
     private void Update()
     {
         CheckYVelocity();
+        RegenerateStamina();
     }
 
     /// <summary>
@@ -236,64 +254,6 @@ public class Character : MonoBehaviour, IAttackable
     }
 
     /// <summary>
-    /// Flip this character's transform in the X-dimension.
-    /// </summary>
-    public void Flip()
-    {
-        float x = transform.localScale.x;
-        float y = transform.localScale.y;
-        float z = transform.localScale.z;
-        transform.localScale = new Vector3(-x, y, z);
-    }
-
-    /// <summary>
-    /// Get the direction that the player is currently facing.
-    /// </summary>
-    public float GetFacingDirection()
-    {
-        float right = 1f;
-        float left = -1f;
-
-        if (transform.localScale.x.IsPositive())
-            return right;
-
-        return left;
-    }
-
-    /// <summary>
-    /// Tell the character to face a specified direction.
-    /// </summary>
-    public void FaceDirection(float direction)
-    {
-        direction = Mathf.Clamp(direction, Direction.Left, Direction.Right);
-        direction = Mathf.Round(direction);
-
-        if (direction == 0f)
-            return;
-
-        float x = Mathf.Abs(transform.localScale.x);
-        float y = transform.localScale.y;
-        float z = transform.localScale.z;
-        transform.localScale = new Vector3(x * direction, y, z);
-    }
-
-    /// <summary>
-    /// Set this character's local X scale to face left.
-    /// </summary>
-    public void FaceLeft()
-    {
-        FaceDirection(Direction.Left);
-    }
-
-    /// <summary>
-    /// Set this character's local X scale to face right.
-    /// </summary>
-    public void FaceRight()
-    {
-        FaceDirection(Direction.Right);
-    }
-
-    /// <summary>
     /// Handle an incoming attack instance, either blocking the attack or
     /// taking damage.
     /// </summary>
@@ -338,72 +298,14 @@ public class Character : MonoBehaviour, IAttackable
         IsBlocking = value;
     }
 
-    /// <summary>
-    /// Returns true if the character is left of the specified point.
-    /// </summary>
-    public bool IsLeftOfPoint(Vector2 point)
-    {
-        return IsLeftOfPoint(point.x);
-    }
-
-    /// <summary>
-    /// Returns true if the character is left of the specified point.
-    /// </summary>
-    public bool IsLeftOfPoint(float point)
-    {
-        return transform.position.x < point;
-    }
-
-    /// <summary>
-    /// Returns true if the character is left of the specified point.
-    /// </summary>
-    public bool IsRightOfPoint(Vector2 point)
-    {
-        return IsRightOfPoint(point.x);
-    }
-
-    /// <summary>
-    /// Returns true if the character is left of the specified point.
-    /// </summary>
-    public bool IsRightOfPoint(float point)
-    {
-        return transform.position.x > point;
-    }
-
-    /// <summary>
-    /// Returns true if the character is facing the specified point.
-    /// </summary>
-    public bool IsFacingPoint(Vector2 point)
-    {
-        return IsFacingPoint(point.x);
-    }
-
-    /// <summary>
-    /// Returns true if the character is facing the specified point.
-    /// </summary>
-    public bool IsFacingPoint(float point)
-    {
-        return IsLeftOfPoint(point) == transform.localScale.x.IsPositive();
-    }
-
-    /// <summary>
-    /// Flip the character's facing direction to face the specified point.
-    /// </summary>
-    public void FacePoint(Vector2 point)
-    {
-        FacePoint(point.x);
-    }
-
-    /// <summary>
-    /// Flip the character's facing direction to face the specified point.
-    /// </summary>
-    public void FacePoint(float point)
-    {
-        if (IsLeftOfPoint(point))
-            FaceRight();
-        else if (IsRightOfPoint(point))
-            FaceLeft();
-    }
+    public void Flip() => SpriteHandler.Flip();
+    public float GetFacingDirection() => SpriteHandler.GetFacingDirection();
+    public void FaceDirection(float direction) => SpriteHandler.FaceDirection(direction);
+    public void FaceLeft() => SpriteHandler.FaceLeft();
+    public void FaceRight() => SpriteHandler.FaceRight();
+    public bool IsLeftOfPoint(Vector2 point) => SpriteHandler.IsLeftOfPoint(point);
+    public bool IsFacingPoint(Vector2 point) => SpriteHandler.IsFacingPoint(point);
+    public void FacePoint(Vector2 point) => SpriteHandler.FacePoint(point);
 
     #region Animator Methods
     public bool GetAnimationBool(string boolName)
@@ -473,7 +375,7 @@ public class Character : MonoBehaviour, IAttackable
         Dodged.Invoke(this, new AttackEventArgs(attack, this));
     }
 
-    private void TakeDamage(int amount)
+    private void TakeDamage(float amount)
     {
         Health.Subtract(amount);
 
@@ -497,6 +399,17 @@ public class Character : MonoBehaviour, IAttackable
 
         if (previousVelocity.IsPositive() != currentVelocity.IsPositive())
             YVelocityChanged?.Invoke(this, YVelocity);
+    }
+
+    private void RegenerateStamina()
+    {
+        if (IsBlocking)
+        {
+            Stamina.Add(StaminaRegenWhileBlocking * Time.deltaTime);
+            return;
+        }
+
+        Stamina.Add(StaminaRegen * Time.deltaTime);
     }
 
     private IEnumerator RollCoroutine(float speed)

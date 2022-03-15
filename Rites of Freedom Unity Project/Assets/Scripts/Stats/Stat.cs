@@ -21,21 +21,21 @@ using UnityEngine;
 public class Stat
 {
     [SerializeField]
-    private int value = 0;
-    public virtual int Value { get => value; }
+    private float value = 0;
+    public virtual float Value { get => value; }
 
     public Stat() { }
-    public Stat(int value)
+    public Stat(float value)
     {
         this.value = value;
     }
 
-    public virtual void SetValue(int value)
+    public virtual void SetValue(float value)
     {
         this.value = value;
     }
 
-    public static implicit operator int(Stat stat)
+    public static implicit operator float(Stat stat)
     {
         return stat.Value;
     }

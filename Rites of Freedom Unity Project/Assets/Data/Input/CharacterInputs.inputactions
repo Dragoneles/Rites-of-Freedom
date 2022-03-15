@@ -95,7 +95,7 @@
                 {
                     "name": "",
                     "id": "0a5b432b-5036-4fe2-a40c-4c0807571926",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -215,7 +215,7 @@
                 },
                 {
                     "name": "",
-                    "id": "1b7b779c-914f-48ea-a626-f2b5aa99471c",
+                    "id": "af03ad49-7b1f-4150-ad64-24a3ebccca13",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
@@ -226,8 +226,8 @@
                 },
                 {
                     "name": "",
-                    "id": "e3614a49-33b9-45ec-8d5a-ef3a4b55a3f1",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "1b7b779c-914f-48ea-a626-f2b5aa99471c",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -281,17 +281,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a6cde787-7fc8-4f1f-a8c7-aba684e13032",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "148b26b2-80bf-43d8-b3ee-49c9c0233182",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -315,7 +304,7 @@
                 {
                     "name": "",
                     "id": "d21e245a-d832-4920-a064-e7415508165a",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -370,7 +359,7 @@
                 {
                     "name": "",
                     "id": "a6db19ae-fb02-49dc-a0ec-78c85f04c281",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -397,6 +386,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DisplayControls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6cde787-7fc8-4f1f-a8c7-aba684e13032",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

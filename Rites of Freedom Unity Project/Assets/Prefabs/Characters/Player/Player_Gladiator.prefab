@@ -92,28 +92,40 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionId
-      value: a0de0c01-f360-46f5-90da-2a6d87238832
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_ActionId
-      value: b1c8ecdf-5df9-4f87-82dc-b682058705c1
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionName
-      value: Combat/Interact[/Keyboard/e]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_ActionName
-      value: Story/Interact[/Keyboard/e]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Mode

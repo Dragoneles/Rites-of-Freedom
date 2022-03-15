@@ -921,11 +921,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   Health:
-    value: 35
-    currentValue: 35
+    value: 100
+    currentValue: 100
   Stamina:
-    value: 25
-    currentValue: 25
+    value: 80
+    currentValue: 80
+  StaminaRegen:
+    value: 30
+  StaminaRegenWhileBlocking:
+    value: 10
   MoveSpeed:
     value: 40
   JumpVelocity:
@@ -1037,6 +1041,7 @@ GameObject:
   - component: {fileID: 9011593091073757296}
   - component: {fileID: 8985574447783745649}
   - component: {fileID: 8372423824516542949}
+  - component: {fileID: 3408226426672375312}
   - component: {fileID: 529323923898888279}
   - component: {fileID: 2389664271073720214}
   - component: {fileID: 4275563996924336114}
@@ -1138,6 +1143,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3408226426672375312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091073757303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6644e445ad6534e9c899da32114a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &529323923898888279
 MonoBehaviour:
   m_ObjectHideFlags: 0

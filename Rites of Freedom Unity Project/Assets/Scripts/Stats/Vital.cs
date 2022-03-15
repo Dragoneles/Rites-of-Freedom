@@ -25,13 +25,13 @@ public class Vital : Stat
 
     [SerializeField]
     [Tooltip("Current value of this vital.")]
-    protected int currentValue = 0;
+    protected float currentValue = 0;
 
-    public override int Value => currentValue;
-    public int MaxValue => base.Value;
+    public override float Value => currentValue;
+    public float MaxValue => base.Value;
 
     public Vital() { }
-    public Vital(int maxValue) : base(maxValue) 
+    public Vital(float maxValue) : base(maxValue) 
     {
         currentValue = maxValue;
     }
@@ -39,7 +39,7 @@ public class Vital : Stat
     /// <summary>
     /// Add to the vital's current value.
     /// </summary>
-    public void Add(int value)
+    public void Add(float value)
     {
         SetValue(currentValue + value);
     }
@@ -47,18 +47,18 @@ public class Vital : Stat
     /// <summary>
     /// Subtract from the vital's current value.
     /// </summary>
-    public void Subtract(int value)
+    public void Subtract(float value)
     {
         Add(-value);
     }
 
-    public override void SetValue(int value)
+    public override void SetValue(float value)
     {
-        int previousValue = this.Value;
+        float previousValue = this.Value;
 
         currentValue = Mathf.Clamp(value, 0, MaxValue);
 
-        int newValue = this.Value;
+        float newValue = this.Value;
 
         if (previousValue != newValue)
         {
@@ -67,7 +67,7 @@ public class Vital : Stat
         }
     }
 
-    public static implicit operator int(Vital vital)
+    public static implicit operator float(Vital vital)
     {
         return vital.Value;
     }
