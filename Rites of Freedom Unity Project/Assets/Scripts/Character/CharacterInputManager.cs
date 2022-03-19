@@ -40,6 +40,11 @@ public class CharacterInputManager : MonoBehaviour
         StateMachine = GetComponent<CharacterStateMachineManager>();
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         if (!allowedActions.HasFlag(ActionTypes.Move))
