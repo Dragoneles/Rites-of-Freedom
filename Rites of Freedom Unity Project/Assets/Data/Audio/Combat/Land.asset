@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: Land
   m_EditorClassIdentifier: 
-  BaseVolume: 1
+  BaseVolume: 0.8
   BasePitch: 0.8
   StereoPan: 0
   RandomPitchDown: -0.1
@@ -21,13 +21,13 @@ MonoBehaviour:
   Loop: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
-  - Clip: {fileID: 8300000, guid: 4a92628f22efa1348982ba316c7deffc, type: 3}
-  - Clip: {fileID: 8300000, guid: d268ffa9c758c66448250f40807a6cdd, type: 3}
-  - Clip: {fileID: 8300000, guid: d1a8237a4b21e17499d519b3e0fc733b, type: 3}
-  - Clip: {fileID: 8300000, guid: 88093a2cdecf583449dee157d43ee7c1, type: 3}
-  - Clip: {fileID: 8300000, guid: 42524743a635468459f7ca0b64d681cc, type: 3}
-  - Clip: {fileID: 8300000, guid: 2b22b8ec191cba14e8824043a756a9bf, type: 3}
-  - Clip: {fileID: 8300000, guid: b3dfaf639c5cb2c4786eddbf88823f8f, type: 3}
-  - Clip: {fileID: 8300000, guid: 4eb2ebff871e32448b590ee13b94a4ad, type: 3}
-  - Clip: {fileID: 8300000, guid: 5e5900abd0ba42d4f978d2948eb079f5, type: 3}
-  - Clip: {fileID: 8300000, guid: 7f057d79b104dba42b14c40d69df5a95, type: 3}
+  - Clip: {fileID: 8300000, guid: a9099d8e8f233214785e9f3766c4fca0, type: 3}
+  - Clip: {fileID: 8300000, guid: 6a6725b2515a38d4faba0858861f992a, type: 3}
+  - Clip: {fileID: 8300000, guid: 96f67e1001c3ede418ce7a4732b5bbc4, type: 3}
+  - Clip: {fileID: 8300000, guid: 46dfbfe1a9c61d74eb7adb85afda5829, type: 3}
+  - Clip: {fileID: 8300000, guid: 92cb453c3e138de49a16bf0852b98e48, type: 3}
+  - Clip: {fileID: 8300000, guid: bcd7694ea6551ea41827fdbee2d6d3cb, type: 3}
+  - Clip: {fileID: 8300000, guid: 67797e150e823f84cbf45c64740f152e, type: 3}
+  - Clip: {fileID: 8300000, guid: daa2580ea11fad243a38033e213bcfd5, type: 3}
+  - Clip: {fileID: 8300000, guid: 3fd58e3dc4f00b24eafb185034255407, type: 3}
+  - Clip: {fileID: 8300000, guid: 58227ea8208334647b870a4d90538f7d, type: 3}
