@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 686270964452572709, guid: 470f4abb09b12334093a60bc6f95ebe7, type: 3}
-      propertyPath: allowedActions
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4015097807403975716, guid: 470f4abb09b12334093a60bc6f95ebe7, type: 3}
       propertyPath: m_Name
       value: Player_Gladiator_Story

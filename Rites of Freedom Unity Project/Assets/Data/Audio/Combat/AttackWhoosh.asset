@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: AttackWhoosh
   m_EditorClassIdentifier: 
-  BaseVolume: 0.3
+  BaseVolume: 0.45
   BasePitch: 1
   StereoPan: 0
   RandomPitchDown: -0.1

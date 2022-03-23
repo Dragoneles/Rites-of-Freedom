@@ -13,12 +13,12 @@ public class LadderScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
 
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.Input.GetKey(KeyCode.W))
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, VerticalSpeed);
 
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (UnityEngine.Input.GetKey(KeyCode.S))
             {
                 other.GetComponent<Rigidbody2D>().velocity = new Vector2(other.GetComponent<Rigidbody2D>().velocity.x, -VerticalSpeed);
             }

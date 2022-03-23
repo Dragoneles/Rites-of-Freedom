@@ -20,7 +20,7 @@ public class DoorController : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < 1 && Input.GetButtonDown("Action Key"))
+        if (Vector2.Distance(player.transform.position, transform.position) < 1 && UnityEngine.Input.GetButtonDown("Action Key"))
         {
             if (IsOpen == false)
             {

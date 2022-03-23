@@ -14,5 +14,5 @@ using UnityEngine.Events;
 public class SmartUnityEvent<TEventArgs> : UnityEvent<object, TEventArgs>
     where TEventArgs : EventArgs 
 {
-
+    
 }

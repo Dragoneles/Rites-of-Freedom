@@ -19,23 +19,23 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = UnityEngine.Input.GetAxisRaw("Horizontal") * runSpeed;
         if (horizontalMove != 0)
         { animator.SetBool("IsWalking", true); }
         else { animator.SetBool("IsWalking", false); }
 
-        if (Input.GetButtonDown("Jump"))
+        if (UnityEngine.Input.GetButtonDown("Jump"))
         {
             jump = true;
             animator.SetBool("IsJumping", true);
         }
 
-        if (Input.GetButtonDown("Crouch"))
+        if (UnityEngine.Input.GetButtonDown("Crouch"))
         {
             crouch = true;
         }
 
-        else if (Input.GetButtonUp("Crouch"))
+        else if (UnityEngine.Input.GetButtonUp("Crouch"))
         {
             crouch = false;
         }
