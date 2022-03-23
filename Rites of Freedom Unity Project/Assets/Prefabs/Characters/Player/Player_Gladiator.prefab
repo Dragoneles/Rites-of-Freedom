@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionId
-      value: 973074c5-647e-4576-b182-5c60150cce97
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionId
@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: Default/Pause[/Keyboard/escape]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1120838135, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_ActionEvents.Array.data[8].m_ActionName
@@ -321,3 +321,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
   m_PrefabInstance: {fileID: 5384020392405668487}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4015097808098622066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9011593090420861173, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+  m_PrefabInstance: {fileID: 5384020392405668487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5301413598215627963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015097808098622066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 34eab6714abe5d84089b9cb9c0f849b1, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Default
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &8604289612297955851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015097808098622066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6da067e5e16c242bd623a9b10d1007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

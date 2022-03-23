@@ -56,6 +56,7 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
             if (context == null)
             {
                 Debug.LogError($"{animator.gameObject} or its parent need a component of type {typeof(T)}");
+                return;
             }
 
             this.transform = context.transform;
@@ -72,7 +73,7 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
 
     public override sealed void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
     {
-        OnStateEnter(animator, stateInfo, layerIndex, controller);
+        OnStateEnter(animator, stateInfo, layerIndex);
     }
 
     protected virtual void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }

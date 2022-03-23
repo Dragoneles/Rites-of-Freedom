@@ -1,41 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6209910595863156104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219366300106387187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af146421f0a6fb244942cc55c5844e70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BehaviorTree: {fileID: 11400000, guid: f0e8ae05c0db61a4199f6430312114d9, type: 2}
-  self: {fileID: 0}
-  target: {fileID: 0}
-  stateMachine: {fileID: 0}
-  predictor: {fileID: 7119994942994283301}
---- !u!114 &7119994942994283301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230612259384136296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec55d9a1d561bed4aa7e5d50361cd0f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredNGramInvoker: {fileID: 0}
-  observedNGramActions:
-  - {fileID: 11400000, guid: 996e2cdcb35afc2418a5844ab3de826e, type: 2}
-  - {fileID: 11400000, guid: 301c26729ff983a43af9ef00cc667335, type: 2}
-  - {fileID: 11400000, guid: 719e90e4ad0842144ae7bba2840c518e, type: 2}
-  memorySize: 15
-  sequenceLength: 2
 --- !u!1001 &3846485112436426246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193,13 +157,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
---- !u!1 &5219366300106387187 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9011593090420861173, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
-  m_PrefabInstance: {fileID: 3846485112436426246}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3230612259384136296 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1852111321978836078, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
   m_PrefabInstance: {fileID: 3846485112436426246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7119994942994283301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230612259384136296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec55d9a1d561bed4aa7e5d50361cd0f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monitoredNGramInvoker: {fileID: 0}
+  observedNGramActions:
+  - {fileID: 11400000, guid: 996e2cdcb35afc2418a5844ab3de826e, type: 2}
+  - {fileID: 11400000, guid: 301c26729ff983a43af9ef00cc667335, type: 2}
+  - {fileID: 11400000, guid: 719e90e4ad0842144ae7bba2840c518e, type: 2}
+  memorySize: 15
+  sequenceLength: 2
+--- !u!1 &5219366300106387187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9011593090420861173, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+  m_PrefabInstance: {fileID: 3846485112436426246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6209910595863156104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219366300106387187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af146421f0a6fb244942cc55c5844e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BehaviorTree: {fileID: 11400000, guid: f0e8ae05c0db61a4199f6430312114d9, type: 2}
+  self: {fileID: 0}
+  target: {fileID: 0}
+  stateMachine: {fileID: 0}
+  predictor: {fileID: 7119994942994283301}
+--- !u!114 &8124792910165803235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219366300106387187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a213c1ab9f3cfc4f95a0df74277d1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

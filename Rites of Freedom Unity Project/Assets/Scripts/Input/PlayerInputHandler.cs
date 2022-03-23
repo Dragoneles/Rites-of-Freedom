@@ -20,17 +20,8 @@ using UnityEngine.InputSystem;
 /// Behavior that logs the state of input events for a character.
 /// </summary>
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : VirtualInputHandler
 {
-    public AxisInput MovementAxis;
-    public Input Attack;
-    public Input Block;
-    public Input Jump;
-    public Input Roll;
-    public Input Interact;
-    public Input Help;
-    public Input Pause;
-
     private PlayerInput playerInput { get; set; }
 
     private bool callbacksRegistered { get; set; } = false;
@@ -145,75 +136,5 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.started) StartCoroutine(Pause.SetDown());
         if (context.canceled) StartCoroutine(Pause.SetUp());
-    }
-}
-
-/// <summary>
-/// Internal input class that contains state for an input.
-/// </summary>
-public class Input
-{
-    /// <summary>
-    /// Event raised whenever the input is pressed.
-    /// </summary>
-    public event Action Pressed;
-
-    /// <summary>
-    /// Event raised whenever the input is released.
-    /// </summary>
-    public event Action Released;
-
-    /// <summary>
-    /// Returns true the frame that the input is pressed.
-    /// </summary>
-    public bool WasPressed { get; private set; }
-
-    /// <summary>
-    /// Returns true if the input is currently held down.
-    /// </summary>
-    public bool IsDown { get; private set; }
-
-    /// <summary>
-    /// Returns true the frame the input is released.
-    /// </summary>
-    public bool WasReleased { get; private set; }
-
-    internal IEnumerator SetDown()
-    {
-        Pressed?.Invoke();
-
-        WasPressed = true;
-
-        IsDown = true;
-
-        yield return new WaitForEndOfFrame();
-
-        WasPressed = false;
-    }
-
-    internal IEnumerator SetUp()
-    {
-        Released?.Invoke();
-
-        WasReleased = true;
-
-        IsDown = false;
-
-        yield return new WaitForEndOfFrame();
-
-        WasReleased = false;
-    }
-}
-
-public class AxisInput
-{
-    /// <summary>
-    /// The value of the input axis, ranging from -1 to 1.
-    /// </summary>
-    public float Value { get; private set; }
-
-    internal void SetAxisValue(float value)
-    {
-        Value = Mathf.Clamp(value, -1f, 1f);
     }
 }

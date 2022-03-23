@@ -20,10 +20,10 @@ using UnityEngine;
 public class JumpState : StateMachineBehavior<Character>
 {
     [SerializeField]
-    private float blendMinimumYVelocity = -3f;
+    private float lowerYVelocityLimit = -3f;
 
     [SerializeField]
-    private float blendMaximumYVelocity = 3f;
+    private float upperYVelocityLimit = 3f;
 
     protected override void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfor, int layerIndex)
     {
@@ -37,7 +37,7 @@ public class JumpState : StateMachineBehavior<Character>
 
     protected virtual void OnCharacterYVelocityChanged(object sender, FloatEventArgs e)
     {
-        float blendValue = Mathf.InverseLerp(blendMinimumYVelocity, blendMaximumYVelocity, e);
+        float blendValue = Mathf.InverseLerp(lowerYVelocityLimit, upperYVelocityLimit, e);
         SetFloat(Character.AnimatorFloats.JumpDirection, blendValue);
     }
 }
