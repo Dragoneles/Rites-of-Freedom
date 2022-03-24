@@ -17,7 +17,7 @@ using UnityEngine;
 /// <summary>
 /// Behavior driving a state for a character's jump.
 /// </summary>
-public class JumpState : StateMachineBehavior<Character>
+public class JumpState : CharacterStateMachineBehavior
 {
     [SerializeField]
     private float lowerYVelocityLimit = -3f;
@@ -25,7 +25,7 @@ public class JumpState : StateMachineBehavior<Character>
     [SerializeField]
     private float upperYVelocityLimit = 3f;
 
-    protected override void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfor, int layerIndex)
+    protected override void OnStateEntered(Animator animator, AnimatorStateInfo stateInfor, int layerIndex)
     {
         context.YVelocityChanged.AddListener(OnCharacterYVelocityChanged);
     }
@@ -35,9 +35,9 @@ public class JumpState : StateMachineBehavior<Character>
         context.YVelocityChanged.RemoveListener(OnCharacterYVelocityChanged);
     }
 
-    protected virtual void OnCharacterYVelocityChanged(object sender, FloatEventArgs e)
+    protected virtual void OnCharacterYVelocityChanged(float e)
     {
         float blendValue = Mathf.InverseLerp(lowerYVelocityLimit, upperYVelocityLimit, e);
-        SetFloat(Character.AnimatorFloats.JumpDirection, blendValue);
+        SetFloat(Float.JumpDirection, blendValue);
     }
 }

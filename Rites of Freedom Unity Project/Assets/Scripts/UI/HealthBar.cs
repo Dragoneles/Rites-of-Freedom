@@ -75,7 +75,7 @@ public class HealthBar : MonoBehaviour
         character.HealthChanged.RemoveListener(OnCharacterHealthChanged);
     }
 
-    protected virtual void OnCharacterHealthChanged(object sender, VitalChangedEventArgs e)
+    protected virtual void OnCharacterHealthChanged(VitalChangedEventArgs e)
     {
         float maxHealth = e.Vital.MaxValue;
         float currentHealth = e.CurrentValue;

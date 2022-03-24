@@ -68,7 +68,7 @@ public class CollisionEventDispatcher : MonoBehaviour
 
         var eventArgs = new CollisionEventArgs(collider);
 
-        trigger?.Invoke(this, eventArgs);
+        trigger?.Invoke(eventArgs);
     }
 
     private bool ColliderIsValid(Collider2D collision)

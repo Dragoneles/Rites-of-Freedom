@@ -49,6 +49,8 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
 
     public override sealed void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+
         if (!initialized)
         {
             context = animator.GetComponentInParent<T>();

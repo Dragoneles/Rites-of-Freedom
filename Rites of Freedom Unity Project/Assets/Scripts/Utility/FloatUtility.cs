@@ -10,6 +10,7 @@
  *  Static extensions for floats, to improve code readability.
  *  
  ******************************************************************************/
+using UnityEngine;
 
 /// <summary>
 /// Static extensions for floats, to improve code readability.
@@ -30,5 +31,16 @@ public static class FloatUtility
     public static bool IsNegative(this float value)
     {
         return (value < 0f);
+    }
+
+    /// <summary>
+    /// Clamp the float to the nearest value, -1 or 1. 0 defaults to 1.
+    /// </summary>
+    public static float AsDirection(this float value)
+    {
+        if (value.IsNegative())
+            return Direction.Left;
+
+        return Direction.Right;
     }
 }

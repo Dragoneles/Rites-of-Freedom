@@ -12,7 +12,6 @@
  ******************************************************************************/
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -21,34 +20,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour, IAttackable
 {
-    public static class AnimatorBooleans
-    {
-        public const string Attacking = nameof(Attacking);
-        public const string Moving = nameof(Moving);
-        public const string Jumping = nameof(Jumping);
-        public const string Falling = nameof(Falling);
-        public const string Blocking = nameof(Blocking);
-        public const string Grounded = nameof(Grounded);
-        public const string Dead = nameof(Dead);
-    }
-    public static class AnimatorIntegers
-    {
-        public const string AttackCount = nameof(AttackCount);
-    }
-    public static class AnimatorFloats
-    {
-        public const string AttackAnimSpeed = nameof(AttackAnimSpeed);
-        public const string JumpDirection = nameof(JumpDirection);
-    }
-    public static class AnimatorTriggers
-    {
-        public const string Idle = nameof(Idle);
-        public const string LightAttack = nameof(LightAttack);
-        public const string HeavyAttack = nameof(HeavyAttack);
-        public const string Block = nameof(Block);
-        public const string BlockStart = nameof(BlockStart);
-    }
-
     [Header("Events")]
     /// <summary>
     /// Event invoked when the character's health value changes.
@@ -59,13 +30,13 @@ public class Character : MonoBehaviour, IAttackable
     /// Event invoked when the y velocity of the character changes.
     /// Used to handle jump/fall animator states.
     /// </summary>
-    public SmartUnityEvent<FloatEventArgs> YVelocityChanged;
+    public SmartUnityEvent<float> YVelocityChanged;
 
     /// <summary>
     /// Event invoked when the character touches or leaves the ground.
     /// "True" EventArgs indicates the character touched the ground.
     /// </summary>
-    public SmartUnityEvent<BoolEventArgs> GroundStateChanged;
+    public SmartUnityEvent<bool> GroundStateChanged;
 
     /// <summary>
     /// Event invoked when the character attacks another character.
@@ -147,15 +118,15 @@ public class Character : MonoBehaviour, IAttackable
     public Vector2 Position { get => transform.position; }
 
     public FeetCollider Feet { get; private set; }
-    public CharacterInputManager Input { get; private set; }
-    private Rigidbody2D Rigidbody { get; set; }
+    public VirtualInputHandler Input { get; private set; }
+    public Rigidbody2D Rigidbody { get; private set; }
     private Animator Animator { get; set; }
     private SpriteHandler SpriteHandler { get; set; }
 
     private void Awake()
     {
         Feet = GetComponentInChildren<FeetCollider>();
-        Input = GetComponentInChildren<CharacterInputManager>();
+        Input = GetComponentInChildren<VirtualInputHandler>();
         Rigidbody = GetComponent<Rigidbody2D>();
         Animator = GetComponentInChildren<Animator>();
         SpriteHandler = GetComponentInChildren<SpriteHandler>();
@@ -168,6 +139,7 @@ public class Character : MonoBehaviour, IAttackable
     {
         CheckYVelocity();
         RegenerateStamina();
+        UpdateFacingDirection();
     }
 
     /// <summary>
@@ -195,10 +167,10 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     public void Roll(float direction)
     {
-        if (direction.IsNegative())
-            FaceLeft();
-        else if (direction.IsPositive())
-            FaceRight();
+        if (direction == 0f)
+            direction = GetFacingDirection();
+        else
+            direction = direction.AsDirection();
 
         float speed = RollSpeed / 10f;
         StartCoroutine(RollCoroutine(direction * speed));
@@ -276,7 +248,7 @@ public class Character : MonoBehaviour, IAttackable
 
         TakeDamage(attack.Damage);
 
-        ReceivedAttack?.Invoke(this, new AttackEventArgs(attack, this));
+        ReceivedAttack?.Invoke(new AttackEventArgs(attack, this));
 
         if (!IsDead)
             Flinch();
@@ -287,7 +259,7 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     public void Flinch()
     {
-        Flinched?.Invoke(this, EventArgs.Empty);
+        Flinched?.Invoke(EventArgs.Empty);
     }
 
     /// <summary>
@@ -307,48 +279,6 @@ public class Character : MonoBehaviour, IAttackable
     public bool IsFacingPoint(Vector2 point) => SpriteHandler.IsFacingPoint(point);
     public void FacePoint(Vector2 point) => SpriteHandler.FacePoint(point);
 
-    #region Animator Methods
-    public bool GetAnimationBool(string boolName)
-    {
-        if (Animator == null)
-            return false;
-
-        return Animator.GetBool(boolName);
-    }
-
-    public int GetAnimationInt(string intName)
-    {
-        if (Animator == null)
-            return 0;
-
-        return Animator.GetInteger(intName);
-    }
-
-    public void SetAnimationBool(string boolName, bool value)
-    {
-        if (Animator == null)
-            return;
-
-        Animator.SetBool(boolName, value);
-    }
-
-    public void SetAnimationInt(string intName, int value)
-    {
-        if (Animator == null)
-            return;
-
-        Animator.SetInteger(intName, value);
-    }
-
-    public void SetAnimationTrigger(string triggerName)
-    {
-        if (Animator == null)
-            return;
-
-        Animator.SetTrigger(triggerName);
-    }
-    #endregion
-
     /// <summary>
     /// Use the character's weapon to attack a target.
     /// </summary>
@@ -358,21 +288,34 @@ public class Character : MonoBehaviour, IAttackable
 
         target.ReceiveAttack(attackInstance);
 
-        DeliveredAttack.Invoke(this, new AttackEventArgs(attackInstance, this));
+        DeliveredAttack.Invoke(new AttackEventArgs(attackInstance, this));
+    }
+
+    private void UpdateFacingDirection()
+    {
+        float facingDirection = GetFacingDirection();
+        float moveDirection = Rigidbody.velocity.x;
+
+        float arbitraryInsignificantMagnitude = 0.01f;
+        if (Mathf.Abs(moveDirection) < arbitraryInsignificantMagnitude)
+            return;
+
+        if (moveDirection.IsPositive() != facingDirection.IsPositive())
+            Flip();
     }
 
     private void BlockAttack(AttackInstance attack)
     {
         Character attacker = attack.Attacker;
 
-        Blocked.Invoke(this, new AttackEventArgs(attack, this));
+        Blocked.Invoke(new AttackEventArgs(attack, this));
 
         attacker.Flinch();
     }
 
     private void DodgeAttack(AttackInstance attack)
     {
-        Dodged.Invoke(this, new AttackEventArgs(attack, this));
+        Dodged.Invoke(new AttackEventArgs(attack, this));
     }
 
     private void TakeDamage(float amount)
@@ -381,7 +324,7 @@ public class Character : MonoBehaviour, IAttackable
 
         if (Health <= 0 && !IsDead)
         {
-            Died?.Invoke(this, EventArgs.Empty);
+            Died?.Invoke(EventArgs.Empty);
             IsDead = true;
             return;
         }
@@ -397,8 +340,7 @@ public class Character : MonoBehaviour, IAttackable
 
         YVelocity = currentVelocity;
 
-        if (previousVelocity.IsPositive() != currentVelocity.IsPositive())
-            YVelocityChanged?.Invoke(this, YVelocity);
+        YVelocityChanged?.Invoke(YVelocity);
     }
 
     private void RegenerateStamina()
@@ -414,7 +356,7 @@ public class Character : MonoBehaviour, IAttackable
 
     private IEnumerator RollCoroutine(float speed)
     {
-        Rolled?.Invoke(this, EventArgs.Empty);
+        Rolled?.Invoke(EventArgs.Empty);
 
         IsRolling = true;
 
@@ -436,17 +378,17 @@ public class Character : MonoBehaviour, IAttackable
 
         IsRolling = false;
 
-        RollFinished?.Invoke(this, EventArgs.Empty);
+        RollFinished?.Invoke(EventArgs.Empty);
 
         yield return null;
     }
 
     protected virtual void OnFeetGroundStateChanged(object sender, BoolEventArgs e)
     {
-        GroundStateChanged?.Invoke(this, e);
+        GroundStateChanged?.Invoke(e);
 
         if (e)
-            Landed?.Invoke(this, EventArgs.Empty);
+            Landed?.Invoke(EventArgs.Empty);
     }
 
     protected virtual void OnHealthValueChanged(object sender, ValueChangedEventArgs e)
@@ -457,6 +399,6 @@ public class Character : MonoBehaviour, IAttackable
             return;
 
         var eventArgs = new VitalChangedEventArgs(health, e.PreviousValue, e.CurrentValue);
-        HealthChanged?.Invoke(this, eventArgs);
+        HealthChanged?.Invoke(eventArgs);
     }
 }

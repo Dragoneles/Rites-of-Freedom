@@ -130,8 +130,7 @@ public class CharacterStateMachineManager : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        if (Character.GetAnimationInt(Character.AnimatorIntegers.AttackCount) >= 2)
-            return;
+        // REFACTOR-IN-PROGRESS
 
         if (InputLocked)
         {
@@ -362,7 +361,7 @@ public class CharacterStateMachineManager : MonoBehaviour
         InputMemoryCoroutineInstance = null;
     }
 
-    protected virtual void OnCharacterGroundStateChanged(object sender, BoolEventArgs e)
+    protected virtual void OnCharacterGroundStateChanged(bool e)
     {
         if (e == false)
             return;
@@ -370,7 +369,7 @@ public class CharacterStateMachineManager : MonoBehaviour
         Trigger(StateEvents.Land);
     }
 
-    protected virtual void OnCharacterYVelocityChanged(object sender, FloatEventArgs e)
+    protected virtual void OnCharacterYVelocityChanged(float e)
     {
         if (Character.Feet.IsGrounded)
             return;
@@ -379,17 +378,17 @@ public class CharacterStateMachineManager : MonoBehaviour
             Trigger(StateEvents.Fall);
     }
 
-    protected virtual void OnCharacterFlinched(object sender, EventArgs e)
+    protected virtual void OnCharacterFlinched(EventArgs e)
     {
         Flinch();
     }
 
-    protected virtual void OnCharacterBlocked(object sender, EventArgs e)
+    protected virtual void OnCharacterBlocked(EventArgs e)
     {
         Trigger(StateEvents.Block);
     }
 
-    protected virtual void OnCharacterDeath(object sender, EventArgs e)
+    protected virtual void OnCharacterDeath(EventArgs e)
     {
         StopMoving();
 

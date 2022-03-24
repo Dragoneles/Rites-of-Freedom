@@ -23,6 +23,6 @@ public class AttackAnimationEvent : MonoBehaviour
 
     public void Attack()
     {
-        attacked.Invoke(this, EventArgs.Empty);
+        attacked.Invoke(EventArgs.Empty);
     }
 }

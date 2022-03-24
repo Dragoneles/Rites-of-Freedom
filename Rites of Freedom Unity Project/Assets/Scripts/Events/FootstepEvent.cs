@@ -28,6 +28,6 @@ public class FootstepEvent : MonoBehaviour
     /// </summary>
     public void Step()
     {
-        Stepped?.Invoke(this, EventArgs.Empty);
+        Stepped?.Invoke(EventArgs.Empty);
     }
 }

@@ -28,7 +28,8 @@ public class AttackSequence
     /// </summary>
     public AttackInstance GetAttackFrom(Character attacker)
     {
-        int attackIndex = attacker.GetAnimationInt(Character.AnimatorIntegers.AttackCount);
+        // REFACTOR-IN-PROGRESS
+        int attackIndex = 0;
 
         if (attackIndex >= Attacks.Length)
             throw new System.Exception($"{attacker} {nameof(AttackSequence)} " +

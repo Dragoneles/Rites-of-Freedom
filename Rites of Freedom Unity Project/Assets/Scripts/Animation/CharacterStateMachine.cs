@@ -19,22 +19,15 @@ using UnityEngine;
 /// Top-level behavior for the character animator. Uses input events to manage
 /// animation triggers.
 /// </summary>
-public class CharacterStateMachine : StateMachineBehavior<Character>
+public class CharacterStateMachine : CharacterStateMachineBehavior
 {
-    /// <summary>
-    /// Whether or not the character can set animation triggers.
-    /// </summary>
-    public bool ShouldReadInputs { get; private set; } = true;
-
     protected override void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ShouldReadInputs = true;
-
         context.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
     }
 
-    protected virtual void OnCharacterGroundStateChanged(object sender, BoolEventArgs e)
+    protected virtual void OnCharacterGroundStateChanged(bool e)
     {
-        SetBool(Character.AnimatorBooleans.Grounded, e);
+        SetBool(Boolean.Grounded, e);
     }
 }

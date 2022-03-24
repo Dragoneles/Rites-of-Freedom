@@ -23,6 +23,6 @@ public class BlockAnimationEvent : MonoBehaviour
 
     public void Block()
     {
-        blocked.Invoke(this, EventArgs.Empty);
+        blocked.Invoke(EventArgs.Empty);
     }
 }
