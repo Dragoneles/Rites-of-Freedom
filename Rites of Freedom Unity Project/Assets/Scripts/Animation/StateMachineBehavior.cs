@@ -47,6 +47,13 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
     protected void ResetTrigger(int id) => animator.ResetTrigger(id);
     protected void ResetTrigger(string name) => animator.ResetTrigger(name);
 
+    public void IncrementInteger(string name) => SetInteger(name, GetInteger(name) + 1);
+    public void DecrementInteger(string name) => SetInteger(name, GetInteger(name) - 1);
+    public void ResetInteger(string name) => SetInteger(name, 0);
+    public void ToggleBool(string name) => SetBool(name, !GetBool(name));
+    public void EnableBool(string name) => SetBool(name, true);
+    public void DisableBool(string name) => SetBool(name, false);
+
     public override sealed void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
@@ -67,10 +74,10 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
 
             initialized = true;
 
-            OnStateInitialized(animator, stateInfo, layerIndex);
+            OnStateInitialized(stateInfo, layerIndex);
         }
 
-        OnStateEntered(animator, stateInfo, layerIndex);
+        OnStateEntered(stateInfo, layerIndex);
     }
 
     public override sealed void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex, AnimatorControllerPlayable controller)
@@ -78,7 +85,7 @@ public class StateMachineBehavior<T> : StateMachineBehaviour where T : Component
         OnStateEnter(animator, stateInfo, layerIndex);
     }
 
-    protected virtual void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void OnStateInitialized(AnimatorStateInfo stateInfo, int layerIndex) { }
 
-    protected virtual void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) { }
+    protected virtual void OnStateEntered(AnimatorStateInfo stateInfo, int layerIndex) { }
 }

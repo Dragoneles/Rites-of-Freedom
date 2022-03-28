@@ -25,7 +25,7 @@ public class PredictionNode : LeafNode
 
     protected override void OnInitialize()
     {
-        predictor = blackboard.Get<NGramPredictor>(EnemyBehaviorTree.Predictor);
+        predictor = blackboard.Get(EnemyBehaviorTree.Predictor);
     }
 
     protected override bool CheckNodeFailed()

@@ -107,9 +107,7 @@ public class Character : MonoBehaviour, IAttackable
     [Tooltip("Length of a roll in milliseconds.")]
     public Stat RollDuration = new Stat(70);
 
-    [Header("Weapon")]
-    [SerializeField]
-    private AttackSequence AttackSequence = new AttackSequence();
+    public AttackInfo LastAttack { get; set; } = new AttackInfo();
 
     public bool IsDead { get; private set; } = false;
     public bool IsBlocking { get; private set; } = false;
@@ -120,7 +118,6 @@ public class Character : MonoBehaviour, IAttackable
     public FeetCollider Feet { get; private set; }
     public VirtualInputHandler Input { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
-    private Animator Animator { get; set; }
     private SpriteHandler SpriteHandler { get; set; }
 
     private void Awake()
@@ -128,7 +125,6 @@ public class Character : MonoBehaviour, IAttackable
         Feet = GetComponentInChildren<FeetCollider>();
         Input = GetComponentInChildren<VirtualInputHandler>();
         Rigidbody = GetComponent<Rigidbody2D>();
-        Animator = GetComponentInChildren<Animator>();
         SpriteHandler = GetComponentInChildren<SpriteHandler>();
 
         Feet.GroundStateChanged += OnFeetGroundStateChanged;
@@ -155,6 +151,12 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     public void Move(float direction)
     {
+        if (direction == 0f)
+        {
+            Stop();
+            return;
+        }
+
         Vector2 directionVector = new Vector2(direction, 0f);
         Vector2 velocity = directionVector * (MoveSpeed / 10);
         velocity.y = Rigidbody.velocity.y;
@@ -206,7 +208,7 @@ public class Character : MonoBehaviour, IAttackable
     /// <summary>
     /// Event receiver for a weapon collision event (dispatched via animation).
     /// </summary>
-    public virtual void OnWeaponHit(object sender, CollisionEventArgs e)
+    public virtual void OnWeaponHit(CollisionEventArgs e)
     {
         // First try the GameObject itself
         IAttackable target = e.GameObject.GetComponent<IAttackable>();
@@ -284,7 +286,7 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     private void Attack(IAttackable target)
     {
-        AttackInstance attackInstance = AttackSequence.GetAttackFrom(this);
+        var attackInstance = LastAttack.CreateAttackInstance(attacker: this);
 
         target.ReceiveAttack(attackInstance);
 

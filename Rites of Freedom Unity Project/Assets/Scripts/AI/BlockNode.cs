@@ -25,15 +25,15 @@ public class BlockNode : LeafNode
 
     private float blockTimeElapsed { get; set; } = 0f;
 
-    private CharacterStateMachineManager stateMachine { get; set; }
     private Character self { get; set; }
+    private AIInputHandler input { get; set; }
 
     protected override void Start()
     {
-        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
-        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
+        self = blackboard.Get(EnemyBehaviorTree.Self);
+        input = blackboard.Get(EnemyBehaviorTree.Input);
 
-        stateMachine.StartBlocking();
+        input.PerformBlock(blockDuration);
     }
 
     protected override void OnReset()
@@ -55,9 +55,6 @@ public class BlockNode : LeafNode
     protected override bool CheckNodeSucceeded()
     {
         bool finishedBlocking = blockTimeElapsed >= blockDuration;
-
-        if (finishedBlocking)
-            stateMachine.StopBlocking();
 
         return finishedBlocking;
     }

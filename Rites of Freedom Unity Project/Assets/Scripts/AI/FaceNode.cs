@@ -38,8 +38,8 @@ public class FaceNode : LeafNode
 
     protected override void OnInitialize()
     {
-        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
-        target = blackboard.Get<Character>(EnemyBehaviorTree.Target);
+        self = blackboard.Get(EnemyBehaviorTree.Self);
+        target = blackboard.Get(EnemyBehaviorTree.Target);
     }
 
     protected override void Start()

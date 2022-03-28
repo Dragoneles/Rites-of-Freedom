@@ -17,18 +17,18 @@ using AI.BehaviorTree;
 /// </summary>
 public class RollNode : LeafNode
 {
-    private CharacterStateMachineManager stateMachine { get; set; }
     private Character self { get; set; }
+    private AIInputHandler input { get; set; }
 
     protected override void OnInitialize()
     {
-        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
-        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
+        self = blackboard.Get(EnemyBehaviorTree.Self);
+        input = blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override void Start()
     {
-        stateMachine.Roll();
+        input.PerformRoll();
     }
 
     protected override bool CheckNodeFailed()

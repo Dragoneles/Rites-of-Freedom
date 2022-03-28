@@ -11,10 +11,7 @@
  *  
  ******************************************************************************/
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Unity.VisualScripting;
 
 namespace AI.BehaviorTree
 {
@@ -31,34 +28,34 @@ namespace AI.BehaviorTree
         /// <summary>
         /// Get a property from the blackboard.
         /// </summary>
-        public T Get<T>(string name)
+        public T Get<T>(BlackboardProperty<T> property)
         {
             if (!initialized)
                 Initialize();
 
-            if (!dictionary.ContainsKey(name))
+            if (!dictionary.ContainsKey(property.Name))
             {
-                return default(T);
+                return property.GetDefault();
             }
 
-            return (T)dictionary[name];
+            return (T)dictionary[property.Name];
         }
 
         /// <summary>
         /// Write a property to the blackboard.
         /// </summary>
-        public void Set<T>(string name, T value)
+        public void Set<T>(BlackboardProperty<T> property, T value)
         {
             if (!initialized)
                 Initialize();
 
-            if (!dictionary.ContainsKey(name))
+            if (!dictionary.ContainsKey(property.Name))
             {
-                AddPropertyToDictionary(name, value);
+                AddPropertyToDictionary(property.Name, value);
                 return;
             }
 
-            dictionary[name] = value;
+            dictionary[property.Name] = value;
         }
 
         private void Initialize()

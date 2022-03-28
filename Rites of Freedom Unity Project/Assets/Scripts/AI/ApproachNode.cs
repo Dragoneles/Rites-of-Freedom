@@ -25,18 +25,15 @@ public class ApproachNode : LeafNode
     [SerializeField]
     private float targetDistance = 1f;
 
-    private const float Left = -1f;
-    private const float Right = 1f;
-
-    private CharacterStateMachineManager stateMachine { get; set; }
     private Character self { get; set; }
     private Character target { get; set; }
+    private AIInputHandler input { get; set; }
 
     protected override void Start()
     {
-        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
-        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
-        target  = blackboard.Get<Character>(EnemyBehaviorTree.Target);
+        self = blackboard.Get(EnemyBehaviorTree.Self);
+        target  = blackboard.Get(EnemyBehaviorTree.Target);
+        input  = blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override IEnumerator Run()
@@ -44,11 +41,11 @@ public class ApproachNode : LeafNode
         switch (self.IsLeftOfPoint(target.Position))
         {
             case true:
-                stateMachine.Move(Right);
+                input.PerformMove(Direction.Right);
                 break;
 
             case false:
-                stateMachine.Move(Left);
+                input.PerformMove(Direction.Left);
                 break;
         }
 
@@ -65,7 +62,7 @@ public class ApproachNode : LeafNode
         bool inRange = Vector2.Distance(self.Position, target.Position) <= targetDistance;
         if (inRange)
         {
-            stateMachine.StopMoving();
+            input.PerformMove(0f);
         }
 
         return inRange;

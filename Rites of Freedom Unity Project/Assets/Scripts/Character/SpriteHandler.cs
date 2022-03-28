@@ -11,8 +11,6 @@
  *  facing direction without inverting the root object.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

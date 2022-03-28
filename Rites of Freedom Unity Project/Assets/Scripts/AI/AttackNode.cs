@@ -17,16 +17,16 @@ using AI.BehaviorTree;
 /// </summary>
 public class AttackNode : LeafNode
 {
-    private CharacterStateMachineManager stateMachine { get; set; }
+    private AIInputHandler input { get; set; }
 
     protected override void OnInitialize()
     {
-        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
+        input = blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override void Start()
     {
-        stateMachine.Attack();
+        input.PerformAttack();
     }
 
     protected override bool CheckNodeFailed()
@@ -36,7 +36,6 @@ public class AttackNode : LeafNode
 
     protected override bool CheckNodeSucceeded()
     {
-        return stateMachine.NextActionState == StateType.Attack || 
-            stateMachine.CurrentActionState == StateType.Attack;
+        return true;
     }
 }

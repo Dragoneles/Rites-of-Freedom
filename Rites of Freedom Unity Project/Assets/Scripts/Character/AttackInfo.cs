@@ -10,9 +10,6 @@
  *  Class containing information pertaining to an attack.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Class containing information pertaining to an attack.
@@ -22,4 +19,9 @@ public class AttackInfo
 {
     public Stat Damage = new Stat(3);
     public Stat StaminaCost = new Stat(5);
+
+    public AttackInstance CreateAttackInstance(Character attacker)
+    {
+        return new AttackInstance(Damage, attacker);
+    }
 }

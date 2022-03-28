@@ -27,20 +27,17 @@ public class FleeNode : LeafNode
     [SerializeField]
     private LayerMask movementBlockerLayers;
 
-    private const float Left = -1f;
-    private const float Right = 1f;
-
-    private CharacterStateMachineManager stateMachine { get; set; }
     private Character self { get; set; }
     private Character target { get; set; }
+    private AIInputHandler input { get; set; }
 
     private bool pathIsBlocked { get; set; } = false;
 
     protected override void OnInitialize()
     {
-        stateMachine = blackboard.Get<CharacterStateMachineManager>(EnemyBehaviorTree.StateMachine);
-        self = blackboard.Get<Character>(EnemyBehaviorTree.Self);
-        target = blackboard.Get<Character>(EnemyBehaviorTree.Target);
+        self = blackboard.Get(EnemyBehaviorTree.Self);
+        target = blackboard.Get(EnemyBehaviorTree.Target);
+        input = blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override void Start()
@@ -56,7 +53,7 @@ public class FleeNode : LeafNode
 
     protected override IEnumerator Run()
     {
-        stateMachine.Move(GetFleeDirection());
+        input.PerformMove(GetFleeDirection());
 
         yield return new WaitForEndOfFrame();
     }
@@ -68,10 +65,11 @@ public class FleeNode : LeafNode
 
     protected override bool CheckNodeSucceeded()
     {
-        bool inRange = Vector2.Distance(self.Position, target.Position) >= targetDistance;
+        float distance = Vector2.Distance(self.Position, target.Position);
+        bool inRange = distance >= targetDistance;
 
         if (inRange)
-            stateMachine.StopMoving();
+            input.PerformMove(0f);
 
         return inRange;
     }
@@ -81,10 +79,10 @@ public class FleeNode : LeafNode
         switch (self.IsLeftOfPoint(target.Position))
         {
             case true:
-                return Left;
+                return Direction.Left;
 
             case false:
-                return Right;
+                return Direction.Right;
         }
     }
 

@@ -11,9 +11,6 @@
  *  the Character class.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Animator StateMachineBehavior designed as a tool for interfacing with 
@@ -21,7 +18,7 @@ using UnityEngine;
 /// </summary>
 public class CharacterStateMachineBehavior : StateMachineBehavior<Character>
 {
-    protected static class Boolean
+    public static class Boolean
     {
         public const string Attacking = nameof(Attacking);
         public const string Moving = nameof(Moving);
@@ -29,19 +26,22 @@ public class CharacterStateMachineBehavior : StateMachineBehavior<Character>
         public const string Grounded = nameof(Grounded);
         public const string Dead = nameof(Dead);
     }
-    protected static class Integer
+    public static class Integer
     {
         public const string AttackCount = nameof(AttackCount);
     }
-    protected static class Float
+    public static class Float
     {
         public const string AttackAnimSpeed = nameof(AttackAnimSpeed);
         public const string MoveAnimSpeed = nameof(MoveAnimSpeed);
+        public const string StunAnimSpeed = nameof(StunAnimSpeed);
         public const string JumpDirection = nameof(JumpDirection);
+        public const string StunDuration = nameof(StunDuration);
     }
-    protected static class Trigger
+    public static class Trigger
     {
         public const string Roll = nameof(Roll);
+        public const string Flinch = nameof(Flinch);
         public const string StartAttack = nameof(StartAttack);
         public const string LightAttack = nameof(LightAttack);
         public const string HeavyAttack = nameof(HeavyAttack);

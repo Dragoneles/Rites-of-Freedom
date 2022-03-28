@@ -22,10 +22,25 @@ using UnityEngine;
 /// </summary>
 public class EnemyBehaviorTree : BehaviorTreeMachine
 {
-    public const string Self = nameof(self);
-    public const string Target = nameof(target);
-    public const string StateMachine = nameof(stateMachine);
-    public const string Predictor = nameof(predictor);
+    /// <summary>
+    /// The character that the behavior tree is attached to.
+    /// </summary>
+    public static BlackboardProperty<Character> Self = new(nameof(Self));
+
+    /// <summary>
+    /// The character that this character is targetting.
+    /// </summary>
+    public static BlackboardProperty<Character> Target = new(nameof(Target));
+
+    /// <summary>
+    /// The virtual input device the AI uses to perform actions.
+    /// </summary>
+    public static BlackboardProperty<AIInputHandler> Input = new(nameof(Input));
+
+    /// <summary>
+    /// The NGram prediction system used by the AI.
+    /// </summary>
+    public static BlackboardProperty<NGramPredictor> Predictor = new(nameof(Predictor));
 
     [SerializeField]
     private Character self;
@@ -34,7 +49,7 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     private Character target;
 
     [SerializeField]
-    private CharacterStateMachineManager stateMachine;
+    private AIInputHandler input;
 
     [SerializeField]
     private NGramPredictor predictor;
@@ -45,9 +60,9 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     {
         base.Awake();
 
-        blackboard.Set(nameof(self), self);
-        blackboard.Set(nameof(target), target);
-        blackboard.Set(nameof(stateMachine), stateMachine);
-        blackboard.Set(nameof(predictor), predictor);
+        blackboard.Set(Self, self);
+        blackboard.Set(Target, target);
+        blackboard.Set(Input, input);
+        blackboard.Set(Predictor, predictor);
     }
 }

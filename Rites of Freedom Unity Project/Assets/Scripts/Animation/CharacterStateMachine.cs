@@ -11,8 +11,6 @@
  *  animation triggers.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -21,13 +19,27 @@ using UnityEngine;
 /// </summary>
 public class CharacterStateMachine : CharacterStateMachineBehavior
 {
-    protected override void OnStateInitialized(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    protected override void OnStateInitialized(AnimatorStateInfo stateInfo, int layerIndex)
     {
-        context.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
+        SetBool(Boolean.Grounded, character.Feet.IsGrounded);
+
+        character.GroundStateChanged.AddListener(OnCharacterGroundStateChanged);
+        character.Flinched.AddListener(OnCharacterFlinch);
+        character.Died.AddListener(OnCharacterDeath);
     }
 
-    protected virtual void OnCharacterGroundStateChanged(bool e)
+    private void OnCharacterGroundStateChanged(bool e)
     {
         SetBool(Boolean.Grounded, e);
+    }
+
+    private void OnCharacterDeath(System.EventArgs e)
+    {
+        SetBool(Boolean.Dead, true);
+    }
+
+    private void OnCharacterFlinch(System.EventArgs e)
+    {
+        SetTrigger(Trigger.Flinch);
     }
 }
