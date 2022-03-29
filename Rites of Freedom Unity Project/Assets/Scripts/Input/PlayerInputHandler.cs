@@ -98,43 +98,43 @@ public class PlayerInputHandler : VirtualInputHandler
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Attack.SetDown());
-        if (context.canceled) StartCoroutine(Attack.SetUp());
+        if (context.started) Attack.SetDown(coroutineRunner: this);
+        if (context.canceled) Attack.SetUp(coroutineRunner: this);
     }
 
     private void OnBlock(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Block.SetDown());
-        if (context.canceled) StartCoroutine(Block.SetUp());
+        if (context.started) Block.SetDown(coroutineRunner: this);
+        if (context.canceled) Block.SetUp(coroutineRunner: this);
     }
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Jump.SetDown());
-        if (context.canceled) StartCoroutine(Jump.SetUp());
+        if (context.started) Jump.SetDown(coroutineRunner: this);
+        if (context.canceled) Jump.SetUp(coroutineRunner: this);
     }
 
     private void OnRoll(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Roll.SetDown());
-        if (context.canceled) StartCoroutine(Roll.SetUp());
+        if (context.started) Roll.SetDown(coroutineRunner: this);
+        if (context.canceled) Roll.SetUp(coroutineRunner: this);
     }
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Interact.SetDown());
-        if (context.canceled) StartCoroutine(Interact.SetUp());
+        if (context.started) Interact.SetDown(coroutineRunner: this);
+        if (context.canceled) Interact.SetUp(coroutineRunner: this);
     }
 
     private void OnHelp(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Help.SetDown());
-        if (context.canceled) StartCoroutine(Help.SetUp());
+        if (context.started) Help.SetDown(coroutineRunner: this);
+        if (context.canceled) Help.SetUp(coroutineRunner: this);
     }
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        if (context.started) StartCoroutine(Pause.SetDown());
-        if (context.canceled) StartCoroutine(Pause.SetUp());
+        if (context.started) Pause.SetDown(coroutineRunner: this);
+        if (context.canceled) Pause.SetUp(coroutineRunner: this);
     }
 }

@@ -634,19 +634,7 @@ MonoBehaviour:
   DeliveredAttack:
     unityEvent:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 132ed9657c6057a478c56d5db44e066e, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   ReceivedAttack:
     unityEvent:
       m_PersistentCalls:
@@ -805,6 +793,7 @@ GameObject:
   - component: {fileID: 529323923898888279}
   - component: {fileID: 2389664271073720214}
   - component: {fileID: 4275563996924336114}
+  - component: {fileID: 715989047147657756}
   - component: {fileID: 9019135271416613444}
   m_Layer: 0
   m_Name: Sprite
@@ -946,7 +935,19 @@ MonoBehaviour:
   attacked:
     unityEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+          m_MethodName: PlaySound
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 132ed9657c6057a478c56d5db44e066e, type: 2}
+            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4275563996924336114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +964,34 @@ MonoBehaviour:
     unityEvent:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &715989047147657756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011593091073757303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40104cdc98c21754da3f88a86a2af9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Jumped:
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+          m_MethodName: PlaySound
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: ec3dbe20d8e409547948c9ba24a4d3c2, type: 2}
+            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &9019135271416613444
 MonoBehaviour:
   m_ObjectHideFlags: 0

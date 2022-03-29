@@ -10,7 +10,6 @@
  *  First class dictionary of UIElement ID and group pairings.
  *  
  ******************************************************************************/
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,43 +18,60 @@ using UnityEngine;
 /// </summary>
 public class UIElementDictionary
 {
-    private Dictionary<string, UIElementGroup> elementDictionary;
-
-    public UIElementDictionary()
-    {
-        elementDictionary = new Dictionary<string, UIElementGroup>();
-    }
+    private Dictionary<string, UIElement> elementDictionary = new Dictionary<string, UIElement>();
 
     /// <summary>
-    /// Find al UIElements in the scene and add them to the dictionary, keyed
-    /// by any of their IDs.
+    /// Add a new UI element to the dictionary.
     /// </summary>
-    public void Populate()
+    public void Add(UIElement element)
     {
-        if (elementDictionary == null)
-            elementDictionary = new Dictionary<string, UIElementGroup>();
-
-        UIElement[] elements = Object.FindObjectsOfType<UIElement>(includeInactive: true);
-
-        foreach (UIElement element in elements)
+        string id = element.ID;
+        if (elementDictionary.ContainsKey(id))
         {
-            AddElementIDs(element);
+            Debug.LogWarning(
+                $"Unable to add {element.gameObject} to the " +
+                $"global UI dictionary. An element with the " +
+                $"ID \'{id}\' already exists.");
+            return;
         }
+
+        elementDictionary.Add(id, element);
     }
 
     /// <summary>
-    /// Broadcast a message to every UIElement with the given ID.
+    /// Remove a UI element from the dictionary.
+    /// </summary>
+    public void Remove(UIElement element)
+    {
+        string id = element.ID;
+
+        if (!elementDictionary.ContainsKey(id))
+            return;
+
+        elementDictionary.Remove(id);
+    }
+
+    /// <summary>
+    /// Clear all elements from the dictionary.
+    /// </summary>
+    public void Reset()
+    {
+        elementDictionary.Clear();
+    }
+
+    /// <summary>
+    /// Send a message to the UIElement with the given ID.
     /// </summary>
     /// <param name="message">
     /// Name of the method that should be invoked.
     /// </param>
-    public void BroadcastMessage(string id, string message)
+    public void SendMessage(string id, string message)
     {
-        BroadcastMessage(id, message, SendMessageOptions.DontRequireReceiver);
+        SendMessage(id, message, SendMessageOptions.DontRequireReceiver);
     }
 
     /// <summary>
-    /// Broadcast a message to every UIElement with the given ID.
+    /// Send a message to the UIElement with the given ID.
     /// </summary>
     /// <param name="message">
     /// Name of the method that should be invoked.
@@ -63,13 +79,13 @@ public class UIElementDictionary
     /// <param name="parameter">
     /// Optional parameter to include when sending the message.
     /// </param>
-    public void BroadcastMessage(string id, string message, object parameter)
+    public void SendMessage(string id, string message, object parameter)
     {
-        BroadcastMessage(id, message, parameter, SendMessageOptions.DontRequireReceiver);
+        SendMessage(id, message, parameter, SendMessageOptions.DontRequireReceiver);
     }
 
     /// <summary>
-    /// Broadcast a message to every UIElement with the given ID.
+    /// Send a message to the UIElement with the given ID.
     /// </summary>
     /// <param name="message">
     /// Name of the method that should be invoked.
@@ -78,21 +94,16 @@ public class UIElementDictionary
     /// Whether or not to throw an error if the UIElement does not have the 
     /// requested provided method signature.
     /// </param>
-    public void BroadcastMessage(string id, string message, SendMessageOptions options)
+    public void SendMessage(string id, string message, SendMessageOptions options)
     {
         if (!elementDictionary.ContainsKey(id))
             return;
 
-        elementDictionary[id].RemoveNullReferences();
-        elementDictionary[id].ForEach(
-            (o) =>
-            {
-                o.BroadcastMessage(message, options);
-            });
+        elementDictionary[id].BroadcastMessage(message, options);
     }
 
     /// <summary>
-    /// Broadcast a message to every UIElement with the given ID.
+    /// Send a message to the UIElement with the given ID.
     /// </summary>
     /// <param name="message">
     /// Name of the method that should be invoked.
@@ -104,37 +115,11 @@ public class UIElementDictionary
     /// Whether or not to throw an error if the UIElement does not have the 
     /// requested provided method signature.
     /// </param>
-    public void BroadcastMessage(string id, string message, object parameter, SendMessageOptions options)
+    public void SendMessage(string id, string message, object parameter, SendMessageOptions options)
     {
         if (!elementDictionary.ContainsKey(id))
             return;
 
-        elementDictionary[id].RemoveNullReferences();
-        elementDictionary[id].ForEach(
-            (o) => 
-            {
-                o.BroadcastMessage(message, parameter, options);
-            });
-    }
-
-    private void AddElementIDs(UIElement element)
-    {
-        foreach (string id in element.IDs)
-        {
-            TryAddKey(id);
-            TryAddElement(element, id);
-        }
-    }
-
-    private void TryAddElement(UIElement element, string id)
-    {
-        if (!elementDictionary[id].Contains(element))
-            elementDictionary[id].Add(element);
-    }
-
-    private void TryAddKey(string id)
-    {
-        if (!elementDictionary.ContainsKey(id))
-            elementDictionary.Add(id, new UIElementGroup());
+        elementDictionary[id].BroadcastMessage(message, parameter, options);
     }
 }

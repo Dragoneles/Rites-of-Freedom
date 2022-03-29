@@ -13,6 +13,7 @@
  ******************************************************************************/
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -36,6 +37,8 @@ public abstract class VirtualInputHandler : MonoBehaviour
 /// </summary>
 public class VirtualInput
 {
+    private const float MinimumPressLength = 0.05f;
+
     /// <summary>
     /// Event raised whenever the input is pressed.
     /// </summary>
@@ -61,7 +64,11 @@ public class VirtualInput
     /// </summary>
     public bool WasReleased { get; private set; }
 
-    internal IEnumerator SetDown()
+    /// <summary>
+    /// Treat the input as if it were pressed. Until the frame ends, 
+    /// WasPressed will evaluate to true.
+    /// </summary>
+    internal void SetDown(MonoBehaviour coroutineRunner)
     {
         Pressed?.Invoke();
 
@@ -69,12 +76,14 @@ public class VirtualInput
 
         IsDown = true;
 
-        yield return new WaitForEndOfFrame();
-
-        WasPressed = false;
+        coroutineRunner.StartCoroutine(ResetDown());
     }
 
-    internal IEnumerator SetUp()
+    /// <summary>
+    /// Treat the input as if it were released. Until the frame ends, 
+    /// WasReleased will evaluate to true.
+    /// </summary>
+    internal void SetUp(MonoBehaviour coroutineRunner)
     {
         Released?.Invoke();
 
@@ -82,16 +91,41 @@ public class VirtualInput
 
         IsDown = false;
 
+        coroutineRunner.StartCoroutine(ResetUp());
+    }
+
+    /// <summary>
+    /// Simulate a virtual press and release action.
+    /// </summary>
+    /// <param name="holdTime">
+    /// The duration that the button is down.
+    /// </param>
+    internal void SimulatePress(MonoBehaviour coroutineRunner, float holdTime)
+    {
+        holdTime = Mathf.Max(holdTime, MinimumPressLength);
+
+        coroutineRunner.StartCoroutine(SimulatePress(holdTime));
+    }
+
+    private IEnumerator ResetDown()
+    {
+        yield return new WaitForEndOfFrame();
+
+        WasPressed = false;
+    }
+
+    private IEnumerator ResetUp()
+    {
         yield return new WaitForEndOfFrame();
 
         WasReleased = false;
     }
 
-    internal IEnumerator SimulatePress(float holdTime)
+    private IEnumerator SimulatePress(float holdTime)
     {
-        yield return SetDown();
+        yield return ResetDown();
         yield return new WaitForSeconds(holdTime);
-        yield return SetUp();
+        yield return ResetUp();
     }
 }
 

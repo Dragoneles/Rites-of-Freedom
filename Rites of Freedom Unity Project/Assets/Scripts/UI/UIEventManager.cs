@@ -10,8 +10,6 @@
  *  Class that dispatches events to UIElements by tag.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -19,7 +17,19 @@ using UnityEngine;
 /// </summary>
 public class UIEventManager : MonoBehaviour
 {
-    private static UIElementDictionary uiDictionary = new UIElementDictionary();
+    private UIElementDictionary uiDictionary = new UIElementDictionary();
+
+    private void Awake()
+    {
+        UIElement.Created += OnUIElementCreated;
+        UIElement.Destroyed += OnUIElementDestroyed;
+    }
+
+    private void OnDestroy()
+    {
+        UIElement.Created -= OnUIElementCreated;
+        UIElement.Destroyed -= OnUIElementDestroyed;
+    }
 
     /// <summary>
     /// Broadcast a message to every UIElement with the given ID.
@@ -58,7 +68,7 @@ public class UIEventManager : MonoBehaviour
     /// </param>
     public void BroadcastMessage(string id, string message, SendMessageOptions options)
     {
-        uiDictionary.BroadcastMessage(id, message, options);
+        uiDictionary.SendMessage(id, message, options);
     }
 
     /// <summary>
@@ -76,6 +86,16 @@ public class UIEventManager : MonoBehaviour
     /// </param>
     public void BroadcastMessage(string id, string message, object parameter, SendMessageOptions options)
     {
-        uiDictionary.BroadcastMessage(id, message, parameter, options);
+        uiDictionary.SendMessage(id, message, parameter, options);
+    }
+
+    private void OnUIElementCreated(UIElement element)
+    {
+        uiDictionary.Add(element);
+    }
+
+    private void OnUIElementDestroyed(UIElement element)
+    {
+        uiDictionary.Remove(element);
     }
 }

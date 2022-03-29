@@ -34,7 +34,7 @@ public class AIInputHandler : VirtualInputHandler
     /// </summary>
     public void PerformJump()
     {
-        StartCoroutine(Jump.SimulatePress(PressLength));
+        Jump.SimulatePress(this, PressLength);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class AIInputHandler : VirtualInputHandler
     /// </param>
     public void PerformBlock(float holdDuration)
     {
-        StartCoroutine(Block.SimulatePress(holdDuration));
+        Block.SimulatePress(this, holdDuration);
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public class AIInputHandler : VirtualInputHandler
     /// </summary>
     public void PerformRoll()
     {
-        StartCoroutine(Roll.SimulatePress(PressLength));
+        Roll.SimulatePress(this, PressLength);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class AIInputHandler : VirtualInputHandler
     /// </summary>
     public void PerformAttack()
     {
-        StartCoroutine(Attack.SimulatePress(PressLength));
+        Attack.SimulatePress(this, PressLength);
     }
 
     /// <summary>
@@ -69,6 +69,6 @@ public class AIInputHandler : VirtualInputHandler
     /// </summary>
     public void PerformInteract()
     {
-        StartCoroutine(Interact.SimulatePress(PressLength));
+        Interact.SimulatePress(this, PressLength);
     }
 }
