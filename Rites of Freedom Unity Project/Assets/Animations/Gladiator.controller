@@ -450,7 +450,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.05
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.7
   m_HasExitTime: 0
@@ -1564,6 +1564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultStunDuration: 0.4
+  clipLength: 0.273
 --- !u!1101 &1724106930158837686
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1756,7 +1757,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.05
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
   m_HasExitTime: 0
@@ -1801,8 +1802,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84135d10f71ec9047a88e243119a93c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minChargeTime: 0.5
-  maxChargeTime: 0.6
+  minChargeTime: 0.3
+  maxChargeTime: 0.4
 --- !u!1101 &4267719807648153723
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

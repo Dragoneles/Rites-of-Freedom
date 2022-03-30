@@ -10,9 +10,7 @@
  *  Base node class of the behavior tree.
  *  
  ******************************************************************************/
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.BehaviorTree
@@ -27,13 +25,13 @@ namespace AI.BehaviorTree
 
         public NodeState State { get; private set; } = NodeState.Inactive;
         public BehaviorTree Tree { get; set; }
-        protected BehaviorTreeMachine machine { get => Tree.machine; }
-        protected GameObject gameObject { get => Tree.gameObject; }
-        protected Transform transform { get => gameObject.transform; }
-        protected Blackboard blackboard { get => Tree.Blackboard; }
+        protected BehaviorTreeMachine Machine { get => Tree.machine; }
+        protected GameObject GameObject { get => Tree.GameObject; }
+        protected Transform Transform { get => GameObject.transform; }
+        protected Blackboard Blackboard { get => Tree.Blackboard; }
 
-        private bool initialized { get; set; } = false;
-        private bool cancelled { get; set; } = false;
+        private bool initialized = false;
+        private bool canceled = false;
 
         public virtual Node Clone()
         {
@@ -56,7 +54,7 @@ namespace AI.BehaviorTree
         /// </summary>
         public void CancelProcess()
         {
-            cancelled = true;
+            canceled = true;
         }
 
         public IEnumerator Process()
@@ -67,7 +65,7 @@ namespace AI.BehaviorTree
 
             Start();
 
-            while (State == NodeState.Running && !cancelled)
+            while (State == NodeState.Running && !canceled)
             {
                 if (CheckNodeSucceeded())
                 {
@@ -98,7 +96,7 @@ namespace AI.BehaviorTree
 
         private void ResetNode()
         {
-            cancelled = false;
+            canceled = false;
 
             OnReset();
         }

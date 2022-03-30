@@ -21,7 +21,7 @@ using UnityEngine.UI;
 public class GraphicHandler : UIElement
 {
     private Graphic _graphic;
-    protected Graphic graphic
+    protected Graphic Graphic
     {
         get
         {
@@ -37,21 +37,21 @@ public class GraphicHandler : UIElement
     /// </summary>
     public void SetColor(Color color)
     {
-        graphic.color = color;
+        Graphic.color = color;
     }
 
     public void CrossFadeAlpha(float alpha, float duration, bool ignoreTimeScale)
     {
-        graphic.CrossFadeAlpha(alpha, duration, ignoreTimeScale);
+        Graphic.CrossFadeAlpha(alpha, duration, ignoreTimeScale);
     }
 
     public void CrossFadeColor(Color targetColor, float duration, bool ignoreTimeScale, bool useAlpha, bool useRGB)
     {
-        graphic.CrossFadeColor(targetColor, duration, ignoreTimeScale, useAlpha, useRGB);
+        Graphic.CrossFadeColor(targetColor, duration, ignoreTimeScale, useAlpha, useRGB);
     }
 
     public void CrossFadeColor(Color targetColor, float duration, bool ignoreTimeScale, bool useAlpha)
     {
-        graphic.CrossFadeColor(targetColor, duration, ignoreTimeScale, useAlpha);
+        Graphic.CrossFadeColor(targetColor, duration, ignoreTimeScale, useAlpha);
     }
 }

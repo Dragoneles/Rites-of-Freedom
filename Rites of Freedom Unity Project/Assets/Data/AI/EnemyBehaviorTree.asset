@@ -748,6 +748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tree:
     RootNode: {fileID: -1224949295573344217}
+    machine: {fileID: 0}
     nodes:
     - {fileID: -4785301937117893264}
     - {fileID: -2063856599108568417}

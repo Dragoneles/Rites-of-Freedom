@@ -23,13 +23,13 @@ namespace AI.BehaviorTree
     {
         public BehaviorTreeAsset BehaviorTree;
 
-        protected BehaviorTree tree { get; set; }
-        private Coroutine treeRunner { get; set; }
+        protected BehaviorTree Tree { get; set; }
+        private Coroutine treeRunner;
 
         protected virtual void Awake()
         {
-            tree = BehaviorTree.Clone();
-            tree.machine = this;
+            Tree = BehaviorTree.Clone();
+            Tree.machine = this;
         }
 
         private void Start()
@@ -42,7 +42,7 @@ namespace AI.BehaviorTree
             if (treeRunner != null)
                 return;
 
-            treeRunner = StartCoroutine(tree.Run());
+            treeRunner = StartCoroutine(Tree.Run());
         }
 
         private void OnEnable()

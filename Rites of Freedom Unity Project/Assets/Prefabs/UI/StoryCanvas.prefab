@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5009029167786740025}
   - component: {fileID: 9114112756464373427}
   - component: {fileID: 1243828568156086074}
+  - component: {fileID: 762668455933594735}
   m_Layer: 0
   m_Name: StoryCanvas
   m_TagString: Untagged
@@ -123,6 +124,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &762668455933594735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156736744646597246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4646e849548d5c1478f1d5ba61721f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: StoryOverlay
 --- !u!1 &4020803322025754578
 GameObject:
   m_ObjectHideFlags: 0

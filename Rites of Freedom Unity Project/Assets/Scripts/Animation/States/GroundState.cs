@@ -19,9 +19,6 @@ public class GroundState : CharacterStateMachineBehavior
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.IsInTransition(layerIndex))
-            return;
-
         if (TryBlock())
             return;
 

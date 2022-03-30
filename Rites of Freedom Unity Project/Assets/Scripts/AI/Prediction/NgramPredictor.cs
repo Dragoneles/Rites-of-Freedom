@@ -31,7 +31,7 @@ public class NGramPredictor : MonoBehaviour
     private NGramInvoker monitoredNGramInvoker;
 
     [SerializeField]
-    private List<NGramAction> observedNGramActions = new List<NGramAction>();
+    private List<NGramAction> observedNGramActions = new();
 
     [SerializeField]
     [Tooltip("Max remembered history of invoked actions.")]
@@ -42,7 +42,7 @@ public class NGramPredictor : MonoBehaviour
     [Tooltip("Max number of consecutive actions that are considered in the prediction.")]
     private int sequenceLength = 3;
 
-    private List<NGramAction> actionHistory = new List<NGramAction>();
+    private readonly List<NGramAction> actionHistory = new();
 
     private void Start()
     {
@@ -89,7 +89,7 @@ public class NGramPredictor : MonoBehaviour
         if (actionHistory.Count == 0)
             return observedNGramActions.GetRandom();
 
-        List<NGramAction> possiblePredictions = new List<NGramAction>();
+        List<NGramAction> possiblePredictions = new();
 
         for (int i = 0; i < actionHistory.Count; i++)
         {

@@ -19,11 +19,24 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class InteractBehavior : MonoBehaviour, IInteractor
 {
-    public UnityEvent<InteractEventArgs> FoundInteractable = new UnityEvent<InteractEventArgs>();
-    public UnityEvent<InteractEventArgs> LostInteractable = new UnityEvent<InteractEventArgs>();
-    public UnityEvent<InteractEventArgs> UsedInteractable = new UnityEvent<InteractEventArgs>();
+    [SerializeField]
+    private VirtualInputHandler input;
 
-    private IInteractable interactable { get; set; }
+    [Space]
+    [Header("Events")]
+    public UnityEvent<InteractEventArgs> FoundInteractable = new();
+    public UnityEvent<InteractEventArgs> LostInteractable = new();
+    public UnityEvent<InteractEventArgs> UsedInteractable = new();
+
+    private IInteractable interactable;
+
+    private void Awake()
+    {
+        if (!input)
+            Debug.LogError($"Field {input} of {this} is not defined.");
+
+        input.Interact.Released.AddListener(Interact);
+    }
 
     /// <summary>
     /// Use the active interactable object. Does nothing if 

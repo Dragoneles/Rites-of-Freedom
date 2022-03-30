@@ -21,11 +21,11 @@ public class PredictionNode : LeafNode
     [SerializeField]
     private NGramAction action;
 
-    private NGramPredictor predictor { get; set; }
+    private NGramPredictor predictor;
 
     protected override void OnInitialize()
     {
-        predictor = blackboard.Get(EnemyBehaviorTree.Predictor);
+        predictor = Blackboard.Get(EnemyBehaviorTree.Predictor);
     }
 
     protected override bool CheckNodeFailed()

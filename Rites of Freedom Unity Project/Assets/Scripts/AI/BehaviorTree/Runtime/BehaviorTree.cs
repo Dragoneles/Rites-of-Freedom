@@ -23,14 +23,14 @@ namespace AI.BehaviorTree
     public class BehaviorTree : ICloneable<BehaviorTree>
     {
         public RootNode RootNode;
-        public Blackboard Blackboard = new Blackboard();
+        public Blackboard Blackboard = new();
 
-        public BehaviorTreeMachine machine { get; set; }
-        public GameObject gameObject { get => machine.gameObject; }
+        public BehaviorTreeMachine machine;
+        public GameObject GameObject { get => machine.gameObject; }
 
         [SerializeField]
         [HideInInspector]
-        protected List<Node> nodes = new List<Node>();
+        protected List<Node> nodes = new();
 
         public BehaviorTree() { }
 

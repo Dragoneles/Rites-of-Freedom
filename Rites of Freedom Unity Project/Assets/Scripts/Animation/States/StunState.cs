@@ -10,8 +10,8 @@
  *  Animator state behavior handling a character's stun state.
  *  
  ******************************************************************************/
-
 using UnityEngine;
+
 /// <summary>
 /// Animator state behavior handling a character's stun state.
 /// </summary>
@@ -20,14 +20,11 @@ public class StunState : CharacterStateMachineBehavior
     [SerializeField]
     private float defaultStunDuration = 0.4f;
 
+    [SerializeField]
+    [Tooltip("Should be set to the length of the state's animator clip.")]
+    private float clipLength = 0.5f;
+
     protected override void OnStateEntered(AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        var clipInfo = animator.GetCurrentAnimatorClipInfo(layerIndex);
-
-        SetAnimationSpeedByClipLength(clipLength: clipInfo.Length);
-    }
-
-    private void SetAnimationSpeedByClipLength(float clipLength)
     {
         float duration = GetFloat(Float.StunDuration);
 
@@ -35,7 +32,7 @@ public class StunState : CharacterStateMachineBehavior
         if (duration == 0f)
             duration = defaultStunDuration;
 
-        float animSpeed = clipLength / duration;
+        float animSpeed = 1f / (duration / clipLength);
 
         SetFloat(Float.StunAnimSpeed, animSpeed);
     }

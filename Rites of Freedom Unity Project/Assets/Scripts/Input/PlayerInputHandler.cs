@@ -22,9 +22,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputHandler : VirtualInputHandler
 {
-    private PlayerInput playerInput { get; set; }
+    private PlayerInput playerInput;
 
-    private bool callbacksRegistered { get; set; } = false;
+    private bool callbacksRegistered = false;
 
     private void Start()
     {
@@ -47,7 +47,8 @@ public class PlayerInputHandler : VirtualInputHandler
         if (callbacksRegistered)
             return;
 
-        playerInput ??= GetComponent<PlayerInput>();
+        if (!playerInput)
+            playerInput = GetComponent<PlayerInput>();
 
         RegisterInputAction(playerInput.actions["Move"], OnMove);
         RegisterInputAction(playerInput.actions["Attack"], OnAttack);
@@ -63,7 +64,8 @@ public class PlayerInputHandler : VirtualInputHandler
 
     private void DisableInputs()
     {
-        playerInput ??= GetComponent<PlayerInput>();
+        if (!playerInput)
+            playerInput = GetComponent<PlayerInput>();
 
         UnregisterInputAction(playerInput.actions["Move"], OnMove);
         UnregisterInputAction(playerInput.actions["Attack"], OnAttack);

@@ -54,15 +54,15 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     [SerializeField]
     private NGramPredictor predictor;
 
-    private Blackboard blackboard => tree.Blackboard;
+    private Blackboard Blackboard => Tree.Blackboard;
 
     protected override void Awake()
     {
         base.Awake();
 
-        blackboard.Set(Self, self);
-        blackboard.Set(Target, target);
-        blackboard.Set(Input, input);
-        blackboard.Set(Predictor, predictor);
+        Blackboard.Set(Self, self);
+        Blackboard.Set(Target, target);
+        Blackboard.Set(Input, input);
+        Blackboard.Set(Predictor, predictor);
     }
 }

@@ -19,7 +19,7 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextHandler : GraphicHandler
 {
-    protected TextMeshProUGUI textMesh => graphic as TextMeshProUGUI;
+    protected TextMeshProUGUI textMesh => Graphic as TextMeshProUGUI;
 
     /// <summary>
     /// Set the Text Mesh's string value.

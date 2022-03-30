@@ -31,15 +31,15 @@ public class FaceNode : LeafNode
     [SerializeField]
     private FaceType faceType = FaceType.TowardsEnemy;
 
-    private Character self { get; set; }
-    private Character target { get; set; }
+    private Character self;
+    private Character target;
 
-    private Func<bool> successCondition { get; set; }
+    private Func<bool> successCondition;
 
     protected override void OnInitialize()
     {
-        self = blackboard.Get(EnemyBehaviorTree.Self);
-        target = blackboard.Get(EnemyBehaviorTree.Target);
+        self = Blackboard.Get(EnemyBehaviorTree.Self);
+        target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
 
     protected override void Start()

@@ -15,6 +15,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Virtual controller, subclassed by player or AI to log context-independent
@@ -22,19 +24,20 @@ using UnityEngine;
 /// </summary>
 public abstract class VirtualInputHandler : MonoBehaviour
 {
-    public VirtualAxisInput MovementAxis = new VirtualAxisInput();
-    public VirtualInput Attack = new VirtualInput();
-    public VirtualInput Block = new VirtualInput();
-    public VirtualInput Jump = new VirtualInput();
-    public VirtualInput Roll = new VirtualInput();
-    public VirtualInput Interact = new VirtualInput();
-    public VirtualInput Help = new VirtualInput();
-    public VirtualInput Pause = new VirtualInput();
+    public VirtualAxisInput MovementAxis = new();
+    public VirtualInput Attack = new();
+    public VirtualInput Block = new();
+    public VirtualInput Jump = new();
+    public VirtualInput Roll = new();
+    public VirtualInput Interact = new();
+    public VirtualInput Help = new();
+    public VirtualInput Pause = new();
 }
 
 /// <summary>
 /// Internal input class that contains state for an input.
 /// </summary>
+[Serializable]
 public class VirtualInput
 {
     private const float MinimumPressLength = 0.05f;
@@ -42,12 +45,12 @@ public class VirtualInput
     /// <summary>
     /// Event raised whenever the input is pressed.
     /// </summary>
-    public event Action Pressed;
+    public UnityEvent Pressed;
 
     /// <summary>
     /// Event raised whenever the input is released.
     /// </summary>
-    public event Action Released;
+    public UnityEvent Released;
 
     /// <summary>
     /// Returns true the frame that the input is pressed.
@@ -104,7 +107,7 @@ public class VirtualInput
     {
         holdTime = Mathf.Max(holdTime, MinimumPressLength);
 
-        coroutineRunner.StartCoroutine(SimulatePress(holdTime));
+        coroutineRunner.StartCoroutine(PerformVirtualPress(coroutineRunner, holdTime));
     }
 
     private IEnumerator ResetDown()
@@ -121,11 +124,11 @@ public class VirtualInput
         WasReleased = false;
     }
 
-    private IEnumerator SimulatePress(float holdTime)
+    private IEnumerator PerformVirtualPress(MonoBehaviour coroutineRunner, float holdTime)
     {
-        yield return ResetDown();
+        SetDown(coroutineRunner);
         yield return new WaitForSeconds(holdTime);
-        yield return ResetUp();
+        SetUp(coroutineRunner);
     }
 }
 

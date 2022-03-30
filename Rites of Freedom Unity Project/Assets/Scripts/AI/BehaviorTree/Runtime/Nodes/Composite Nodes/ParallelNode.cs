@@ -27,7 +27,7 @@ namespace AI.BehaviorTree
         {
             foreach (Node child in children)
             {
-                childrenProcesses.Add(machine.StartCoroutine(child.Process()));
+                childrenProcesses.Add(Machine.StartCoroutine(child.Process()));
             }
         }
 
@@ -42,7 +42,7 @@ namespace AI.BehaviorTree
             foreach (Coroutine process in childrenProcesses)
             {
                 if (process != null)
-                    machine.StopCoroutine(process);
+                    Machine.StopCoroutine(process);
             }
 
             childrenProcesses.Clear();

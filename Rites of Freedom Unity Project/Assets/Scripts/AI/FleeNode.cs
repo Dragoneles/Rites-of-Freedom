@@ -27,17 +27,17 @@ public class FleeNode : LeafNode
     [SerializeField]
     private LayerMask movementBlockerLayers;
 
-    private Character self { get; set; }
-    private Character target { get; set; }
-    private AIInputHandler input { get; set; }
+    private Character self;
+    private Character target;
+    private AIInputHandler input;
 
-    private bool pathIsBlocked { get; set; } = false;
+    private bool pathIsBlocked = false;
 
     protected override void OnInitialize()
     {
-        self = blackboard.Get(EnemyBehaviorTree.Self);
-        target = blackboard.Get(EnemyBehaviorTree.Target);
-        input = blackboard.Get(EnemyBehaviorTree.Input);
+        self = Blackboard.Get(EnemyBehaviorTree.Self);
+        target = Blackboard.Get(EnemyBehaviorTree.Target);
+        input = Blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override void Start()
@@ -91,7 +91,7 @@ public class FleeNode : LeafNode
         float pathDirection = GetFleeDirection();
 
         Vector2 raycastOrigin = self.Position + new Vector2(0f, 0.5f);
-        Vector2 raycastDirection = new Vector2(pathDirection, 0f);
+        Vector2 raycastDirection = new(pathDirection, 0f);
         RaycastHit2D[] hits = Physics2D.RaycastAll(
             raycastOrigin, 
             raycastDirection, 

@@ -17,25 +17,36 @@ using AI.BehaviorTree;
 /// </summary>
 public class JumpNode : LeafNode
 {
-    private AIInputHandler input { get; set; }
+    private AIInputHandler input;
+    private Character self;
+
+    bool inputCompleted = false;
 
     protected override void OnInitialize()
     {
-        input = blackboard.Get(EnemyBehaviorTree.Input);
+        self = Blackboard.Get(EnemyBehaviorTree.Self);
+        input = Blackboard.Get(EnemyBehaviorTree.Input);
+    }
+
+    protected override void OnReset()
+    {
+        inputCompleted = false;
     }
 
     protected override void Start()
     {
         input.PerformJump();
+
+        inputCompleted = true;
     }
 
     protected override bool CheckNodeFailed()
     {
-        return false;
+        return self.IsDead;
     }
 
     protected override bool CheckNodeSucceeded()
     {
-        return true;
+        return inputCompleted;
     }
 }

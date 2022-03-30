@@ -12,7 +12,6 @@
  ******************************************************************************/
 using AI.BehaviorTree;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -23,15 +22,15 @@ public class BlockNode : LeafNode
     [SerializeField]
     private float blockDuration = 3f;
 
-    private float blockTimeElapsed { get; set; } = 0f;
+    private float blockTimeElapsed = 0f;
 
-    private Character self { get; set; }
-    private AIInputHandler input { get; set; }
+    private Character self;
+    private AIInputHandler input;
 
     protected override void Start()
     {
-        self = blackboard.Get(EnemyBehaviorTree.Self);
-        input = blackboard.Get(EnemyBehaviorTree.Input);
+        self = Blackboard.Get(EnemyBehaviorTree.Self);
+        input = Blackboard.Get(EnemyBehaviorTree.Input);
 
         input.PerformBlock(blockDuration);
     }
