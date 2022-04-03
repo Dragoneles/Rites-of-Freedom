@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
+  m_Name: Dummy_Hurt
+  m_EditorClassIdentifier: 
+  BaseVolume: 0.8
+  BasePitch: 0.8
+  StereoPan: 0
+  RandomPitchDown: -0.1
+  RandomPitchUp: 0.1
+  PlayOnAwake: 0
+  Loop: 0
+  Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
+  Variations:
+  - Clip: {fileID: 8300000, guid: f64fa2cb752004640a740081f32920ba, type: 3}
+  - Clip: {fileID: 8300000, guid: 6eff44f126854534a8735464f197b5ac, type: 3}
+  - Clip: {fileID: 8300000, guid: d8b6f184d02c6454f9e394ef5600e3d3, type: 3}
+  - Clip: {fileID: 8300000, guid: 0330b54d16bf3474cb39f07ded20f97f, type: 3}
+  - Clip: {fileID: 8300000, guid: fbef67eea5de3d84e86bdb1760eee4ca, type: 3}
