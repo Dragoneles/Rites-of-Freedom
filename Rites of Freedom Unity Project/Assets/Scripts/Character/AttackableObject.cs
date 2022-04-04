@@ -10,19 +10,20 @@
  *  Behavior that allows an object to raise events when attacked.
  *  
  ******************************************************************************/
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Behavior that allows an object to raise events when attacked.
 /// </summary>
 public class AttackableObject : MonoBehaviour, IAttackable
 {
-    [SerializeField]
-    private SmartUnityEvent<EventArgs> attacked = new();
+    public UnityEvent<Character> Attacked => attacked;
+
+    [SerializeField] private UnityEvent<Character> attacked = new();
 
     public void ReceiveAttack(AttackInstance attack)
     {
-        attacked?.Invoke(EventArgs.Empty);
+        attacked?.Invoke(attack.Attacker);
     }
 }

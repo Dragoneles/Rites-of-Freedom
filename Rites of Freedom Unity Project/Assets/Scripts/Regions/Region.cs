@@ -12,6 +12,7 @@
  ******************************************************************************/
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Event dispatcher for a trigger collider.
@@ -22,12 +23,12 @@ public class Region : MonoBehaviour
     /// <summary>
     /// Event raised when an object matching the trigger layers enters the region.
     /// </summary>
-    public SmartUnityEvent<CollisionEventArgs> ObjectEntered = new();
+    public UnityEvent<CollisionEventArgs> ObjectEntered = new();
 
     /// <summary>
     /// Event raised when an object matching the trigger layers exits the region.
     /// </summary>
-    public SmartUnityEvent<CollisionEventArgs> ObjectExited = new();
+    public UnityEvent<CollisionEventArgs> ObjectExited = new();
 
     private readonly List<GameObject> objectsInRegion = new();
     

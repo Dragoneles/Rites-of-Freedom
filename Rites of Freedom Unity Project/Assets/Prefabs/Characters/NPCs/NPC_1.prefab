@@ -83,7 +83,19 @@ MonoBehaviour:
   onCollision:
     unityEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3991273814487568548}
+          m_TargetAssemblyTypeName: DialogueSpeaker, Assembly-CSharp
+          m_MethodName: StartConversation
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: cb26069b105638f4a88e762e2a07a389, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Conversation, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   onExit:
     unityEvent:
       m_PersistentCalls:
@@ -100,8 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c61ad59e66cd04ea80e69080d4cfbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conversationEvents: []
   voice: {fileID: 11400000, guid: 7e08e6dc98808164685140741f59b275, type: 2}
   dialogueDisplayer: {fileID: 8382826527240644751}
+  repeatConversation: 0
 --- !u!1 &1499074051441279820
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e150201f8944844b054117e28dfdc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IDs: []
+  ID: 
 --- !u!114 &8382826527240644751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,15 +565,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9019135271416613444, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_newColors.Array.data[13].b
-      value: 0.25485048
+      value: 0.20545568
       objectReference: {fileID: 0}
     - target: {fileID: 9019135271416613444, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_newColors.Array.data[13].g
-      value: 0.46454674
+      value: 0.3798205
       objectReference: {fileID: 0}
     - target: {fileID: 9019135271416613444, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_newColors.Array.data[13].r
-      value: 0.6509434
+      value: 0.5377358
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
@@ -580,6 +594,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a213c1ab9f3cfc4f95a0df74277d1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Attack:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Block:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Jump:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Roll:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Interact:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Help:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
+  Pause:
+    Pressed:
+      m_PersistentCalls:
+        m_Calls: []
+    Released:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!4 &1677285188129930319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}

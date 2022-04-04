@@ -18,15 +18,13 @@ public class CollisionEventDispatcher : MonoBehaviour
     private LayerMask layersDetected;
 
     [SerializeField]
-    private List<Collider2D> ignoredColliders = new List<Collider2D>();
+    private List<Collider2D> ignoredColliders = new();
 
     [SerializeField]
-    private SmartUnityEvent<CollisionEventArgs> onCollision = 
-        new SmartUnityEvent<CollisionEventArgs>();
+    private UnityEvent<CollisionEventArgs> onCollision = new();
 
     [SerializeField]
-    private SmartUnityEvent<CollisionEventArgs> onExit =
-        new SmartUnityEvent<CollisionEventArgs>();
+    private UnityEvent<CollisionEventArgs> onExit = new();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -61,7 +59,7 @@ public class CollisionEventDispatcher : MonoBehaviour
     }
 
     private void HandleCollision(Collider2D collider, 
-        SmartUnityEvent<CollisionEventArgs> trigger)
+        UnityEvent<CollisionEventArgs> trigger)
     {
         if (ColliderIsValid(collider) == false)
             return;

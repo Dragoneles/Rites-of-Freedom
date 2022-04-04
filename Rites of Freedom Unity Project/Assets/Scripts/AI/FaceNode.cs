@@ -42,7 +42,7 @@ public class FaceNode : LeafNode
         target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
 
-    protected override void Start()
+    protected override void OnNodeEntered()
     {
         switch (faceType)
         {

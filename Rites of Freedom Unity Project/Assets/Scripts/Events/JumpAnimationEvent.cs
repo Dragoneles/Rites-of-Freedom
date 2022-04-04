@@ -12,6 +12,7 @@
  ******************************************************************************/
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Behavior attached to an animator that can invoke an event for jumps.
@@ -21,7 +22,7 @@ public class JumpAnimationEvent : MonoBehaviour
     /// <summary>
     /// Event invoked when the character jumps.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Jumped = new SmartUnityEvent<EventArgs>();
+    public UnityEvent<EventArgs> Jumped = new();
 
     /// <summary>
     /// Invoke the jump UnityEvent.

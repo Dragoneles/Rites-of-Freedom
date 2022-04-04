@@ -33,7 +33,7 @@ public class RollNode : LeafNode
         inputCompleted = false;
     }
 
-    protected override void Start()
+    protected override void OnNodeEntered()
     {
         input.PerformRoll();
 

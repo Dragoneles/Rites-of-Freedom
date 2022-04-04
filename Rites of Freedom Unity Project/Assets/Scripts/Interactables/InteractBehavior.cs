@@ -34,7 +34,10 @@ public class InteractBehavior : MonoBehaviour, IInteractor
     {
         if (!input)
             Debug.LogError($"Field {input} of {this} is not defined.");
+    }
 
+    private void Start()
+    {
         input.Interact.Released.AddListener(Interact);
     }
 

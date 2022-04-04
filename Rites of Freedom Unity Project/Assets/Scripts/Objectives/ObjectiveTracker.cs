@@ -19,16 +19,23 @@ using UnityEngine;
 /// </summary>
 public class ObjectiveTracker : MonoBehaviour
 {
-    internal class ObjectiveDisplayDictionary : Dictionary<Objective, ObjectiveDisplay> { }
+    private class ObjectiveDisplayDictionary : Dictionary<IObjective, ObjectiveDisplay> { }
 
     [SerializeField]
     private GameObject objectiveDisplayPrefab;
 
-    private ObjectiveDisplayDictionary objectiveDisplays = new ObjectiveDisplayDictionary();
+    private ObjectiveDisplayDictionary objectiveDisplays = new();
 
     private void Awake()
     {
         Initialize();
+    }
+
+    private void OnDestroy()
+    {
+        ObjectiveSystem.ObjectiveAdded -= OnObjectiveAdded;
+        ObjectiveSystem.ObjectiveCompleted -= OnObjectiveCompleted;
+        ObjectiveSystem.ObjectiveCanceled -= OnObjectiveCanceled;
     }
 
     private void Initialize()
@@ -38,19 +45,12 @@ public class ObjectiveTracker : MonoBehaviour
         ObjectiveSystem.ObjectiveCanceled += OnObjectiveCanceled;
     }
 
-    protected void OnObjectiveAdded(Objective objective)
+    protected void OnObjectiveAdded(IObjective objective)
     {
-        ObjectiveDisplay display = CreateObjectiveDisplay();
 
-        if (display == null)
-            return;
-
-        display.TrackObjective(objective);
-
-        objectiveDisplays.Add(objective, display);
     }
 
-    protected void OnObjectiveCompleted(Objective objective)
+    protected void OnObjectiveCompleted(IObjective objective)
     {
         if (!objectiveDisplays.ContainsKey(objective))
             return;
@@ -60,7 +60,7 @@ public class ObjectiveTracker : MonoBehaviour
         objectiveDisplays.Remove(objective);
     }
 
-    protected void OnObjectiveCanceled(Objective objective)
+    protected void OnObjectiveCanceled(IObjective objective)
     {
         if (!objectiveDisplays.ContainsKey(objective))
             return;
@@ -68,22 +68,5 @@ public class ObjectiveTracker : MonoBehaviour
         objectiveDisplays[objective].CancelAndDestroy();
 
         objectiveDisplays.Remove(objective);
-    }
-
-    private ObjectiveDisplay CreateObjectiveDisplay()
-    {
-        var obj = Instantiate(objectiveDisplayPrefab, transform);
-        var display = obj.GetComponentInChildren<ObjectiveDisplay>();
-
-        if (display == null)
-        {
-            Debug.LogWarning(
-                $"Prefab {objectiveDisplayPrefab} does not have" +
-                $" a {nameof(ObjectiveDisplay)} component.");
-
-            return null;
-        }
-
-        return display;
     }
 }

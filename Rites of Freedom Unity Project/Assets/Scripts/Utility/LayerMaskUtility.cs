@@ -23,6 +23,6 @@ public static class LayerMaskUtility
     /// </summary>
     public static bool ContainsLayer(this LayerMask layermask, int layer)
     {
-        return layer == (layermask | (1 << layer));
+        return layermask == (layermask | (1 << layer));
     }
 }

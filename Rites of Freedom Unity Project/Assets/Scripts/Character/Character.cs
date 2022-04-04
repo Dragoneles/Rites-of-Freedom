@@ -13,6 +13,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Base class for characters that can animate and receive attacks.
@@ -24,66 +25,69 @@ public class Character : MonoBehaviour, IAttackable
     /// <summary>
     /// Event invoked when the character's health value changes.
     /// </summary>
-    public SmartUnityEvent<VitalChangedEventArgs> HealthChanged;
+    public UnityEvent<VitalChangedEventArgs> HealthChanged;
 
     /// <summary>
     /// Event invoked when the y velocity of the character changes.
     /// Used to handle jump/fall animator states.
     /// </summary>
-    public SmartUnityEvent<float> YVelocityChanged;
+    public UnityEvent<float> YVelocityChanged;
 
     /// <summary>
     /// Event invoked when the character touches or leaves the ground.
     /// "True" EventArgs indicates the character touched the ground.
     /// </summary>
-    public SmartUnityEvent<bool> GroundStateChanged;
+    public UnityEvent<bool> GroundStateChanged;
 
     /// <summary>
     /// Event invoked when the character attacks another character.
     /// TriggeringCharacter is the sender.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> DeliveredAttack;
+    public UnityEvent<AttackEventArgs> DeliveredAttack;
 
     /// <summary>
     /// Event invoked when the character receives an attack.
     /// TriggeringCharacter is the sender.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> ReceivedAttack;
+    public UnityEvent<AttackEventArgs> ReceivedAttack;
 
     /// <summary>
     /// Event invoked when the character flinches from an attack.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Flinched;
+    public UnityEvent<EventArgs> Flinched;
 
     /// <summary>
     /// Event invoked when the character blocks an attack.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> Blocked;
+    public UnityEvent<AttackEventArgs> Blocked;
 
     /// <summary>
     /// Event invoked when the character dodges an attack by rolling.
     /// </summary>
-    public SmartUnityEvent<AttackEventArgs> Dodged;
+    public UnityEvent<AttackEventArgs> Dodged;
 
     /// <summary>
     /// Event invoked when the character rolls.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Rolled;
+    public UnityEvent<EventArgs> Rolled;
 
     /// <summary>
     /// Event invoked when the character finishes rolling.
     /// </summary>
-    public SmartUnityEvent<EventArgs> RollFinished;
+    public UnityEvent<EventArgs> RollFinished;
 
     /// <summary>
     /// Event invoked when a character dies.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Died;
+    public UnityEvent<EventArgs> Died;
 
     /// <summary>
     /// Event invoked when the character lands.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Landed;
+    public UnityEvent<EventArgs> Landed;
+
+    public UnityEvent<Character> Attacked => attacked;
+    private UnityEvent<Character> attacked;
 
     [Header("Stats")]
     public Vital Health = new Vital(100);
@@ -113,6 +117,8 @@ public class Character : MonoBehaviour, IAttackable
     public bool IsBlocking { get; private set; } = false;
     public bool IsRolling { get; private set; } = false;
     private float YVelocity { get; set; } = 0f;
+    public bool IsMoving { get => Rigidbody.velocity.x != 0f; }
+    public bool IsJumping { get => Rigidbody.velocity.y != 0f; }
     public Vector2 Position { get => transform.position; }
 
     public FeetCollider Feet { get; private set; }
@@ -235,6 +241,8 @@ public class Character : MonoBehaviour, IAttackable
     {
         if (IsDead)
             return;
+
+        attacked?.Invoke(attack.Attacker);
 
         if (IsBlocking && IsFacingPoint(attack.Attacker.Position))
         {

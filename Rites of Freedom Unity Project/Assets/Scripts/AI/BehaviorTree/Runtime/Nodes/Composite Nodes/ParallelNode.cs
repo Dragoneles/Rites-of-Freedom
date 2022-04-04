@@ -23,7 +23,7 @@ namespace AI.BehaviorTree
     {
         private List<Coroutine> childrenProcesses = new List<Coroutine>();
 
-        protected override void Start()
+        protected override void OnNodeEntered()
         {
             foreach (Node child in children)
             {

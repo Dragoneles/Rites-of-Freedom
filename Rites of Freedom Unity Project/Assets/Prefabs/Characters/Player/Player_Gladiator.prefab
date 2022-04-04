@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92fdc3fb98df2ad4b90bf2e248584b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 8604289612297955851}
   FoundInteractable:
     m_PersistentCalls:
       m_Calls: []
@@ -80,7 +81,6 @@ MonoBehaviour:
   UsedInteractable:
     m_PersistentCalls:
       m_Calls: []
-  input: {fileID: 8604289612297955851}
 --- !u!1001 &5384020392405668487
 PrefabInstance:
   m_ObjectHideFlags: 0

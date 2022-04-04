@@ -10,11 +10,17 @@
  *  Interface for an object that can be attacked.
  *  
  ******************************************************************************/
+using System;
+using UnityEngine.Events;
 
 /// <summary>
 /// Interface for an object that can be attacked.
 /// </summary>
 public interface IAttackable
 {
+    /// <summary>
+    /// Event raised when a character is attacked. Argument is attacker.
+    /// </summary>
+    public UnityEvent<Character> Attacked { get; }
     void ReceiveAttack(AttackInstance attack);
 }

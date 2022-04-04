@@ -12,6 +12,7 @@
  ******************************************************************************/
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Behavior attached to an animator that can invoke an event for footsteps.
@@ -21,7 +22,7 @@ public class FootstepEvent : MonoBehaviour
     /// <summary>
     /// Event invoked when the character takes a footstep.
     /// </summary>
-    public SmartUnityEvent<EventArgs> Stepped;
+    public UnityEvent<EventArgs> Stepped;
 
     /// <summary>
     /// Invoke the footstep event.

@@ -26,7 +26,9 @@ namespace AI.BehaviorTree
         public override Node Clone()
         {
             RootNode node = base.Clone() as RootNode;
-            node.Child = Child.Clone();
+
+            if (node.Child != null)
+                node.Child = Child.Clone();
 
             return node;
         }
@@ -35,7 +37,8 @@ namespace AI.BehaviorTree
         {
             base.SetTree(tree);
 
-            Child.SetTree(tree);
+            if (Child != null)
+                Child.SetTree(tree);
         }
 
         protected override void OnReset()
@@ -51,21 +54,11 @@ namespace AI.BehaviorTree
 
         protected override bool CheckNodeFailed()
         {
-            if (Child.State == NodeState.Failure)
-            {
-                Debug.Log("Root node failed");
-            }
-
             return Child.State == NodeState.Failure;
         }
 
         protected override bool CheckNodeSucceeded()
         {
-            if (Child.State == NodeState.Success)
-            {
-                Debug.Log("Root node succeeded");
-            }
-
             return Child.State == NodeState.Success;
         }
     }

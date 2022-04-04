@@ -10,33 +10,58 @@
  *  Behavior that can facilitate conversation objects.
  *  
  ******************************************************************************/
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Behavior that can facilitate conversation objects.
 /// </summary>
 public class DialogueSpeaker : MonoBehaviour
 {
+    [SerializeField] 
+    private List<ConversationEvent> conversationEvents = new();
+
+    private Dictionary<Conversation, ConversationEvent> conversationEventDictionary = new();
+
     [SerializeField]
     private AudioEntry voice;
 
     [SerializeField]
     private DialogueDisplayer dialogueDisplayer;
 
+    [SerializeField]
+    private bool repeatConversation = false;
+
     private Coroutine conversationCoroutine { get; set; }
     private AudioManager audioManager { get; set; }
+
+    private List<Conversation> completedconversations = new();
+
+    private void Awake()
+    {
+        PopulateEventDictionary();
+    }
 
     /// <summary>
     /// Speak each line of dialogue in a conversation, in order.
     /// </summary>
     public void StartConversation(Conversation conversation)
     {
+        if (!repeatConversation && completedconversations.Contains(conversation))
+            return;
+
         if (conversationCoroutine != null)
             return;
 
+        if (conversationEventDictionary.ContainsKey(conversation))
+            conversationEventDictionary[conversation].InvokeStartEvent();
+
         conversationCoroutine = StartCoroutine(ConversationLoop(conversation));
+
+        completedconversations.Add(conversation);
     }
 
     /// <summary>
@@ -46,6 +71,12 @@ public class DialogueSpeaker : MonoBehaviour
     {
         PlayVoiceSound();
         dialogueDisplayer?.Display(line);
+    }
+
+    private void PopulateEventDictionary()
+    {
+        conversationEvents.ForEach(
+            o => conversationEventDictionary.Add(o.Conversation, o));
     }
 
     private void PlayVoiceSound()
@@ -77,5 +108,31 @@ public class DialogueSpeaker : MonoBehaviour
         SayLine(Line.NoLine());
 
         conversationCoroutine = null;
+
+        if (conversationEventDictionary.ContainsKey(conversation))
+            conversationEventDictionary[conversation].InvokeFinishEvent();
+    }
+}
+
+[System.Serializable]
+public class ConversationEvent
+{
+    [Tooltip("The conversation that the events are bound to.")]
+    public Conversation Conversation;
+
+    [Tooltip("Event raised when a conversation starts.")]
+    public UnityEvent<EventArgs> ConversationStarted = new();
+
+    [Tooltip("Event raised when a conversation finished.")]
+    public UnityEvent<EventArgs> ConversationFinished = new();
+
+    public void InvokeStartEvent()
+    {
+        ConversationStarted.Invoke(EventArgs.Empty);
+    }
+
+    public void InvokeFinishEvent()
+    {
+        ConversationFinished.Invoke(EventArgs.Empty);
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPC1_Scene1
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Well well, look who finally woke up
+  - Text: Looks like somebody slept in
     Duration: 2.5
-  - Text: I hope you're ready to get thrashed
+  - Text: The battlemaster is gonna tear you apart
     Duration: 3

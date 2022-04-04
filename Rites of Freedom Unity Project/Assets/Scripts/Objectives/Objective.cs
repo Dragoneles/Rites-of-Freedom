@@ -11,15 +11,23 @@
  *  
  ******************************************************************************/
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 /// <summary>
 /// Objective that can be assigned to / completed by the player.
 /// </summary>
-public class Objective
+public class Objective : MonoBehaviour, IObjective
 {
+    [Header("Events")]
+    [SerializeField] private UnityEvent onCompleted;
+
+    [SerializeField] private UnityEvent onUpdated;
+
+    [Tooltip("Event raised when the objective is started.")]
+    [SerializeField] private UnityEvent onStarted;
+
     /// <summary>
     /// Event raised when the objective is completed.
     /// </summary>
@@ -30,24 +38,72 @@ public class Objective
     /// </summary>
     public event Action Updated;
 
-    protected string displayTextPrefix = string.Empty;
+    [Header("Start conditions")]
+    [Tooltip("If true, the objective will start when the scene loads.")]
+    [SerializeField] private bool startOnAwake = false;
 
-    public Objective()
+    [Tooltip("If true, the objective will start when the component is enabled.")]
+    [SerializeField] private bool startOnEnable = true;
+
+    [Header("Parameters")]
+    [Tooltip("The one-line text prompt shown to the player.")]
+    [SerializeField] private string description = "Do the objective: ";
+    [Tooltip("Number of times the objective needs to be completed.")]
+    [SerializeField] private int repeats = 1;
+    [Tooltip("Whether or not to show the progress tracker (x / 5).")]
+    [SerializeField] private bool showCounter = true;
+
+    [Header("References")]
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI maxProgressText;
+    [SerializeField] private GameObject progressTracker;
+
+    // non-serialized fields
+    private int timesCompleted = 0;
+    private bool objectiveCompleted = false;
+    private EventCallback eventCallback;
+
+    private void Awake()
     {
-        Initialize();
+        eventCallback = GetComponent<EventCallback>();
+
+        if (eventCallback == null)
+            Debug.LogWarning(
+                $"{this} can't update objective. GameObject does not " +
+                $"contain a {nameof(EventCallback)} component.");
     }
 
-    public Objective(string displayTextPrefix) : this()
+    private void Start()
     {
-        this.displayTextPrefix = displayTextPrefix;
+        if (!startOnAwake)
+            return;
+
+        StartAndAssign();
+    }
+
+    private void OnEnable()
+    {
+        if (!startOnEnable)
+            return;
+
+        StartAndAssign();
+    }
+
+    private void OnValidate()
+    {
+        if (descriptionText != null) descriptionText.text = description;
+        if (maxProgressText != null) maxProgressText.text = repeats.ToString();
+        if (progressTracker != null) progressTracker.SetActive(showCounter);
     }
 
     /// <summary>
-    /// Get the text indicating the objective's progress.
+    /// Start the objective and add it to the objective system.
     /// </summary>
-    public virtual string GetProgressText()
+    public void StartAndAssign()
     {
-        return displayTextPrefix;
+        onStarted?.Invoke();
+        ObjectiveSystem.AddObjective(this);
+        Initialize();
     }
 
     /// <summary>
@@ -58,15 +114,32 @@ public class Objective
         Completed += action;
     }
 
+    private void Initialize()
+    {
+        eventCallback.Invoked += OnObjectiveUpdated;
+    }
+
     protected virtual void OnObjectiveCompleted()
     {
+        objectiveCompleted = true;
+
         Completed?.Invoke();
+        onCompleted?.Invoke();
     }
 
     protected virtual void OnObjectiveUpdated()
     {
-        Updated?.Invoke();
-    }
+        if (objectiveCompleted)
+            return;
 
-    protected virtual void Initialize() { }
+        timesCompleted++;
+
+        Updated?.Invoke();
+        onUpdated?.Invoke();
+
+        if (timesCompleted >= repeats)
+        {
+            OnObjectiveCompleted();
+        }
+    }
 }

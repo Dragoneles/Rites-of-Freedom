@@ -12,6 +12,7 @@
  ******************************************************************************/
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Script that invokes an event when a Block animation starts.
@@ -19,7 +20,7 @@ using UnityEngine;
 public class BlockAnimationEvent : MonoBehaviour
 {
     [SerializeField]
-    private SmartUnityEvent<EventArgs> blocked = new SmartUnityEvent<EventArgs>();
+    private UnityEvent<EventArgs> blocked = new UnityEvent<EventArgs>();
 
     public void Block()
     {

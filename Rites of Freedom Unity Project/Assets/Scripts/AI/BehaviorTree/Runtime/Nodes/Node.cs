@@ -63,7 +63,7 @@ namespace AI.BehaviorTree
 
             State = NodeState.Running;
 
-            Start();
+            OnNodeEntered();
 
             while (State == NodeState.Running && !canceled)
             {
@@ -119,7 +119,7 @@ namespace AI.BehaviorTree
         /// <summary>
         /// Start is invoked whenever the node beings processing.
         /// </summary>
-        protected virtual void Start() { }
+        protected virtual void OnNodeEntered() { }
 
         /// <summary>
         /// Initialize is called only when the node is processed for 

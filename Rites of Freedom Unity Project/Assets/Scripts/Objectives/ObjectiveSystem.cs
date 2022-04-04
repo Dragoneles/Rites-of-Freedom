@@ -11,9 +11,7 @@
  *  
  ******************************************************************************/
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Static class used to register player objectives.
@@ -23,25 +21,25 @@ public static class ObjectiveSystem
     /// <summary>
     /// Event raised whenever a new objective is added.
     /// </summary>
-    public static event Action<Objective> ObjectiveAdded;
+    public static event Action<IObjective> ObjectiveAdded;
 
     /// <summary>
     /// Event raised whenever an objective is completed.
     /// </summary>
-    public static event Action<Objective> ObjectiveCompleted;
+    public static event Action<IObjective> ObjectiveCompleted;
 
     /// <summary>
     /// Event raised whenever an objective is canceled.
     /// </summary>
-    public static event Action<Objective> ObjectiveCanceled;
+    public static event Action<IObjective> ObjectiveCanceled;
 
-    private static List<Objective> activeObjectives = new List<Objective>();
-    private static List<Objective> completedObjectives = new List<Objective>();
+    private static List<IObjective> activeObjectives = new();
+    private static List<IObjective> completedObjectives = new();
 
     /// <summary>
     /// Add a new objective to the system.
     /// </summary>
-    public static void AddObjective(Objective objective)
+    public static void AddObjective(IObjective objective)
     {
         if (objective == null)
             return;
@@ -64,7 +62,7 @@ public static class ObjectiveSystem
     /// <summary>
     /// Cancel an assigned objective.
     /// </summary>
-    public static void CancelObjective(Objective objective)
+    public static void CancelObjective(IObjective objective)
     {
         if (!activeObjectives.Contains(objective))
             return;
@@ -74,7 +72,7 @@ public static class ObjectiveSystem
         ObjectiveCanceled?.Invoke(objective);
     }
 
-    private static void MarkObjectiveComplete(Objective objective)
+    private static void MarkObjectiveComplete(IObjective objective)
     {
         if (!activeObjectives.Contains(objective))
             return;

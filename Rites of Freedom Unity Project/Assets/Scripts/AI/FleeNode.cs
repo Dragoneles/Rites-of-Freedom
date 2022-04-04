@@ -40,7 +40,7 @@ public class FleeNode : LeafNode
         input = Blackboard.Get(EnemyBehaviorTree.Input);
     }
 
-    protected override void Start()
+    protected override void OnNodeEntered()
     {
         if (CheckPathIsBlocked() == true)
             pathIsBlocked = true;

@@ -41,7 +41,7 @@ public class UIElement : MonoBehaviour
     }
 
     /// <summary>
-    /// Virtual factory method for executing logic on Awake().
+    /// Virtual factory method for executing logic on Start().
     /// </summary>
     protected virtual void OnStart() { }
 

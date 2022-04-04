@@ -281,25 +281,23 @@ MonoBehaviour:
   ignoredColliders:
   - {fileID: 4556553493349078976}
   onCollision:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1511416008644732209}
-          m_TargetAssemblyTypeName: Character, Assembly-CSharp
-          m_MethodName: OnWeaponHit
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onExit:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1852111321978836078
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,25 +428,23 @@ MonoBehaviour:
   ignoredColliders:
   - {fileID: 4556553493349078976}
   onCollision:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1511416008644732209}
-          m_TargetAssemblyTypeName: Character, Assembly-CSharp
-          m_MethodName: OnWeaponHit
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onExit:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8347601295017363702
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,25 +514,23 @@ MonoBehaviour:
   ignoredColliders:
   - {fileID: 4556553493349078976}
   onCollision:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1511416008644732209}
-          m_TargetAssemblyTypeName: Character, Assembly-CSharp
-          m_MethodName: OnWeaponHit
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511416008644732209}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: OnWeaponHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onExit:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9011593090420861173
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,128 +614,116 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthChanged:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   YVelocityChanged:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   GroundStateChanged:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   DeliveredAttack:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   ReceivedAttack:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 0587389d9c6ebb647af1f34dcf02abca, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls: []
   Flinched:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 6620a242b3ab76349a54ab83742ecc7a, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Blocked:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 73aad5876166bdc43937757b006120b6, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 73aad5876166bdc43937757b006120b6, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Dodged:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 13f93eac7b6b613458cf5d0305cc8f83, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 13f93eac7b6b613458cf5d0305cc8f83, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Rolled:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 19381dd928babcd4e9ecf5cae86f703a, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 19381dd928babcd4e9ecf5cae86f703a, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   RollFinished:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
   Died:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 175e5714d6abf754ab6acded750f8c06, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 175e5714d6abf754ab6acded750f8c06, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Landed:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 1c531de3f835d044baaf7fc592e813c6, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 1c531de3f835d044baaf7fc592e813c6, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Health:
-    value: 100
-    currentValue: 100
+    value: 150
+    currentValue: 150
   Stamina:
     value: 80
     currentValue: 80
@@ -917,9 +899,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stepped:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 97507a05cbff75249995f1db87d31a8e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2389664271073720214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,21 +926,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacked:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 132ed9657c6057a478c56d5db44e066e, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 132ed9657c6057a478c56d5db44e066e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4275563996924336114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,9 +953,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocked:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &715989047147657756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,21 +968,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Jumped:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
-          m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
-          m_MethodName: PlaySound
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: ec3dbe20d8e409547948c9ba24a4d3c2, type: 2}
-            m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: ec3dbe20d8e409547948c9ba24a4d3c2, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9019135271416613444
 MonoBehaviour:
   m_ObjectHideFlags: 0

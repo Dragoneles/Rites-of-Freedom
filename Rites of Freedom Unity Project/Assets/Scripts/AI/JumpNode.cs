@@ -33,7 +33,7 @@ public class JumpNode : LeafNode
         inputCompleted = false;
     }
 
-    protected override void Start()
+    protected override void OnNodeEntered()
     {
         input.PerformJump();
 

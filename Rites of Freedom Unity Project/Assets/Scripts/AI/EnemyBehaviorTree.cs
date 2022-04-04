@@ -56,10 +56,8 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
 
     private Blackboard Blackboard => Tree.Blackboard;
 
-    protected override void Awake()
+    protected override void OnTreeInitialized()
     {
-        base.Awake();
-
         Blackboard.Set(Self, self);
         Blackboard.Set(Target, target);
         Blackboard.Set(Input, input);

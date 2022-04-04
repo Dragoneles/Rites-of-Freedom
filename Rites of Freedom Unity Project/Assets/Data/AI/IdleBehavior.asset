@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8178484941a9549b2dfe61750329b5, type: 3}
+  m_Name: IdleBehavior
+  m_EditorClassIdentifier: 
+  tree:
+    RootNode: {fileID: 3720572425386089291}
+    machine: {fileID: 0}
+    nodes:
+    - {fileID: 3720572425386089291}
+    - {fileID: 313611998326850771}
+    - {fileID: 8001512044526702464}
+--- !u!114 &313611998326850771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419b79cec539fc946b33cf1f237b96d3, type: 3}
+  m_Name: RepeaterNode
+  m_EditorClassIdentifier: 
+  Guid: 125021b699f756d4c9e357240034b99a
+  Position: {x: 0, y: 125}
+  Child: {fileID: 8001512044526702464}
+  repeats: -1
+  tickRate: 15
+--- !u!114 &3720572425386089291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d9d52a3dd2b0e428f78eb7c9dae9c1, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  Guid: 1786b1878a241774481b4c429afdd6ea
+  Position: {x: 0, y: 0}
+  Child: {fileID: 313611998326850771}
+--- !u!114 &8001512044526702464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f0700e499bc2b4ab2e1f9871b97499, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  Guid: 083ae23c85d5ea84e8f06e7db4287b17
+  Position: {x: 0, y: 250}
+  waitDuration: 1

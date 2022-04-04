@@ -26,10 +26,9 @@ namespace AI.BehaviorTree
         protected BehaviorTree Tree { get; set; }
         private Coroutine treeRunner;
 
-        protected virtual void Awake()
+        private void Awake()
         {
-            Tree = BehaviorTree.Clone();
-            Tree.machine = this;
+            InitializeTree();
         }
 
         private void Start()
@@ -37,9 +36,41 @@ namespace AI.BehaviorTree
             Run();
         }
 
+        public void SetTree(BehaviorTreeAsset tree)
+        {
+            if (treeRunner != null)
+            {
+                StopCoroutine(treeRunner);
+                treeRunner = null;
+            }    
+
+            BehaviorTree = tree;
+
+            InitializeTree();
+
+            Run();
+        }
+
+        private void InitializeTree()
+        {
+            if (BehaviorTree == null)
+                return;
+
+            Tree = BehaviorTree.Clone();
+
+            Tree.machine = this;
+
+            OnTreeInitialized();
+        }
+
+        protected virtual void OnTreeInitialized() { }
+
         private void Run()
         {
             if (treeRunner != null)
+                return;
+
+            if (Tree == null)
                 return;
 
             treeRunner = StartCoroutine(Tree.Run());

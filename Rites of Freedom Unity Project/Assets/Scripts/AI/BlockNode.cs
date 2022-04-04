@@ -27,7 +27,7 @@ public class BlockNode : LeafNode
     private Character self;
     private AIInputHandler input;
 
-    protected override void Start()
+    protected override void OnNodeEntered()
     {
         self = Blackboard.Get(EnemyBehaviorTree.Self);
         input = Blackboard.Get(EnemyBehaviorTree.Input);

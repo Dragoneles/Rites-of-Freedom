@@ -25,16 +25,6 @@ public class ObjectiveDisplay : MonoBehaviour
     private TextMeshProUGUI textDisplay;
 
     /// <summary>
-    /// Start tracking an objective.
-    /// </summary>
-    public void TrackObjective(Objective objective)
-    {
-        SetTextDisplay(objective.GetProgressText());
-
-        objective.Updated += () => OnObjectiveUpdated(objective);
-    }
-
-    /// <summary>
     /// Notify the display that the objective is complete, then destroy it.
     /// </summary>
     public void CompleteAndDestroy()
@@ -50,15 +40,5 @@ public class ObjectiveDisplay : MonoBehaviour
     {
         // TO-DO: implement sequence
         Destroy(gameObject);
-    }
-
-    private void OnObjectiveUpdated(Objective objective)
-    {
-        SetTextDisplay(objective.GetProgressText());
-    }
-
-    private void SetTextDisplay(string text)
-    {
-        textDisplay.text = text;
     }
 }

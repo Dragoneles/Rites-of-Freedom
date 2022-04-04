@@ -33,7 +33,7 @@ namespace AI.BehaviorTree
             return selectedChild.State == NodeState.Success;
         }
 
-        protected override void Start()
+        protected override void OnNodeEntered()
         {
             int randomIndex = Random.Range(0, children.Count);
             selectedChild = children[randomIndex];

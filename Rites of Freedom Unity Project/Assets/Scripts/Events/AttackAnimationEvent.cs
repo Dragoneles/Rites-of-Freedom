@@ -12,6 +12,7 @@
  ******************************************************************************/
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Script that invokes an event when an Attack animation starts.
@@ -19,7 +20,7 @@ using UnityEngine;
 public class AttackAnimationEvent : MonoBehaviour
 {
     [SerializeField]
-    private SmartUnityEvent<EventArgs> attacked = new SmartUnityEvent<EventArgs>();
+    private UnityEvent<EventArgs> attacked = new UnityEvent<EventArgs>();
 
     public void Attack()
     {
