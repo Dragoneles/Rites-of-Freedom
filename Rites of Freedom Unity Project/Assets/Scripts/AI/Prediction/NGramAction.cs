@@ -11,11 +11,7 @@
  *  and use as predictable elements.
  *  
  ******************************************************************************/
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityObject = UnityEngine.Object;
 
 /// <summary>
 /// Asset that can be referenced as a key for an NGram predictor to monitor

@@ -11,10 +11,7 @@
  *  
  ******************************************************************************/
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityObject = UnityEngine.Object;
 
 /// <summary>
 /// Behavior that invokes NGram actions.
