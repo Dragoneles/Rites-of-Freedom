@@ -36,7 +36,7 @@ public class EventObject : IEventObject
     {
         Sequence delayInvoke = DOTween.Sequence();
         delayInvoke.SetDelay(delay);
-        delayInvoke.OnStart(Invoke);
+        delayInvoke.OnComplete(Invoke);
 
         delayInvoke.Play();
     }

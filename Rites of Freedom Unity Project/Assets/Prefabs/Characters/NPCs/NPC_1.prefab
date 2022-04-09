@@ -81,25 +81,11 @@ MonoBehaviour:
   ignoredColliders:
   - {fileID: 6157921064403746083}
   onCollision:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3991273814487568548}
-          m_TargetAssemblyTypeName: DialogueSpeaker, Assembly-CSharp
-          m_MethodName: StartConversation
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: cb26069b105638f4a88e762e2a07a389, type: 2}
-            m_ObjectArgumentAssemblyTypeName: Conversation, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    m_PersistentCalls:
+      m_Calls: []
   onExit:
-    unityEvent:
-      m_PersistentCalls:
-        m_Calls: []
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3991273814487568548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +393,10 @@ PrefabInstance:
       propertyPath: CanBeRemoved
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3619915920172756999, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: observedInputHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 4413806911302167588}
     - target: {fileID: 4422918788652616930, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_RootOrder
       value: 6

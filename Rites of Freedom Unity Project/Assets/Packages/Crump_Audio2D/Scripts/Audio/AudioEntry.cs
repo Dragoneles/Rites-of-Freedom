@@ -1,4 +1,5 @@
 ﻿/*******************************************************************************
+* 
 * File:      AudioEntry.cs
 * Author:    Joseph Crump
 * Date:      1/31/2022
@@ -26,6 +27,10 @@ public class AudioEntry : ScriptableObject, ICollection<AudioEntryVariation>
     public float BasePitch = 1f;
     [Range(-1f, 1f)]
     public float StereoPan = 0f;
+
+    [Min(0f)]
+    [Tooltip("Length of time used to fade out the sound when using the FadeOut operation.")]
+    public float FadeOutLength = 1f;
 
     [Range(-3f, 0f)]
     public float RandomPitchDown = 0f;

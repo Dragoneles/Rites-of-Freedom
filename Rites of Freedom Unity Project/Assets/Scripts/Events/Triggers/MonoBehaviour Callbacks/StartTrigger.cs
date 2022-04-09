@@ -10,21 +10,14 @@
  *  UnityEvent that invokes on Start.
  *  
  ******************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// UnityEvent that invokes on Start.
 /// </summary>
-public class StartTrigger : MonoBehaviour
+public class StartTrigger : MonoBehaviourCallbackTrigger
 {
-    [SerializeField]
-    private UnityEvent trigger = new UnityEvent();
-
     private void Start()
     {
-        trigger.Invoke();
+        OnTrigger();
     }
 }

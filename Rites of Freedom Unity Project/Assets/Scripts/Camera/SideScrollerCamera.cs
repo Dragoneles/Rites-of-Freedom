@@ -89,7 +89,8 @@ public class SideScrollerCamera : MonoBehaviour
             xSum += anchor.Position.x;
         }
 
-        float center = xSum / Anchors.Count;
+        // Mathf.Max() prevents divide by 0 operation
+        float center = xSum / Mathf.Max(1, Anchors.Count);
 
         float centerDisplacement = 0f;
 

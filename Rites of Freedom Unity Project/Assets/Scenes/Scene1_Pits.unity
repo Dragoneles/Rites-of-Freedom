@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 270234769}
   - component: {fileID: 270234770}
   m_Layer: 0
-  m_Name: FadeInObjectives
+  m_Name: FadeCanvasFinished -> FadeInObjectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,12 +228,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270234768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1132824700}
+  m_Father: {fileID: 1817440340}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &270234770
@@ -245,25 +245,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 270234768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4fedc3f37177043b5433a25283de3c, type: 3}
+  m_Script: {fileID: 11500000, guid: b343a2855b4ed99418f39cd660653230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventObject:
-    onEventInvoked:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6132594290227448156}
-          m_TargetAssemblyTypeName: CanvasGroupFader, Assembly-CSharp
-          m_MethodName: FadeCanvas
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  globalTriggerEvents: []
+  localTriggerEvents:
+  - {fileID: 1861053021178905143}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6132594290227448156}
+        m_TargetAssemblyTypeName: CanvasGroupFader, Assembly-CSharp
+        m_MethodName: FadeCanvas
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &480601324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -579,39 +581,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6225428274264668539, guid: c959a9d398ba2a746868557cd998a1ee, type: 3}
   m_PrefabInstance: {fileID: 994091207}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1132824699
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1132824700}
-  m_Layer: 0
-  m_Name: CanvasFader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1132824700
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132824699}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1373706402}
-  - {fileID: 270234769}
-  m_Father: {fileID: 1817440340}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1291510865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -949,77 +918,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4939946192347798127, guid: c3cd86bcb43c6544bb3fccb36563b906, type: 3}
   m_PrefabInstance: {fileID: 1369782679}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1373706401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1373706402}
-  - component: {fileID: 1373706403}
-  m_Layer: 0
-  m_Name: SceneStart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1373706402
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373706401}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1132824700}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1373706403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373706401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31eb453160796a14db833112ae5e2a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1861053021178905143}
-        m_TargetAssemblyTypeName: CanvasGroupFader, Assembly-CSharp
-        m_MethodName: FadeCanvas
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 270234770}
-        m_TargetAssemblyTypeName: LocalEvent, Assembly-CSharp
-        m_MethodName: DelayInvoke
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1.5
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1535067464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1140,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3557815053003693889, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 186.155
       objectReference: {fileID: 0}
     - target: {fileID: 3557815053003693889, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1160,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585487310590693690, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 412.31
       objectReference: {fileID: 0}
     - target: {fileID: 3585487310590693690, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1176,7 +1074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585487310590693690, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 206.155
       objectReference: {fileID: 0}
     - target: {fileID: 3585487310590693690, guid: 591be25ae6b859140b4e77a8c60f8bbb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1402,7 +1300,7 @@ GameObject:
   - component: {fileID: 1620709743}
   - component: {fileID: 1620709744}
   m_Layer: 0
-  m_Name: StartMusic
+  m_Name: OnStart -> PlayBGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1435,7 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31eb453160796a14db833112ae5e2a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger:
+  onCallbackTriggered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
@@ -1484,7 +1382,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1620709743}
-  - {fileID: 1132824700}
+  - {fileID: 270234769}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1816,13 +1714,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 5a79a1a4361145d4890313426818c858, type: 3}
 --- !u!114 &1861053021178905143 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7028042313690800862, guid: 5a79a1a4361145d4890313426818c858, type: 3}
+  m_CorrespondingSourceObject: {fileID: 972818985321452925, guid: 5a79a1a4361145d4890313426818c858, type: 3}
   m_PrefabInstance: {fileID: 1861053021178905142}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08310ed7943a4964ba013ab6a1fa726f, type: 3}
+  m_Script: {fileID: 11500000, guid: cf4fedc3f37177043b5433a25283de3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &6132594289538358296 stripped

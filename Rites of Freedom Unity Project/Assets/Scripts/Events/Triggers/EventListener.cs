@@ -31,6 +31,11 @@ public class EventListener : MonoBehaviour
     [Tooltip("Actions invoked when an event is triggered.")]
     private UnityEvent onEventTriggered = new();
 
+    private void Awake()
+    {
+        ValidateEvents();
+    }
+
     private void Start()
     {
         StartListening();
@@ -51,12 +56,6 @@ public class EventListener : MonoBehaviour
         StopListening();
     }
 
-    private void OnValidate()
-    {
-        globalTriggerEvents.RemoveAll(o => o == null);
-        localTriggerEvents.RemoveAll(o => o == null);
-    }
-
     /// <summary>
     /// Subscribe to the scriptable event.
     /// </summary>
@@ -73,5 +72,11 @@ public class EventListener : MonoBehaviour
     {
         globalTriggerEvents.ForEach(o => o.Invoked -= onEventTriggered.Invoke);
         localTriggerEvents.ForEach(o => o.Invoked -= onEventTriggered.Invoke);
+    }
+
+    private void ValidateEvents()
+    {
+        globalTriggerEvents.RemoveAll(o => o == null);
+        localTriggerEvents.RemoveAll(o => o == null);
     }
 }

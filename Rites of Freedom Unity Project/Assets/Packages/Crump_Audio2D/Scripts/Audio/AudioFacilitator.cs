@@ -1,4 +1,5 @@
 /*******************************************************************************
+* 
 * File:      AudioFacilitator.cs
 * Author:    Joseph Crump
 * Date:      1/31/2022
@@ -55,5 +56,10 @@ public class AudioFacilitator : ScriptableObject
     public void StopSound(AudioEntry entry)
     {
         Manager.StopSound(entry);
+    }
+
+    public void FadeOutSound(AudioEntry entry)
+    {
+        Manager.FadeOutSound(entry);
     }
 }

@@ -16,7 +16,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 /// <summary>
 /// Virtual controller, subclassed by player or AI to log context-independent
@@ -32,6 +31,50 @@ public abstract class VirtualInputHandler : MonoBehaviour
     public VirtualInput Interact = new();
     public VirtualInput Help = new();
     public VirtualInput Pause = new();
+
+    /// <summary>
+    /// Get a list of all virtual inputs that match a given types enum.
+    /// </summary>
+    /// <param name="types">
+    /// Flags enum for different input types.
+    /// </param>
+    public List<VirtualInput> GetInputsByTypes(InputTypes types)
+    {
+        List<VirtualInput> inputs = new();
+
+        if (types.HasFlag(InputTypes.Attack))
+            inputs.Add(Attack);
+        if (types.HasFlag(InputTypes.Block))
+            inputs.Add(Block);
+        if (types.HasFlag(InputTypes.Jump))
+            inputs.Add(Jump);
+        if (types.HasFlag(InputTypes.Roll))
+            inputs.Add(Roll);
+        if (types.HasFlag(InputTypes.Interact))
+            inputs.Add(Interact);
+        if (types.HasFlag(InputTypes.Help))
+            inputs.Add(Help);
+        if (types.HasFlag(InputTypes.Pause))
+            inputs.Add(Pause);
+
+        return inputs;
+    }
+}
+
+/// <summary>
+/// Flags enum that can be mapped to virtual inputs.
+/// </summary>
+[Flags]
+public enum InputTypes
+{
+    None = 0,
+    Attack = 1,
+    Block = 2,
+    Jump = 4,
+    Roll = 8,
+    Interact = 16,
+    Help = 32,
+    Pause = 64
 }
 
 /// <summary>

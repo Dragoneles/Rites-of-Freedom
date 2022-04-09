@@ -1,4 +1,5 @@
 ﻿/*******************************************************************************
+* 
 * File:      AudioManager.cs
 * Author:    Joseph Crump
 * Date:      1/31/2022
@@ -16,9 +17,11 @@ using UnityEngine;
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
-    public List<AudioEntry> AudioEntries = new List<AudioEntry>();
-    private Dictionary<AudioEntry, AudioSourceCollection> AudioSourceDictionary =
-        new Dictionary<AudioEntry, AudioSourceCollection>();
+    /// <summary>
+    /// Collection of audio entries belonging to the audio manager.
+    /// </summary>
+    public List<AudioEntry> AudioEntries = new();
+    private Dictionary<AudioEntry, AudioSourceCollection> sourceDictionary = new();
 
     public static AudioManager Instance { get; private set; }
 
@@ -44,7 +47,7 @@ public class AudioManager : MonoBehaviour
     public void Initialize()
     {
         // Initialize the AudioSources Dictionary
-        AudioSourceDictionary = new Dictionary<AudioEntry, AudioSourceCollection>();
+        sourceDictionary = new Dictionary<AudioEntry, AudioSourceCollection>();
 
         foreach (var entry in AudioEntries)
         {
@@ -57,7 +60,7 @@ public class AudioManager : MonoBehaviour
         var key = entry;
         var sourceGroup = entry.CreateAudioSources(gameObject);
 
-        AudioSourceDictionary.Add(key, sourceGroup);
+        sourceDictionary.Add(key, sourceGroup);
 
         if (entry.PlayOnAwake)
         {
@@ -79,6 +82,9 @@ public class AudioManager : MonoBehaviour
             Debug.LogError($"Unable to get audio source at index {index}.");
             return;
         }
+
+        // Restore volume (necessary if the source was faded out)
+        source.volume = entry.BaseVolume;
 
         // Calculate pitch variance
         float pitchDown = entry.RandomPitchDown;
@@ -105,17 +111,26 @@ public class AudioManager : MonoBehaviour
         if (entry == null)
             return;
 
-        AudioSourceCollection audioSources = GetOrAddAudioSourceGroup(entry);
-        audioSources.Stop();
+        AudioSourceCollection sourceGroup = GetOrAddAudioSourceGroup(entry);
+        sourceGroup.Stop();
+    }
+
+    public void FadeOutSound(AudioEntry entry)
+    {
+        if (entry == null)
+            return;
+
+        AudioSourceCollection sourceGroup = GetOrAddAudioSourceGroup(entry);
+        sourceGroup.FadeOut(entry.FadeOutLength);
     }
 
     private AudioSourceCollection GetOrAddAudioSourceGroup(AudioEntry entry)
     {
-        if (!AudioSourceDictionary.ContainsKey(entry))
+        if (!sourceDictionary.ContainsKey(entry))
             AddEntry(entry);
 
         AudioSourceCollection sourceGroup;
-        AudioSourceDictionary.TryGetValue(entry, out sourceGroup);
+        sourceDictionary.TryGetValue(entry, out sourceGroup);
 
         return sourceGroup;
     }

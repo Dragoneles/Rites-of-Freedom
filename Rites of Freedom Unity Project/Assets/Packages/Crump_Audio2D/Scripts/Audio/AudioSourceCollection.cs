@@ -1,4 +1,5 @@
 /*******************************************************************************
+* 
 * File:      AudioSourceCollection.cs
 * Author:    Joseph Crump
 * Date:      1/31/2022
@@ -11,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// A collection of audio sources that can be used interchangeably. Allows for
@@ -45,6 +47,9 @@ public class AudioSourceCollection : ICollection<AudioSource>
         }
     }
 
+    /// <summary>
+    /// Stop all audio sources in this group that are currently playing.
+    /// </summary>
     public void Stop()
     {
         // Stop all sources in the group
@@ -52,6 +57,27 @@ public class AudioSourceCollection : ICollection<AudioSource>
         {
             if (source.isPlaying)
                 source.Stop();
+        }
+    }
+
+    /// <summary>
+    /// Fade the volume of the audio sources to 0 and then stop them.
+    /// </summary>
+    public void FadeOut(float duration)
+    {
+        // Stop all sources in the group
+        foreach (AudioSource source in AudioSources)
+        {
+            if (!source.isPlaying)
+                return;
+
+            var tween = DOTween.To(
+                () => source.volume,
+                (v) => source.volume = v,
+                endValue: 0f,
+                duration: duration);
+
+            tween.OnComplete(Stop);
         }
     }
 
