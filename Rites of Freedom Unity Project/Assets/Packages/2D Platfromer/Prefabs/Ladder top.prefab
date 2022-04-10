@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1854963081105152513}
   - component: {fileID: 1854963081105152542}
-  - component: {fileID: 1854963081105152543}
   - component: {fileID: 1854963081105152512}
   m_Layer: 0
   m_Name: Ladder top
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1854963081105152543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854963081105152540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b70b49474d92d14f8e54c57467f5abf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VerticalSpeed: 5
 --- !u!61 &1854963081105152512
 BoxCollider2D:
   m_ObjectHideFlags: 0

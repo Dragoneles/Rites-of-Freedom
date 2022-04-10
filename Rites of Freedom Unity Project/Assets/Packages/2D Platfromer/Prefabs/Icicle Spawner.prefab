@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050357315166294890}
-  - component: {fileID: 8074477097945291127}
   - component: {fileID: 2127731696001567644}
   - component: {fileID: 2487570724340158547}
   - component: {fileID: 2912102159468592311}
@@ -37,20 +36,6 @@ Transform:
   m_Father: {fileID: 4474992366560189352}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8074477097945291127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254744099496524952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68493144db24f60448f884a79d1b4be6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RaycastStartPoint: {fileID: 5889913236873679575}
-  DestroyDelay: 0.75
 --- !u!50 &2127731696001567644
 Rigidbody2D:
   serializedVersion: 4
@@ -179,7 +164,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4474992366560189352}
-  - component: {fileID: 4474992366560189353}
   m_Layer: 0
   m_Name: Icicle Spawner
   m_TagString: Untagged
@@ -203,23 +187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4474992366560189353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4474992366560189354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd8f358b6ee78e44db191c6398b3b5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IciclePrefab: {fileID: 4200582393508267742, guid: d720b8851516d4f4c9d2ca6b340436ad,
-    type: 3}
-  Icicle: {fileID: 1254744099496524952}
-  spawnPoint: {x: 0, y: 0, z: 0}
-  Speed: 0.16
 --- !u!1 &5889913236873679575
 GameObject:
   m_ObjectHideFlags: 0

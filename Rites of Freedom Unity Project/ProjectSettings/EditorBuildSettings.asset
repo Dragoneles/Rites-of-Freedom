@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/_TitleScreen.unity
     guid: 2b1f7a1c3ab62224f87bb0b975294e1b
   - enabled: 1
+    path: Assets/Scenes/Scene0_Epilogue.unity
+    guid: 392a0710256974549bde40026bbf5d55
+  - enabled: 1
     path: Assets/Scenes/Scene1_Pits.unity
     guid: abf69c99876349e45a313e9e1abd2dde
   - enabled: 1
@@ -17,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene3_Arena.unity
     guid: df22a600571739a4187d4cbfd1e6f9a9
+  - enabled: 1
+    path: Assets/Scenes/Scene4_Narrative.unity
+    guid: 71d6b7db84fde044bb150bae72ef96cc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d662d68f29349b94684b04fc6f2eddcb, type: 2}

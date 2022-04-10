@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 2110968141926448307}
   - component: {fileID: 8388530010936535080}
   - component: {fileID: 93022393481595745}
+  - component: {fileID: 3991080280889677372}
   m_Layer: 5
   m_Name: BulletPoint_Complete
   m_TagString: Untagged
@@ -194,6 +195,33 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3991080280889677372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640848334872647064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9ae6172525d8841bc9fbb2f7180854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCallbackTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e65824c9d7a699b4dbe1ddb192068c89, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3568735518969135607
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 90.39, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3759833927271386959
@@ -523,6 +551,9 @@ GameObject:
   - component: {fileID: 3996569496738902891}
   - component: {fileID: 23058850762522667}
   - component: {fileID: 8240570979873452859}
+  - component: {fileID: 6540390705653841639}
+  - component: {fileID: 1212312006781719398}
+  - component: {fileID: 7330949922488292844}
   m_Layer: 5
   m_Name: ObjectiveDisplay
   m_TagString: Untagged
@@ -685,6 +716,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: b80024a54a3fb394ead3f08791620f19, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -696,6 +739,71 @@ MonoBehaviour:
   descriptionText: {fileID: 7325939353238867816}
   maxProgressText: {fileID: 4604671338945255815}
   progressTracker: {fileID: 7923063605099538377}
+--- !u!114 &6540390705653841639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421961254553926835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9ae6172525d8841bc9fbb2f7180854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCallbackTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7330949922488292844}
+        m_TargetAssemblyTypeName: CanvasGroupFader, Assembly-CSharp
+        m_MethodName: FadeCanvas
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 3d1173bee3bc9ed40b6fd3d4654b8a3a, type: 2}
+        m_TargetAssemblyTypeName: AudioFacilitator, Crump_Audio2D
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 39e7ca93b3106c045b28b67a201702ea, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AudioEntry, Crump_Audio2D
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!225 &1212312006781719398
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421961254553926835}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &7330949922488292844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421961254553926835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08310ed7943a4964ba013ab6a1fa726f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeCanvas: {fileID: 1212312006781719398}
+  canvasFadeTime: 0.6
 --- !u!1 &5680129314354189270
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +1057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 283.85498, y: 0}
+  m_AnchoredPosition: {x: 209.045, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &111826941921828842

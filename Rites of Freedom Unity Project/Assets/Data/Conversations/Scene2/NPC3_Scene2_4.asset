@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NPC3_Scene2_4
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Alright, I think that's enough hazing for one day
-    Duration: 3
-  - Text: Now get out there and fight
-    Duration: 2
+  - Text: Alright, that's enough screwing around
+    Duration: 2.5
+  - Text: Your sparring partner is waiting, hurry along now
+    Duration: 2.5

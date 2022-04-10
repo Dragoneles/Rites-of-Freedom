@@ -45,7 +45,7 @@ MonoBehaviour:
   Guid: c515003a8a8e3a845b3dc25c0df55807
   Position: {x: -135, y: 375}
   compareType: 4
-  value: 1
+  value: 1.5
 --- !u!114 &-74142798273081211
 MonoBehaviour:
   m_ObjectHideFlags: 0

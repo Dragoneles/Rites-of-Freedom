@@ -113,6 +113,12 @@ public class Character : MonoBehaviour, IAttackable
 
     public AttackInfo LastAttack { get; set; } = new AttackInfo();
 
+    [SerializeField]
+    private bool canBeAttacked = true;
+
+    public Faction Faction;
+
+    public bool IsAttackable { get => canBeAttacked && !IsRolling; }
     public bool IsDead { get; private set; } = false;
     public bool IsBlocking { get; private set; } = false;
     public bool IsRolling { get; private set; } = false;
@@ -242,6 +248,9 @@ public class Character : MonoBehaviour, IAttackable
         if (IsDead)
             return;
 
+        if (!canBeAttacked)
+            return;
+
         attacked?.Invoke(attack.Attacker);
 
         if (IsBlocking && IsFacingPoint(attack.Attacker.Position))
@@ -278,6 +287,32 @@ public class Character : MonoBehaviour, IAttackable
     public void SetBlockState(bool value)
     {
         IsBlocking = value;
+    }
+
+    /// <summary>
+    /// Change whether the character is able to receive attacks.
+    /// </summary>
+    public void SetCanBeAttacked(bool value)
+    {
+        canBeAttacked = value;
+    }
+
+    /// <summary>
+    /// Evaluate whether two characters are allied by their factions.
+    /// </summary>
+    public bool IsEnemyOfCharacter(Character character)
+    {
+        if (Faction == null)
+            return true;
+
+        if (Faction == character.Faction)
+            return false;
+
+        if (Faction.AlliedFactions.Contains(character.Faction))
+            return false;
+
+        // default
+        return true;
     }
 
     public void Flip() => SpriteHandler.Flip();

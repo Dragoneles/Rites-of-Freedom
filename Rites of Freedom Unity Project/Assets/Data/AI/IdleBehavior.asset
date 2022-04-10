@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5272580638439247606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d9d52a3dd2b0e428f78eb7c9dae9c1, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  Guid: 900bba26e009c8c48b9cbe3df5f334b0
+  Position: {x: 0, y: 0}
+  Child: {fileID: -4775839880802390948}
+--- !u!114 &-5169222517017286824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f0700e499bc2b4ab2e1f9871b97499, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  Guid: f842f2faef388dc4d8733c653547c09b
+  Position: {x: 67.5, y: 375}
+  waitDuration: 1
+--- !u!114 &-4775839880802390948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52207d613dae8d34f91fa3bd32e67a93, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  Guid: 8d18e1a6bd19fac48973093c9710218b
+  Position: {x: 0, y: 125}
+  children:
+  - {fileID: 1626376572312993084}
+  - {fileID: -1977886975970786533}
+--- !u!114 &-1977886975970786533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419b79cec539fc946b33cf1f237b96d3, type: 3}
+  m_Name: RepeaterNode
+  m_EditorClassIdentifier: 
+  Guid: 75ef0d729a084b54abf4ffb1f6fe4715
+  Position: {x: 67.5, y: 250}
+  Child: {fileID: -5169222517017286824}
+  repeats: -1
+  tickRate: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,13 +77,15 @@ MonoBehaviour:
   m_Name: IdleBehavior
   m_EditorClassIdentifier: 
   tree:
-    RootNode: {fileID: 3720572425386089291}
+    RootNode: {fileID: -5272580638439247606}
     machine: {fileID: 0}
     nodes:
-    - {fileID: 3720572425386089291}
-    - {fileID: 313611998326850771}
-    - {fileID: 8001512044526702464}
---- !u!114 &313611998326850771
+    - {fileID: -5272580638439247606}
+    - {fileID: -4775839880802390948}
+    - {fileID: -1977886975970786533}
+    - {fileID: -5169222517017286824}
+    - {fileID: 1626376572312993084}
+--- !u!114 &1626376572312993084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,41 +94,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419b79cec539fc946b33cf1f237b96d3, type: 3}
-  m_Name: RepeaterNode
+  m_Script: {fileID: 11500000, guid: f276cbecd70804d49bb1a24bffb3eb11, type: 3}
+  m_Name: StopNode
   m_EditorClassIdentifier: 
-  Guid: 125021b699f756d4c9e357240034b99a
-  Position: {x: 0, y: 125}
-  Child: {fileID: 8001512044526702464}
-  repeats: -1
-  tickRate: 15
---- !u!114 &3720572425386089291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d9d52a3dd2b0e428f78eb7c9dae9c1, type: 3}
-  m_Name: RootNode
-  m_EditorClassIdentifier: 
-  Guid: 1786b1878a241774481b4c429afdd6ea
-  Position: {x: 0, y: 0}
-  Child: {fileID: 313611998326850771}
---- !u!114 &8001512044526702464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f0700e499bc2b4ab2e1f9871b97499, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  Guid: 083ae23c85d5ea84e8f06e7db4287b17
-  Position: {x: 0, y: 250}
-  waitDuration: 1
+  Guid: b1154eecb7020ac428295afcfdee81ec
+  Position: {x: -67.5, y: 250}

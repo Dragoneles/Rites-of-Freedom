@@ -41,6 +41,7 @@ public class AudioFacilitator : ScriptableObject
     private void CreateNewAudioManager()
     {
         _Manager = GameObject.Instantiate(new GameObject()).AddComponent<AudioManager>();
+        _Manager.name = nameof(AudioManager);
     }
 
     private void FindAudioManager()

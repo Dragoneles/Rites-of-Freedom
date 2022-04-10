@@ -63,4 +63,30 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
         Blackboard.Set(Input, input);
         Blackboard.Set(Predictor, predictor);
     }
+
+    /// <summary>
+    /// Change the behavior tree's target property.
+    /// </summary>
+    public void SetTarget(Character target)
+    {
+        this.target = target;
+
+        Blackboard.Set(Target, target);
+    }
+
+    /// <summary>
+    /// Get the behavior tree's current target property.
+    /// </summary>
+    public Character GetTarget()
+    {
+        return Blackboard.Get(Target);
+    }
+
+    /// <summary>
+    /// Get the character that is using this behavior tree.
+    /// </summary>
+    public Character GetSelf()
+    {
+        return Blackboard.Get(Self);
+    }
 }

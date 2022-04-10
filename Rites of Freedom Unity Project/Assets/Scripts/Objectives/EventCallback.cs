@@ -24,9 +24,13 @@ public abstract class EventCallback : MonoBehaviour
     /// </summary>
     public event Action Invoked;
 
+    [SerializeField]
+    private UnityEvent onCallbackTriggered = new();
+
     protected virtual void OnInvoked()
     {
         Invoked?.Invoke();
+        onCallbackTriggered?.Invoke();
     }
 }
 

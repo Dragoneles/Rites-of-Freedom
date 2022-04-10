@@ -19,8 +19,11 @@ using DG.Tweening;
 [RequireComponent(typeof(CanvasGroup))]
 public class CanvasGroupFader : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup fadeCanvas;
-    [SerializeField] private float canvasFadeTime = 1f;
+    [SerializeField] 
+    private CanvasGroup fadeCanvas;
+
+    [SerializeField] 
+    private float canvasFadeTime = 1f;
 
     private void OnValidate()
     {
@@ -36,5 +39,29 @@ public class CanvasGroupFader : MonoBehaviour
             return;
 
         fadeCanvas.DOFade(targetAlpha, canvasFadeTime);
+    }
+
+    /// <summary>
+    /// Change the time it takes the canvas to fade.
+    /// </summary>
+    public void SetFadeTime(float seconds)
+    {
+        canvasFadeTime = seconds;
+    }
+
+    /// <summary>
+    /// Get the value of the <see cref="canvasFadeTime"/> field.
+    /// </summary>
+    public float GetFadeTime()
+    {
+        return canvasFadeTime;
+    }
+
+    /// <summary>
+    /// Set the alpha of the canvas group instantly.
+    /// </summary>
+    public void SetAlpha(float value)
+    {
+        fadeCanvas.alpha = value;
     }
 }

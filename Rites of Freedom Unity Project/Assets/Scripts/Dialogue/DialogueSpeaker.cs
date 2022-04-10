@@ -35,6 +35,7 @@ public class DialogueSpeaker : MonoBehaviour
     [SerializeField]
     private bool repeatConversation = false;
 
+    private bool skipLine = false;
     private Coroutine conversationCoroutine { get; set; }
     private AudioManager audioManager { get; set; }
 
@@ -73,6 +74,14 @@ public class DialogueSpeaker : MonoBehaviour
         dialogueDisplayer?.Display(line);
     }
 
+    /// <summary>
+    /// Set the skip line flag to true.
+    /// </summary>
+    public void Skip()
+    {
+        skipLine = true;
+    }
+
     private void PopulateEventDictionary()
     {
         conversationEvents.ForEach(
@@ -100,17 +109,36 @@ public class DialogueSpeaker : MonoBehaviour
 
             SayLine(nextLine);
 
-            yield return new WaitForSeconds(nextLine.Duration);
+            yield return NextLineTriggered(nextLine.Duration);
 
             lineIndex++;
         }
 
-        SayLine(Line.NoLine());
+        dialogueDisplayer.Clear();
 
         conversationCoroutine = null;
 
         if (conversationEventDictionary.ContainsKey(conversation))
             conversationEventDictionary[conversation].InvokeFinishEvent();
+    }
+
+    private IEnumerator NextLineTriggered(float waitTime)
+    {
+        float timer = 0f;
+        while (timer < waitTime)
+        {
+            yield return new WaitForEndOfFrame();
+
+            timer += Time.deltaTime;
+
+            if (skipLine)
+            {
+                skipLine = false;
+                break;
+            }
+        }
+
+        yield break;
     }
 }
 
