@@ -57,6 +57,9 @@ public class NGramPredictor : MonoBehaviour
     /// </summary>
     public void SetTarget(Character target)
     {
+        if (target == null)
+            return;
+
         DeregisterNGramInvokeEvents();
 
         var newTarget = target.GetComponentInChildren<NGramInvoker>();
@@ -123,11 +126,17 @@ public class NGramPredictor : MonoBehaviour
 
     private void RegisterNGramInvokeEvents()
     {
+        if (monitoredInvoker == null)
+            return;
+
         monitoredInvoker.Invoked += OnNGramActionInvoked;
     }
 
     private void DeregisterNGramInvokeEvents()
     {
+        if (monitoredInvoker == null)
+            return;
+
         monitoredInvoker.Invoked -= OnNGramActionInvoked;
     }
 

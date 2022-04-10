@@ -18,10 +18,11 @@
 public class AttackInfo
 {
     public Stat Damage = new Stat(3);
+    public Stat StunDuration = new Stat(25);
     public Stat StaminaCost = new Stat(5);
 
     public AttackInstance CreateAttackInstance(Character attacker)
     {
-        return new AttackInstance(Damage, attacker);
+        return new AttackInstance(Damage, StunDuration, attacker);
     }
 }

@@ -318,6 +318,8 @@ MonoBehaviour:
   attackInfo:
     Damage:
       value: 10
+    StunDuration:
+      value: 70
     StaminaCost:
       value: 15
 --- !u!114 &-6610681368298452481
@@ -797,6 +799,8 @@ MonoBehaviour:
   attackInfo:
     Damage:
       value: 8
+    StunDuration:
+      value: 60
     StaminaCost:
       value: 12
 --- !u!114 &-2869877520257505347
@@ -1685,6 +1689,8 @@ MonoBehaviour:
   attackInfo:
     Damage:
       value: 7
+    StunDuration:
+      value: 30
     StaminaCost:
       value: 5
 --- !u!114 &3114190549778305710
@@ -1988,6 +1994,8 @@ MonoBehaviour:
   attackInfo:
     Damage:
       value: 4
+    StunDuration:
+      value: 20
     StaminaCost:
       value: 5
 --- !u!1101 &5563872134815172802
@@ -2202,6 +2210,8 @@ MonoBehaviour:
   attackInfo:
     Damage:
       value: 5
+    StunDuration:
+      value: 25
     StaminaCost:
       value: 5
 --- !u!1101 &6693469903228325673
@@ -2448,9 +2458,9 @@ AnimatorStateMachine:
   - {fileID: -1130199244875629882}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -7156014667293777761}
-    second: []
   - first: {fileID: 461748987692685369}
+    second: []
+  - first: {fileID: -7156014667293777761}
     second: []
   m_StateMachineBehaviours:
   - {fileID: 2931454610067856917}

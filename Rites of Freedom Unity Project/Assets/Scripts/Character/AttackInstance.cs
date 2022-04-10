@@ -21,14 +21,17 @@ public class AttackInstance
     /// </summary>
     public readonly float Damage;
 
+    public readonly float StunDuration;
+
     /// <summary>
     /// The character invoking the attack.
     /// </summary>
     public readonly Character Attacker;
 
-    public AttackInstance(float damage, Character attacker)
+    public AttackInstance(float damage, float stunDuration, Character attacker)
     {
         Damage = damage;
+        StunDuration = stunDuration;
         Attacker = attacker;
     }
 }

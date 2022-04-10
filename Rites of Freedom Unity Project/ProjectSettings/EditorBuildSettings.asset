@@ -9,19 +9,28 @@ EditorBuildSettings:
     path: Assets/Scenes/_TitleScreen.unity
     guid: 2b1f7a1c3ab62224f87bb0b975294e1b
   - enabled: 1
-    path: Assets/Scenes/Scene0_Epilogue.unity
+    path: Assets/Scenes/Scene01_Epilogue.unity
     guid: 392a0710256974549bde40026bbf5d55
   - enabled: 1
-    path: Assets/Scenes/Scene1_Pits.unity
+    path: Assets/Scenes/Scene02_Pits.unity
     guid: abf69c99876349e45a313e9e1abd2dde
   - enabled: 1
-    path: Assets/Scenes/Scene2_TrainingYard.unity
+    path: Assets/Scenes/Scene03_TrainingYard.unity
     guid: d5647491da1fa9747a60f2568f03c1e5
   - enabled: 1
-    path: Assets/Scenes/Scene3_Arena.unity
+    path: Assets/Scenes/Scene04_Arena.unity
     guid: df22a600571739a4187d4cbfd1e6f9a9
   - enabled: 1
-    path: Assets/Scenes/Scene4_Narrative.unity
+    path: Assets/Scenes/Scene05_Narrative.unity
     guid: 71d6b7db84fde044bb150bae72ef96cc
+  - enabled: 1
+    path: Assets/Scenes/Scene06_Pits.unity
+    guid: e22103fda7a9d5d448c9f4717046efdc
+  - enabled: 1
+    path: Assets/Scenes/Scene07_Pits.unity
+    guid: eb7205bd721698b4bb8efac299bb3a8d
+  - enabled: 1
+    path: Assets/Scenes/Scene08_Arena.unity
+    guid: d84df97138982724b9b23bc56cd4d9cd
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d662d68f29349b94684b04fc6f2eddcb, type: 2}

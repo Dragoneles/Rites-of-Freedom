@@ -54,7 +54,7 @@ public class Character : MonoBehaviour, IAttackable
     /// <summary>
     /// Event invoked when the character flinches from an attack.
     /// </summary>
-    public UnityEvent<EventArgs> Flinched;
+    public UnityEvent<FloatEventArgs> Flinched;
 
     /// <summary>
     /// Event invoked when the character blocks an attack.
@@ -110,6 +110,9 @@ public class Character : MonoBehaviour, IAttackable
 
     [Tooltip("Length of a roll in milliseconds.")]
     public Stat RollDuration = new Stat(70);
+
+    [Tooltip("Length of the stun inflicted from blocking in milliseconds.")]
+    public Stat BlockStunDuration = new Stat(65);
 
     public AttackInfo LastAttack { get; set; } = new AttackInfo();
 
@@ -270,15 +273,15 @@ public class Character : MonoBehaviour, IAttackable
         ReceivedAttack?.Invoke(new AttackEventArgs(attack, this));
 
         if (!IsDead)
-            Flinch();
+            Flinch(attack.StunDuration);
     }
 
     /// <summary>
     /// Play the "Hurt" animation and lock the character's controls.
     /// </summary>
-    public void Flinch()
+    public void Flinch(float duration = 0.4f)
     {
-        Flinched?.Invoke(EventArgs.Empty);
+        Flinched?.Invoke(duration);
     }
 
     /// <summary>
@@ -355,7 +358,7 @@ public class Character : MonoBehaviour, IAttackable
 
         Blocked.Invoke(new AttackEventArgs(attack, this));
 
-        attacker.Flinch();
+        attacker.Flinch(BlockStunDuration / 100f);
     }
 
     private void DodgeAttack(AttackInstance attack)

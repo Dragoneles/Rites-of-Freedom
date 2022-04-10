@@ -44,7 +44,9 @@ public class TargetFinder : MonoBehaviour
     /// </summary>
     public Character Self => behaviorTree.GetSelf();
 
-    private List<Character> enemyCharacters = new();
+    [Header("Readonly")]
+    [SerializeField]
+    private List<Character> validTargets = new();
 
     private void OnValidate()
     {
@@ -53,7 +55,6 @@ public class TargetFinder : MonoBehaviour
 
     private void Start()
     {
-        FindEnemyCharacters();
         SelectNewTarget();
     }
 
@@ -77,24 +78,26 @@ public class TargetFinder : MonoBehaviour
 
     private void SelectNewTarget()
     {
+        FindValidCharacters();
         SetTarget(SelectTarget());
     }
 
-    private void FindEnemyCharacters()
+    private void FindValidCharacters()
     {
         Character[] characters = FindObjectsOfType<Character>();
 
         switch (targetFilter)
         {
             case TargetFilterType.Enemy:
-                enemyCharacters = characters
+                validTargets = characters
                     .Where(o => Self.IsEnemyOfCharacter(o))
                     .ToList();
                 break;
 
             case TargetFilterType.Ally:
-                enemyCharacters = characters
+                validTargets = characters
                     .Where(o => !Self.IsEnemyOfCharacter(o))
+                    .Where(o => o != Self)
                     .ToList();
                 break;
 
@@ -106,29 +109,34 @@ public class TargetFinder : MonoBehaviour
 
     private Character SelectTarget()
     {
-        if (enemyCharacters.Count == 0)
+        if (validTargets.Count == 0)
             return null;
 
         switch (targetingType)
         {
             case TargetingType.Weakest:
-                enemyCharacters.OrderBy(enemy => enemy.Health);
-                return enemyCharacters[0];
+                return 
+                    validTargets
+                        .OrderBy(target => target.Health)
+                        .First();
 
             case TargetingType.Nearest:
-                enemyCharacters.OrderBy(
-                    enemy => Vector3.Distance(transform.position, enemy.transform.position));
-                return enemyCharacters[0];
+                return 
+                    validTargets
+                        .OrderBy(target => Vector3.Distance(Self.transform.position, target.transform.position))
+                        .First();
 
             case TargetingType.Strongest:
-                enemyCharacters.OrderByDescending(enemy => enemy.Health);
-                return enemyCharacters[0];
+                return 
+                    validTargets
+                        .OrderByDescending(target => target.Health)
+                        .First();
 
             default:
                 break;
         }
 
-        return enemyCharacters[0];
+        return validTargets[0];
     }
 
     private void SetTarget(Character target)
@@ -136,9 +144,11 @@ public class TargetFinder : MonoBehaviour
         if (CurrentTarget != null)
             CurrentTarget.Died.RemoveListener(OnTargetDeath);
 
+
         behaviorTree.SetTarget(target);
 
-        CurrentTarget.Died.AddListener(OnTargetDeath);
+        if (CurrentTarget != null)
+            CurrentTarget.Died.AddListener(OnTargetDeath);
     }
 
     private void OnTargetDeath(EventArgs e)

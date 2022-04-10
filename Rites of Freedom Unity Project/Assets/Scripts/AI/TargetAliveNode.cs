@@ -19,14 +19,15 @@ public class TargetAliveNode : LeafNode
 {
     protected override bool CheckNodeFailed()
     {
-        Character target = Blackboard.Get(EnemyBehaviorTree.Target);
-
-        return target.IsDead;
+        return !CheckNodeSucceeded();
     }
 
     protected override bool CheckNodeSucceeded()
     {
         Character enemy = Blackboard.Get(EnemyBehaviorTree.Target);
+
+        if (enemy == null)
+            return false;
 
         return !enemy.IsDead;
     }
