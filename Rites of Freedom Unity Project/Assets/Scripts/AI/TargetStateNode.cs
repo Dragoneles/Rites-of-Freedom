@@ -1,6 +1,6 @@
 /******************************************************************************
  * 
- * File: EnemyStateNode.cs
+ * File: TargetStateNode.cs
  * Author: Joseph Crump
  * Date: 4/02/22
  * 
@@ -16,12 +16,12 @@ using AI.BehaviorTree;
 /// <summary>
 /// Leaf node that compares the target's state.
 /// </summary>
-public class EnemyStateNode : LeafNode
+public class TargetStateNode : LeafNode
 {
     public enum StateType { Blocking, Rolling, Moving, Jumping }
 
     [SerializeField]
-    private StateType enemyState = StateType.Blocking;
+    private StateType targetState = StateType.Blocking;
 
     private Character target;
 
@@ -37,7 +37,7 @@ public class EnemyStateNode : LeafNode
 
     protected override bool CheckNodeSucceeded()
     {
-        switch (enemyState)
+        switch (targetState)
         {
             case StateType.Blocking: return target.IsBlocking;
             case StateType.Rolling: return target.IsRolling;

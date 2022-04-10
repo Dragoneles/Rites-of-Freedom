@@ -20,6 +20,7 @@ using UnityEngine;
 /// <summary>
 /// Behavior tree machine made specifically for this game's AI.
 /// </summary>
+[RequireComponent(typeof(AIInputHandler))]
 public class EnemyBehaviorTree : BehaviorTreeMachine
 {
     /// <summary>
@@ -56,6 +57,12 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
 
     private Blackboard Blackboard => Tree.Blackboard;
 
+    private void OnValidate()
+    {
+        input = GetComponent<AIInputHandler>();
+        self = this.GetComponentInParent<Character>();
+    }
+
     protected override void OnTreeInitialized()
     {
         Blackboard.Set(Self, self);
@@ -72,6 +79,9 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
         this.target = target;
 
         Blackboard.Set(Target, target);
+
+        // also set NGram target
+        predictor.SetTarget(target);
     }
 
     /// <summary>

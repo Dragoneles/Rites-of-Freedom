@@ -23,12 +23,16 @@ using UnityEngine;
 public class TargetFinder : MonoBehaviour
 {
     public enum TargetingType { Weakest, Nearest, Strongest }
+    public enum TargetFilterType { Enemy, Ally }
 
     [SerializeField]
     private EnemyBehaviorTree behaviorTree;
 
     [SerializeField]
     private TargetingType targetingType = TargetingType.Nearest;
+
+    [SerializeField]
+    private TargetFilterType targetFilter = TargetFilterType.Enemy;
 
     /// <summary>
     /// The behavior tree's current active target.
@@ -53,6 +57,24 @@ public class TargetFinder : MonoBehaviour
         SelectNewTarget();
     }
 
+    /// <summary>
+    /// Change this target finder's alignment filter to look for allies.
+    /// </summary>
+    public void SetFilterToAlly()
+    {
+        this.targetFilter = TargetFilterType.Ally;
+        SelectNewTarget();
+    }
+
+    /// <summary>
+    /// Change this target finder's alignment filter to look for enemies.
+    /// </summary>
+    public void SetFilterToEnemy()
+    {
+        this.targetFilter = TargetFilterType.Enemy;
+        SelectNewTarget();
+    }
+
     private void SelectNewTarget()
     {
         SetTarget(SelectTarget());
@@ -62,9 +84,24 @@ public class TargetFinder : MonoBehaviour
     {
         Character[] characters = FindObjectsOfType<Character>();
 
-        enemyCharacters = characters
-            .Where(o => Self.IsEnemyOfCharacter(o))
-            .ToList();
+        switch (targetFilter)
+        {
+            case TargetFilterType.Enemy:
+                enemyCharacters = characters
+                    .Where(o => Self.IsEnemyOfCharacter(o))
+                    .ToList();
+                break;
+
+            case TargetFilterType.Ally:
+                enemyCharacters = characters
+                    .Where(o => !Self.IsEnemyOfCharacter(o))
+                    .ToList();
+                break;
+
+            default:
+                break;
+        }
+        
     }
 
     private Character SelectTarget()

@@ -26,7 +26,7 @@ public class NGramPredictor : MonoBehaviour
     public NGramAction PredictedAction { get; private set; }
 
     [SerializeField]
-    private NGramInvoker monitoredNGramInvoker;
+    private NGramInvoker monitoredInvoker;
 
     [SerializeField]
     private List<NGramAction> observedNGramActions = new();
@@ -50,6 +50,19 @@ public class NGramPredictor : MonoBehaviour
     private void OnDestroy()
     {
         DeregisterNGramInvokeEvents();
+    }
+
+    /// <summary>
+    /// Change the monitored character.
+    /// </summary>
+    public void SetTarget(Character target)
+    {
+        DeregisterNGramInvokeEvents();
+
+        var newTarget = target.GetComponentInChildren<NGramInvoker>();
+        monitoredInvoker = newTarget;
+
+        RegisterNGramInvokeEvents();
     }
 
     private void LogActionInvocation(NGramAction action)
@@ -110,12 +123,12 @@ public class NGramPredictor : MonoBehaviour
 
     private void RegisterNGramInvokeEvents()
     {
-        monitoredNGramInvoker.Invoked += OnNGramActionInvoked;
+        monitoredInvoker.Invoked += OnNGramActionInvoked;
     }
 
     private void DeregisterNGramInvokeEvents()
     {
-        monitoredNGramInvoker.Invoked -= OnNGramActionInvoked;
+        monitoredInvoker.Invoked -= OnNGramActionInvoked;
     }
 
     protected virtual void OnNGramActionInvoked(object sender, NGramActionInvokedEventArgs e)

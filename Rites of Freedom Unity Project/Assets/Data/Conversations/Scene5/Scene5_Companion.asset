@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43e4f8c3ad90bea4eb3f831f7c07c0f4, type: 3}
-  m_Name: Scene4
+  m_Name: Scene5_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: The tournament begins tomorrow
+  - Text: Hey, did you hear the news?
+    Duration: 1.5
+  - Text: Turns out the guys up top assigned us to a team
+    Duration: 3.5
+  - Text: Get some rest, alright?
+    Duration: 1.5
+  - Text: I don't need you getting me killed tomorrow
     Duration: 3
-  - Text: Three battles stand between you and your freedom
-    Duration: 4
-  - Text: You should get some rest
-    Duration: 2.5
