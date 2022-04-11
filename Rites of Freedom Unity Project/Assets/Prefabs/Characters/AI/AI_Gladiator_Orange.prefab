@@ -58,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 8985574447783745649, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1f6c2df87dfffbc49b8dc6bea44583c5, type: 2}
+      objectReference: {fileID: 2100000, guid: c64e52ce69136044ab4f24c71d0e5e7a, type: 2}
     - target: {fileID: 9011593090420861173, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -290,7 +290,7 @@ MonoBehaviour:
   behaviorTree: {fileID: 6209910595863156104}
   targetingType: 1
   targetFilter: 0
-  enemyCharacters: []
+  validTargets: []
 --- !u!114 &6209910595863156104
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,10 @@ public class CanvasGroupFader : MonoBehaviour
         if (fadeCanvas == null)
             return;
 
-        fadeCanvas.DOFade(targetAlpha, canvasFadeTime);
+        var fader = fadeCanvas.DOFade(targetAlpha, canvasFadeTime);
+
+        if (PauseFacilitator.IsPaused)
+            fader.SetUpdate(isIndependentUpdate: true);
     }
 
     /// <summary>

@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376464006279928924, guid: 042c2dddf999f4c41a2b11cd7af7d188, type: 3}
       propertyPath: m_text
-      value: The Traning Yard
+      value: The Training Yard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 042c2dddf999f4c41a2b11cd7af7d188, type: 3}

@@ -87,7 +87,7 @@ public class Character : MonoBehaviour, IAttackable
     public UnityEvent<EventArgs> Landed;
 
     public UnityEvent<Character> Attacked => attacked;
-    private UnityEvent<Character> attacked;
+    private UnityEvent<Character> attacked = new();
 
     [Header("Stats")]
     public Vital Health = new Vital(100);

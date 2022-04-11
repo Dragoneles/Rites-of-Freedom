@@ -27,7 +27,7 @@ public abstract class EventCallback : MonoBehaviour
     [SerializeField]
     private UnityEvent onCallbackTriggered = new();
 
-    protected virtual void OnInvoked()
+    protected void OnInvoked()
     {
         Invoked?.Invoke();
         onCallbackTriggered?.Invoke();
@@ -55,11 +55,6 @@ public abstract class EventCallback<T> : EventCallback
             return;
 
         OnInvoked();
-    }
-
-    protected override sealed void OnInvoked()
-    {
-        base.OnInvoked();
     }
 
     protected abstract bool ValidateCallback(T args);

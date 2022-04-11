@@ -811,9 +811,9 @@ MonoBehaviour:
   onInputUsed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: adafc470748112e4f9d425f3b6bce3a1, type: 2}
-        m_TargetAssemblyTypeName: GlobalEvent, Assembly-CSharp
-        m_MethodName: Invoke
+      - m_Target: {fileID: 11400000, guid: 8f696d476bb250b4e81e9298f2c94af8, type: 2}
+        m_TargetAssemblyTypeName: PauseFacilitator, Assembly-CSharp
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1220,7 +1220,10 @@ MonoBehaviour:
     value: 50
   RollDuration:
     value: 70
+  BlockStunDuration:
+    value: 65
   canBeAttacked: 1
+  Faction: {fileID: 0}
 --- !u!50 &3282629183849687295
 Rigidbody2D:
   serializedVersion: 4

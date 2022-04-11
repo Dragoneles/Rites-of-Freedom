@@ -38,6 +38,9 @@ public class EventObject : IEventObject
         delayInvoke.SetDelay(delay);
         delayInvoke.OnComplete(Invoke);
 
+        if (PauseFacilitator.IsPaused)
+            delayInvoke.SetUpdate(isIndependentUpdate: true);
+
         delayInvoke.Play();
     }
 }

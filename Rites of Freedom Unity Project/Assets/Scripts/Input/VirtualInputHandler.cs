@@ -137,7 +137,8 @@ public class VirtualInput
 
         IsDown = false;
 
-        coroutineRunner.StartCoroutine(ResetUp());
+        if (coroutineRunner != null)
+            coroutineRunner.StartCoroutine(ResetUp());
     }
 
     /// <summary>

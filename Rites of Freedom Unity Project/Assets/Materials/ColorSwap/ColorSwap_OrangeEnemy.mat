@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ColorSwap_NPC2
+  m_Name: ColorSwap_OrangeEnemy
   m_Shader: {fileID: 4800000, guid: ff27de3736188824d8e9b88d4ad98f58, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION
   m_LightmapFlags: 1
