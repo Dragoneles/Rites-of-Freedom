@@ -36,12 +36,13 @@ public class FleeNode : LeafNode
     protected override void OnInitialize()
     {
         self = Blackboard.Get(EnemyBehaviorTree.Self);
-        target = Blackboard.Get(EnemyBehaviorTree.Target);
         input = Blackboard.Get(EnemyBehaviorTree.Input);
     }
 
     protected override void OnNodeEntered()
     {
+        target = Blackboard.Get(EnemyBehaviorTree.Target);
+
         if (CheckPathIsBlocked() == true)
             pathIsBlocked = true;
     }

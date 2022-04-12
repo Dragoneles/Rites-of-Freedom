@@ -30,6 +30,10 @@ public class DistanceNode : LeafNode
     protected override void OnInitialize()
     {
         self = Blackboard.Get(EnemyBehaviorTree.Self);
+    }
+
+    protected override void OnNodeEntered()
+    {
         target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
 

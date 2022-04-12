@@ -24,11 +24,11 @@ public class TargetAliveNode : LeafNode
 
     protected override bool CheckNodeSucceeded()
     {
-        Character enemy = Blackboard.Get(EnemyBehaviorTree.Target);
+        Character target = Blackboard.Get(EnemyBehaviorTree.Target);
 
-        if (enemy == null)
+        if (target == null)
             return false;
 
-        return !enemy.IsDead;
+        return !target.IsDead;
     }
 }

@@ -28,11 +28,15 @@ public class ApproachNode : LeafNode
     private Character target;
     private AIInputHandler input;
 
-    protected override void OnNodeEntered()
+    protected override void OnInitialize()
     {
         self = Blackboard.Get(EnemyBehaviorTree.Self);
-        target  = Blackboard.Get(EnemyBehaviorTree.Target);
-        input  = Blackboard.Get(EnemyBehaviorTree.Input);
+        input = Blackboard.Get(EnemyBehaviorTree.Input);
+    }
+
+    protected override void OnNodeEntered()
+    {
+        target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
 
     protected override IEnumerator Run()

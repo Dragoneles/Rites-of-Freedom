@@ -39,11 +39,12 @@ public class FaceNode : LeafNode
     protected override void OnInitialize()
     {
         self = Blackboard.Get(EnemyBehaviorTree.Self);
-        target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
 
     protected override void OnNodeEntered()
     {
+        target = Blackboard.Get(EnemyBehaviorTree.Target);
+
         switch (faceType)
         {
             case FaceType.TowardsEnemy:

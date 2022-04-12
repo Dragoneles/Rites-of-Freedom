@@ -38,6 +38,9 @@ namespace AI.BehaviorTree
                 return property.GetDefault();
             }
 
+            if (dictionary[property.Name] is Func<T> reference)
+                return reference.Invoke();
+
             return (T)dictionary[property.Name];
         }
 
@@ -56,6 +59,23 @@ namespace AI.BehaviorTree
             }
 
             dictionary[property.Name] = value;
+        }
+
+        /// <summary>
+        /// Set a property to return a reference to a value.
+        /// </summary>
+        public void Set<T>(BlackboardProperty<T> property, Func<T> reference)
+        {
+            if (!initialized)
+                Initialize();
+
+            if (!dictionary.ContainsKey(property.Name))
+            {
+                AddPropertyToDictionary(property.Name, reference);
+                return;
+            }
+
+            dictionary[property.Name] = reference;
         }
 
         private void Initialize()

@@ -20,10 +20,12 @@ using UnityEngine;
 /// Basic target detection system used to select targets for the behavior tree.
 /// </summary>
 [RequireComponent(typeof(EnemyBehaviorTree))]
-public class TargetFinder : MonoBehaviour
+public class TargetFinder : MonoBehaviour, ITargetProvider
 {
     public enum TargetingType { Weakest, Nearest, Strongest }
     public enum TargetFilterType { Enemy, Ally }
+
+    private Character currentTarget;
 
     [SerializeField]
     private EnemyBehaviorTree behaviorTree;
@@ -33,11 +35,6 @@ public class TargetFinder : MonoBehaviour
 
     [SerializeField]
     private TargetFilterType targetFilter = TargetFilterType.Enemy;
-
-    /// <summary>
-    /// The behavior tree's current active target.
-    /// </summary>
-    public Character CurrentTarget => behaviorTree.GetTarget();
 
     /// <summary>
     /// The character that uses the behavior tree.
@@ -76,10 +73,20 @@ public class TargetFinder : MonoBehaviour
         SelectNewTarget();
     }
 
+    public Character GetTarget()
+    {
+        if (currentTarget == null || currentTarget.IsDead)
+        {
+            SelectNewTarget();
+        }
+
+        return currentTarget;
+    }
+
     private void SelectNewTarget()
     {
         FindValidCharacters();
-        SetTarget(SelectTarget());
+        currentTarget = SelectTarget();
     }
 
     private void FindValidCharacters()
@@ -90,12 +97,14 @@ public class TargetFinder : MonoBehaviour
         {
             case TargetFilterType.Enemy:
                 validTargets = characters
+                    .Where(o => !o.IsDead)
                     .Where(o => Self.IsEnemyOfCharacter(o))
                     .ToList();
                 break;
 
             case TargetFilterType.Ally:
                 validTargets = characters
+                    .Where(o => !o.IsDead)
                     .Where(o => !Self.IsEnemyOfCharacter(o))
                     .Where(o => o != Self)
                     .ToList();
@@ -104,7 +113,6 @@ public class TargetFinder : MonoBehaviour
             default:
                 break;
         }
-        
     }
 
     private Character SelectTarget()
@@ -137,22 +145,5 @@ public class TargetFinder : MonoBehaviour
         }
 
         return validTargets[0];
-    }
-
-    private void SetTarget(Character target)
-    {
-        if (CurrentTarget != null)
-            CurrentTarget.Died.RemoveListener(OnTargetDeath);
-
-
-        behaviorTree.SetTarget(target);
-
-        if (CurrentTarget != null)
-            CurrentTarget.Died.AddListener(OnTargetDeath);
-    }
-
-    private void OnTargetDeath(EventArgs e)
-    {
-        SelectNewTarget();
     }
 }

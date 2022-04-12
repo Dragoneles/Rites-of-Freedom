@@ -63,6 +63,10 @@ public class NGramPredictor : MonoBehaviour
         DeregisterNGramInvokeEvents();
 
         var newTarget = target.GetComponentInChildren<NGramInvoker>();
+
+        if (newTarget == null)
+            return;
+
         monitoredInvoker = newTarget;
 
         RegisterNGramInvokeEvents();

@@ -20,18 +20,18 @@ using UnityEngine;
 /// <summary>
 /// Behavior tree machine made specifically for this game's AI.
 /// </summary>
-[RequireComponent(typeof(AIInputHandler))]
+[RequireComponent(typeof(AIInputHandler), typeof(ITargetProvider))]
 public class EnemyBehaviorTree : BehaviorTreeMachine
 {
-    /// <summary>
-    /// The character that the behavior tree is attached to.
-    /// </summary>
-    public static BlackboardProperty<Character> Self = new(nameof(Self));
-
     /// <summary>
     /// The character that this character is targetting.
     /// </summary>
     public static BlackboardProperty<Character> Target = new(nameof(Target));
+
+    /// <summary>
+    /// The character that the behavior tree is attached to.
+    /// </summary>
+    public static BlackboardProperty<Character> Self = new(nameof(Self));
 
     /// <summary>
     /// The virtual input device the AI uses to perform actions.
@@ -47,13 +47,21 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     private Character self;
 
     [SerializeField]
-    private Character target;
-
-    [SerializeField]
     private AIInputHandler input;
 
     [SerializeField]
     private NGramPredictor predictor;
+
+    private ITargetProvider _targetProvider;
+    private ITargetProvider targetProvider
+    {
+        get
+        {
+            if (_targetProvider == null)
+                _targetProvider = GetComponent<ITargetProvider>();
+            return _targetProvider;
+        }
+    } // lazy initialize
 
     private Blackboard Blackboard => Tree.Blackboard;
 
@@ -65,31 +73,10 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
 
     protected override void OnTreeInitialized()
     {
+        Blackboard.Set(Target, GetTarget);
         Blackboard.Set(Self, self);
-        Blackboard.Set(Target, target);
         Blackboard.Set(Input, input);
         Blackboard.Set(Predictor, predictor);
-    }
-
-    /// <summary>
-    /// Change the behavior tree's target property.
-    /// </summary>
-    public void SetTarget(Character target)
-    {
-        this.target = target;
-
-        Blackboard.Set(Target, target);
-
-        // also set NGram target
-        predictor.SetTarget(target);
-    }
-
-    /// <summary>
-    /// Get the behavior tree's current target property.
-    /// </summary>
-    public Character GetTarget()
-    {
-        return Blackboard.Get(Target);
     }
 
     /// <summary>
@@ -98,5 +85,10 @@ public class EnemyBehaviorTree : BehaviorTreeMachine
     public Character GetSelf()
     {
         return Blackboard.Get(Self);
+    }
+
+    private Character GetTarget()
+    {
+        return targetProvider.GetTarget();
     }
 }

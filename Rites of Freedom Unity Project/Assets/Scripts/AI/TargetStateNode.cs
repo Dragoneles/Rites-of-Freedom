@@ -25,7 +25,7 @@ public class TargetStateNode : LeafNode
 
     private Character target;
 
-    protected override void OnInitialize()
+    protected override void OnNodeEntered()
     {
         target = Blackboard.Get(EnemyBehaviorTree.Target);
     }
