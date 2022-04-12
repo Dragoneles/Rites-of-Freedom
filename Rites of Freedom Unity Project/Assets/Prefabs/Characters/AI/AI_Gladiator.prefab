@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec55d9a1d561bed4aa7e5d50361cd0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monitoredNGramInvoker: {fileID: 0}
+  monitoredInvoker: {fileID: 0}
   observedNGramActions:
   - {fileID: 11400000, guid: 996e2cdcb35afc2418a5844ab3de826e, type: 2}
   - {fileID: 11400000, guid: 301c26729ff983a43af9ef00cc667335, type: 2}
@@ -238,6 +238,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9011593090420861173, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
   m_PrefabInstance: {fileID: 3846485112436426246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3388565625861722633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219366300106387187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ae3ed3cadcd854b8794c7a250651ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviorTree: {fileID: 6209910595863156104}
+  targetingType: 1
+  targetFilter: 0
+  validTargets: []
 --- !u!114 &6209910595863156104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,8 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BehaviorTree: {fileID: 11400000, guid: f0e8ae05c0db61a4199f6430312114d9, type: 2}
-  self: {fileID: 2420919058359755575}
-  target: {fileID: 0}
+  self: {fileID: 0}
   input: {fileID: 8124792910165803235}
   predictor: {fileID: 7119994942994283301}
 --- !u!114 &8124792910165803235
@@ -316,7 +331,7 @@ MonoBehaviour:
     Released:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &3388565625861722633
+--- !u!114 &7910980792226053797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,8 +340,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5219366300106387187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44ae3ed3cadcd854b8794c7a250651ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 73b7644bf0bd9dc4d992201533ff6b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviorTree: {fileID: 6209910595863156104}
-  targetingType: 1
+  onCallbackTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6209910595863156104}
+        m_TargetAssemblyTypeName: AI.BehaviorTree.BehaviorTreeMachine, AI.BehaviorTree
+        m_MethodName: SetTree
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 7c21e3c096c417b458ed3495bee4a48f, type: 2}
+          m_ObjectArgumentAssemblyTypeName: AI.BehaviorTree.BehaviorTreeAsset, AI.BehaviorTree
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  target: {fileID: 2420919058359755575}
