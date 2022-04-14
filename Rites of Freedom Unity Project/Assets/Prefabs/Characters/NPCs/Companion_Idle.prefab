@@ -534,6 +534,7 @@ MonoBehaviour:
   behaviorTree: {fileID: 816010790686701355}
   targetingType: 1
   targetFilter: 0
+  validTargets: []
 --- !u!114 &564856589446038832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,9 +610,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BehaviorTree: {fileID: 11400000, guid: 6ef5f42617d50f44e82c66b350eb1fc3, type: 2}
   self: {fileID: 0}
-  target: {fileID: 0}
   input: {fileID: 564856589446038832}
   predictor: {fileID: 7245632010833326847}
+--- !u!114 &1672450215548661788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677285187759325718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b7644bf0bd9dc4d992201533ff6b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCallbackTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3301402609893734193}
+        m_TargetAssemblyTypeName: LocalEvent, Assembly-CSharp
+        m_MethodName: Invoke
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  target: {fileID: 9129030693581918162}
 --- !u!4 &1677285188129930319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9011593091044284076, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
@@ -641,3 +669,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 719e90e4ad0842144ae7bba2840c518e, type: 2}
   memorySize: 20
   sequenceLength: 3
+--- !u!114 &9129030693581918162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511416008644732209, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+  m_PrefabInstance: {fileID: 7658782204604787427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd70978fbb2f678449de711019a1672f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

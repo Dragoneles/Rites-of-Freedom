@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
-  m_Name: BGM_Pits
+  m_Name: BGM_FinalBattle
   m_EditorClassIdentifier: 
-  BaseVolume: 0.45
+  BaseVolume: 0.75
   BasePitch: 1
   StereoPan: 0
-  FadeOutLength: 1
+  FadeOutLength: 2
   RandomPitchDown: 0
   RandomPitchUp: 0
   PlayOnAwake: 0
   Loop: 1
   Mixer: {fileID: 1706496663997938563, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
-  - Clip: {fileID: 8300000, guid: 979cea3f7d0a60e4b99468da709b76fd, type: 3}
+  - Clip: {fileID: 8300000, guid: ff94d5cc0af7b4146894c4850047c72e, type: 3}

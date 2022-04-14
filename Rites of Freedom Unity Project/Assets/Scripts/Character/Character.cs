@@ -119,6 +119,9 @@ public class Character : MonoBehaviour, IAttackable
     [SerializeField]
     private bool canBeAttacked = true;
 
+    [SerializeField]
+    private bool allowFriendlyFire = false;
+
     public Faction Faction;
 
     public bool IsAttackable { get => canBeAttacked && !IsRolling; }
@@ -238,6 +241,10 @@ public class Character : MonoBehaviour, IAttackable
 
         if (target == null)
             return;
+
+        if (!allowFriendlyFire && target is Character character)
+            if (!character.IsEnemyOfCharacter(this))
+                return;
 
         Attack(target);
     }

@@ -372,6 +372,10 @@ PrefabInstance:
       propertyPath: Weight
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2572694917063042654, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: canvasFadeTime
+      value: 0.14
+      objectReference: {fileID: 0}
     - target: {fileID: 2728246456856888776, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_RootOrder
       value: 7

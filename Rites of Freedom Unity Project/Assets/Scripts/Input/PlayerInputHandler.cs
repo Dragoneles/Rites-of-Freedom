@@ -74,6 +74,8 @@ public class PlayerInputHandler : VirtualInputHandler
         UnregisterInputAction(playerInput.actions["Help"], OnHelp);
         UnregisterInputAction(playerInput.actions["Pause"], OnPause);
 
+        ResetInputs();
+
         callbacksRegistered = false;
     }
 

@@ -59,6 +59,21 @@ public abstract class VirtualInputHandler : MonoBehaviour
 
         return inputs;
     }
+
+    /// <summary>
+    /// Reset the state of this controller to its default values.
+    /// </summary>
+    protected void ResetInputs()
+    {
+        MovementAxis.Reset();
+        Attack.Reset();
+        Block.Reset();
+        Jump.Reset();
+        Roll.Reset();
+        Interact.Reset();
+        Help.Reset();
+        Pause.Reset();
+    }
 }
 
 /// <summary>
@@ -109,6 +124,15 @@ public class VirtualInput
     /// Returns true the frame the input is released.
     /// </summary>
     public bool WasReleased { get; private set; }
+
+    /// <summary>
+    /// Reset the state of this input to its default value.
+    /// </summary>
+    internal void Reset()
+    {
+        if (IsDown)
+            IsDown = false;
+    }
 
     /// <summary>
     /// Treat the input as if it were pressed. Until the frame ends, 
@@ -182,6 +206,14 @@ public class VirtualAxisInput
     /// The value of the input axis, ranging from -1 to 1.
     /// </summary>
     public float Value { get; private set; }
+
+    /// <summary>
+    /// Reset the state of this input to its default value.
+    /// </summary>
+    internal void Reset()
+    {
+        Value = 0f;
+    }
 
     internal void SetAxisValue(float value)
     {
