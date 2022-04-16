@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Scene12_Narrative
   m_EditorClassIdentifier: 
   Lines:
-  - Text: The two gladiators fought their way to the final round
+  - Text: The two gladiators fought their way to the final round.
     Duration: 3
-  - Text: The crowd favorites
-    Duration: 1.2
-  - Text: The dynamic duo
-    Duration: 1.2
-  - Text: The brothers of battle
-    Duration: 1.5
+  - Text: The crowd favorites.
+    Duration: 1.6
+  - Text: The dynamic duo.
+    Duration: 1.6
+  - Text: The brothers of battle.
+    Duration: 1.8
   - Text: 
     Duration: 1
-  - Text: The final round of the tournament arrives swiftly
+  - Text: The last day of the tournament arrives swiftly.
     Duration: 3

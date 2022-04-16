@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Scene4_BeforeBattle
   m_EditorClassIdentifier: 
   Lines:
-  - Text: About time you showed up
+  - Text: Ah, there you are.
     Duration: 2
-  - Text: Don't think I'm going to go easy on you today
-    Duration: 2.5
-  - Text: Bring it on!
-    Duration: 1.5
+  - Text: You should know better than to keep me waiting.
+    Duration: 3
+  - Text: Get your sword up! Let's go!
+    Duration: 2

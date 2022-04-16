@@ -29,15 +29,12 @@ public class BlockNode : LeafNode
 
     protected override void OnNodeEntered()
     {
+        blockTimeElapsed = 0f;
+
         self = Blackboard.Get(EnemyBehaviorTree.Self);
         input = Blackboard.Get(EnemyBehaviorTree.Input);
 
         input.PerformBlock(blockDuration);
-    }
-
-    protected override void OnReset()
-    {
-        blockTimeElapsed = 0f;
     }
 
     protected override IEnumerator Run()

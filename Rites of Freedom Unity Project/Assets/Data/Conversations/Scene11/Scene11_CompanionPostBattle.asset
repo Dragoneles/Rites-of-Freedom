@@ -15,7 +15,7 @@ MonoBehaviour:
   Lines:
   - Text: '*breathing heavily*'
     Duration: 2
-  - Text: Thank you, friend
-    Duration: 1.5
-  - Text: I couldn't have done it without you
-    Duration: 2
+  - Text: Nicely done, Gladiator.
+    Duration: 1.8
+  - Text: I should count myself lucky that you're my partner instead of my opponent.
+    Duration: 4

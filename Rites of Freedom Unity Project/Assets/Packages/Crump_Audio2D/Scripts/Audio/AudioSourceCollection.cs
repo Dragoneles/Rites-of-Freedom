@@ -81,6 +81,20 @@ public class AudioSourceCollection : ICollection<AudioSource>
         }
     }
 
+    /// <summary>
+    /// Evaluate whether any of the audio sources are playing.
+    /// </summary>
+    public bool IsPlaying()
+    {
+        foreach (AudioSource source in AudioSources)
+        {
+            if (source.isPlaying)
+                return true;
+        }
+
+        return false;
+    }
+
     public void Add(AudioSource item)
     {
         AudioSources.Add(item);

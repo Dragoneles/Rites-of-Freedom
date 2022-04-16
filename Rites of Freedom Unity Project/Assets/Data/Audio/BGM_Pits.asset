@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: BGM_Pits
   m_EditorClassIdentifier: 
-  BaseVolume: 0.45
+  BaseVolume: 0.3
   BasePitch: 1
   StereoPan: 0
   FadeOutLength: 1
@@ -20,6 +20,7 @@ MonoBehaviour:
   RandomPitchUp: 0
   PlayOnAwake: 0
   Loop: 1
+  IsMusic: 1
   Mixer: {fileID: 1706496663997938563, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
-  - Clip: {fileID: 8300000, guid: 979cea3f7d0a60e4b99468da709b76fd, type: 3}
+  - Clip: {fileID: 8300000, guid: 98186a99c7a98cf4a96ecc36389b5908, type: 3}

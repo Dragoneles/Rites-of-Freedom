@@ -67,6 +67,20 @@ public class Vital : Stat
         }
     }
 
+    /// <summary>
+    /// Set the maximum value of this vital.
+    /// </summary>
+    /// <param name="setCurrentValue">
+    /// If true, also sets the current value to match the new maximum value.
+    /// </param>
+    public void SetMaxValue(float value, bool setCurrentValue = false)
+    {
+        base.SetValue(value);
+
+        if (setCurrentValue)
+            SetValue(value);
+    }
+
     public static implicit operator float(Vital vital)
     {
         return vital.Value;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseVolume: 1
   BasePitch: 1
-  StereoPan: 0
+  StereoPan: -0.4
   FadeOutLength: 1
   RandomPitchDown: -0.1
   RandomPitchUp: 0.1
@@ -22,4 +22,4 @@ MonoBehaviour:
   Loop: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
-  - Clip: {fileID: 8300000, guid: ac7a897c1a26a094a940fa3fb656cddd, type: 3}
+  - Clip: {fileID: 8300000, guid: 6f77fc12e12073043a3b6b9cab5307cd, type: 3}

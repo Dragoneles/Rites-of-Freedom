@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene3_4
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Alright, that's enough screwing around
+  - Text: Alright, that's enough screwing around.
     Duration: 2.5
-  - Text: Your sparring partner is waiting, hurry along now
+  - Text: Your sparring partner is waiting, hurry along now.
     Duration: 2.5

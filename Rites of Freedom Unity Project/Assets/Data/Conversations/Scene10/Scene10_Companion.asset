@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Scene10_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Hey, there you are!
+  - Text: Rise and shine, Gladiator.
     Duration: 2
-  - Text: We've got a big day ahead of us
+  - Text: We've got a big day ahead of us.
     Duration: 2.5
-  - Text: Let's get going
+  - Text: Let's get going.
     Duration: 1.5

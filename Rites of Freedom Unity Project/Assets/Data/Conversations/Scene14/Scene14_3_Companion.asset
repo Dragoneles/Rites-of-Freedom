@@ -10,16 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43e4f8c3ad90bea4eb3f831f7c07c0f4, type: 3}
-  m_Name: Scene14_Companion
+  m_Name: Scene14_3_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Rookie...
-    Duration: 2
-  - Text: ...
-    Duration: 3
-  - Text: Don't you go easy on me, okay?
-    Duration: 3
-  - Text: One of us is going to walk free today
-    Duration: 3
-  - Text: May the other die with honor
-    Duration: 3
+  - Text: You know that won't work.
+    Duration: 1.8
+  - Text: That just means we both die.
+    Duration: 2.3

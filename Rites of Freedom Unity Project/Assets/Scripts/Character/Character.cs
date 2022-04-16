@@ -161,7 +161,15 @@ public class Character : MonoBehaviour, IAttackable
     /// </summary>
     public void CheatKill()
     {
-        TakeDamage(999999);
+        TakeDamage(9999999);
+    }
+
+    /// <summary>
+    /// Set this character's health to an extremely high value.
+    /// </summary>
+    public void CheatGodMode()
+    {
+        Health.SetMaxValue(9999999, setCurrentValue: true);
     }
 
     /// <summary>
@@ -330,6 +338,7 @@ public class Character : MonoBehaviour, IAttackable
     public void FaceDirection(float direction) => SpriteHandler.FaceDirection(direction);
     public void FaceLeft() => SpriteHandler.FaceLeft();
     public void FaceRight() => SpriteHandler.FaceRight();
+    public void FaceTarget(Transform target) => SpriteHandler.FaceTarget(target);
     public bool IsLeftOfPoint(Vector2 point) => SpriteHandler.IsLeftOfPoint(point);
     public bool IsFacingPoint(Vector2 point) => SpriteHandler.IsFacingPoint(point);
     public void FacePoint(Vector2 point) => SpriteHandler.FacePoint(point);

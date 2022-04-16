@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Scene2_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Good luck out there gladiator
+  - Text: Good luck out there, Rookie.
     Duration: 3

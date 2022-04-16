@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene2_NPC1
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Looks like somebody slept in
+  - Text: Looks like somebody slept in.
     Duration: 2.5
-  - Text: The battlemaster is gonna tear you apart
+  - Text: The battlemaster is gonna tear you apart.
     Duration: 3

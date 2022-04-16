@@ -78,6 +78,14 @@ public class SpriteHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// Set this character to face towards a given object.
+    /// </summary>
+    public void FaceTarget(Transform target)
+    {
+        FacePoint(target.position);
+    }
+
+    /// <summary>
     /// Returns true if the character is left of the specified point.
     /// </summary>
     public bool IsLeftOfPoint(Vector2 point)

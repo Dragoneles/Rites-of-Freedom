@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 1212312006781719398}
-  canvasFadeTime: 0.6
+  canvasFadeTime: 0.3
 --- !u!1 &5680129314354189270
 GameObject:
   m_ObjectHideFlags: 0

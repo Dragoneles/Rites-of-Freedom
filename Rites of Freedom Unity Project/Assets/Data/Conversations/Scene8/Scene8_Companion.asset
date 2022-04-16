@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Scene8_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Whew
+  - Text: Whew.
     Duration: 1.2
-  - Text: Nice work there, rookie
-    Duration: 2
-  - Text: Maybe you're not such a liability after all
+  - Text: Maybe you're not such a rookie after all.
     Duration: 3
+  - Text: Nice work...
+    Duration: 1.5
+  - Text: Gladiator.
+    Duration: 2.5

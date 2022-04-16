@@ -41,5 +41,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene11_Arena.unity
     guid: 0597634cefe4c514fa206e5998f74fbd
+  - enabled: 1
+    path: Assets/Scenes/Scene12_Narrative.unity
+    guid: e64f06ce597e39e4a9954c772dd0a0aa
+  - enabled: 1
+    path: Assets/Scenes/Scene13_Pits.unity
+    guid: 1a70886f4e575724ea9a9df28887d310
+  - enabled: 1
+    path: Assets/Scenes/Scene14_Arena.unity
+    guid: fec11075195fac34f8ac815537cf2748
+  - enabled: 1
+    path: Assets/Scenes/Scene15_Narrative.unity
+    guid: 3efdd327095d5304b91ed384bb1a7d4f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d662d68f29349b94684b04fc6f2eddcb, type: 2}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Scene11_Heckler
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Well well, look who finally rolled out of bed
+  - Text: Well well, look who finally rolled out of bed.
     Duration: 3
-  - Text: I hope you're still tired
+  - Text: I hope you're still tired.
     Duration: 1.5
-  - Text: Because I'm gonna put you to sleep for a long time
+  - Text: Because I'm gonna put you to sleep for a long time.
     Duration: 2.5

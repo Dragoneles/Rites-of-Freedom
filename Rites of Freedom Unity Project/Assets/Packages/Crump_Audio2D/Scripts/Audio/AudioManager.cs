@@ -75,6 +75,9 @@ public class AudioManager : MonoBehaviour
 
         AudioSourceCollection sourceGroup = GetOrAddAudioSourceGroup(entry);
 
+        if (entry.IsMusic && sourceGroup.IsPlaying())
+            return;
+
         AudioSource source = sourceGroup[index];
 
         if (source == null)

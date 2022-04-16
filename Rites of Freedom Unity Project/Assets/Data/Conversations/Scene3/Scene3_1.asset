@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene3_1
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Ah, look who finally showed up
+  - Text: About time you showed up.
     Duration: 2.5
   - Text: Well, enough standing around, get over there and hit that thing!
     Duration: 3.5

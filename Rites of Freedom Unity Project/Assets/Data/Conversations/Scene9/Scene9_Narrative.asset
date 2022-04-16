@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene9_Narrative
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Two fights remain
+  - Text: Two fights remain.
     Duration: 2.5
-  - Text: Freedom awaits
+  - Text: Freedom awaits.
     Duration: 3.5

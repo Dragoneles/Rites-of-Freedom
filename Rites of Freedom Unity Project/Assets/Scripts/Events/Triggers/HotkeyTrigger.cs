@@ -28,6 +28,8 @@ public class HotkeyTrigger : MonoBehaviour
     private void Awake()
     {
         PopulateDictionary();
+
+        OnInitialize();
     }
 
     private void PopulateDictionary()
@@ -45,6 +47,8 @@ public class HotkeyTrigger : MonoBehaviour
             eventDictionary[key].Invoke();
         }
     }
+
+    protected virtual void OnInitialize() { }
 
     private bool ReadKeys(out Key keyPressed)
     {

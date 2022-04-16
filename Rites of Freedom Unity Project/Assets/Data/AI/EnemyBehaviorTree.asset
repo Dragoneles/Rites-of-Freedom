@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9080901470367899454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac6e3840752e4542a17a5e980cef2e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  Guid: d5a0891c46b14a0489f16fce00578ff8
+  Position: {x: -1282.5, y: 1000}
 --- !u!114 &-9021261362996050903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +27,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 276ad7bca72c3a94187676c5a6029f46
-  Position: {x: 2565, y: 625}
+  Position: {x: 2767.5, y: 625}
   waitDuration: 1
 --- !u!114 &-8747892566033486781
 MonoBehaviour:
@@ -28,7 +42,7 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: be09473bda78e8049ad301b1450d5cab
-  Position: {x: -2565, y: 875}
+  Position: {x: -2767.5, y: 875}
   targetDistance: 3
 --- !u!114 &-8715672923752880016
 MonoBehaviour:
@@ -43,7 +57,7 @@ MonoBehaviour:
   m_Name: DistanceNode
   m_EditorClassIdentifier: 
   Guid: 7957b913d6bb5bb43bb22055ff8f9529
-  Position: {x: -3240, y: 625}
+  Position: {x: -3442.5, y: 625}
   compareType: 4
   value: 1
 --- !u!114 &-8706693359168598809
@@ -59,7 +73,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 2218f6a97e07a2e428cbd911601653e3
-  Position: {x: 1890, y: 500}
+  Position: {x: 2092.5, y: 500}
   children:
   - {fileID: 3011452985247337661}
   - {fileID: -1449592269726869930}
@@ -77,7 +91,7 @@ MonoBehaviour:
   m_Name: JumpNode
   m_EditorClassIdentifier: 
   Guid: eeb1fad12ddadc54897f933a6378069e
-  Position: {x: 0, y: 1000}
+  Position: {x: 202.5, y: 1000}
 --- !u!114 &-8230508175584223904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +105,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: f746aca5e8f8f7949a62ef60e805c12b
-  Position: {x: -540, y: 1250}
+  Position: {x: -337.5, y: 1250}
 --- !u!114 &-8023839173249738032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +119,7 @@ MonoBehaviour:
   m_Name: ParallelNode
   m_EditorClassIdentifier: 
   Guid: 1141e9447c56401469f2f15384a0c4c4
-  Position: {x: 0, y: 875}
+  Position: {x: 202.5, y: 875}
   children:
   - {fileID: 460398328285168294}
   - {fileID: -8401782275296234186}
@@ -123,7 +137,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: c69abfc0b849fdf4d8552e829ae7d216
-  Position: {x: 540, y: 875}
+  Position: {x: 742.5, y: 875}
   faceType: 1
 --- !u!114 &-7223790366583465112
 MonoBehaviour:
@@ -138,7 +152,7 @@ MonoBehaviour:
   m_Name: RollNode
   m_EditorClassIdentifier: 
   Guid: 3f7eb20247daefe4d98733c69e0647e1
-  Position: {x: 3105, y: 625}
+  Position: {x: 3307.5, y: 625}
 --- !u!114 &-7144568464074351043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +166,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: cbc5285ad9d1dab49a3eb8ba81c5ec3f
-  Position: {x: -2497.5, y: 750}
+  Position: {x: -2700, y: 750}
   children:
   - {fileID: -6155730539396410885}
   - {fileID: -3739632162933567043}
@@ -171,7 +185,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 645c2836321233c4c87999507f0a7589
-  Position: {x: 2295, y: 1000}
+  Position: {x: 2497.5, y: 1000}
   waitDuration: 0.3
 --- !u!114 &-7081295738269753619
 MonoBehaviour:
@@ -186,7 +200,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 0c97eed4bc4da9447945424fd73ef547
-  Position: {x: -2835, y: 1125}
+  Position: {x: -3037.5, y: 1125}
   waitDuration: 1
 --- !u!114 &-6722434690601058154
 MonoBehaviour:
@@ -201,7 +215,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 0b08b709df2c52549b6c5948d79ab7bb
-  Position: {x: 1620, y: 875}
+  Position: {x: 1822.5, y: 875}
   waitDuration: 0.1
 --- !u!114 &-6700906864699974684
 MonoBehaviour:
@@ -216,7 +230,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: da5720475d85a75448e808fa7405e1e2
-  Position: {x: 1080, y: 625}
+  Position: {x: 1282.5, y: 625}
   waitDuration: 1
 --- !u!114 &-6592976157969712971
 MonoBehaviour:
@@ -232,6 +246,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Guid: 7531a9c388e661c4f8ac665d97e46446
   Position: {x: -272.0001, y: 934.5209}
+--- !u!114 &-6493922508864661824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419b79cec539fc946b33cf1f237b96d3, type: 3}
+  m_Name: RepeaterNode
+  m_EditorClassIdentifier: 
+  Guid: 142e11643484b2b419765af88fe40865
+  Position: {x: -1147.5, y: 1000}
+  Child: {fileID: 3241003374589775776}
+  repeats: 3
+  tickRate: 12
 --- !u!114 &-6408015603258969091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +276,7 @@ MonoBehaviour:
   m_Name: RandomNode
   m_EditorClassIdentifier: 
   Guid: bea19d2d95873344a80571bde5dcf220
-  Position: {x: -540, y: 875}
+  Position: {x: -337.5, y: 875}
   children:
   - {fileID: -5619904326128623004}
   - {fileID: -5549737584765894438}
@@ -263,7 +294,7 @@ MonoBehaviour:
   m_Name: NotNode
   m_EditorClassIdentifier: 
   Guid: a8d7b4535a056754da6c83353d105cb9
-  Position: {x: -2835, y: 1000}
+  Position: {x: -3037.5, y: 1000}
   Child: {fileID: -7081295738269753619}
 --- !u!114 &-6282498226017528204
 MonoBehaviour:
@@ -278,7 +309,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: d6ffcb09dadbbc146ba59468d2e052b3
-  Position: {x: 1350, y: 875}
+  Position: {x: 1552.5, y: 875}
   faceType: 0
 --- !u!114 &-6245594134015018813
 MonoBehaviour:
@@ -293,7 +324,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: cba5640e44655ce4889ff15f89df8f76
-  Position: {x: -1620, y: 875}
+  Position: {x: -1822.5, y: 875}
   faceType: 0
 --- !u!114 &-6155730539396410885
 MonoBehaviour:
@@ -308,7 +339,7 @@ MonoBehaviour:
   m_Name: ParallelNode
   m_EditorClassIdentifier: 
   Guid: 16956e4b57e7f56458ea204af07d40a8
-  Position: {x: -2902.5, y: 875}
+  Position: {x: -3105, y: 875}
   children:
   - {fileID: 3807771926568289053}
   - {fileID: -6319149302954712583}
@@ -325,7 +356,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: 8ff7e52e4df165e4bb43631f44b99d01
-  Position: {x: 2970, y: 625}
+  Position: {x: 3172.5, y: 625}
   faceType: 0
 --- !u!114 &-5619904326128623004
 MonoBehaviour:
@@ -340,7 +371,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: f3f9eca90b27fb2418ac0034933af792
-  Position: {x: -810, y: 1000}
+  Position: {x: -607.5, y: 1000}
 --- !u!114 &-5614325747416850910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +385,7 @@ MonoBehaviour:
   m_Name: NotNode
   m_EditorClassIdentifier: 
   Guid: cbc78ac0c43658a4d87e9478aed88d02
-  Position: {x: -3240, y: 500}
+  Position: {x: -3442.5, y: 500}
   Child: {fileID: -8715672923752880016}
 --- !u!114 &-5549737584765894438
 MonoBehaviour:
@@ -369,7 +400,7 @@ MonoBehaviour:
   m_Name: RepeaterNode
   m_EditorClassIdentifier: 
   Guid: 1aac779992b1f2a4b8dc49e71295954d
-  Position: {x: -607.5, y: 1000}
+  Position: {x: -405, y: 1000}
   Child: {fileID: 5168076581699663327}
   repeats: 2
   tickRate: 12
@@ -398,7 +429,7 @@ MonoBehaviour:
   m_Name: RandomNode
   m_EditorClassIdentifier: 
   Guid: 7db151e7f7e032b40a23d1e10a80abf7
-  Position: {x: -1417.5, y: 875}
+  Position: {x: -1620, y: 875}
   children:
   - {fileID: 1573937756976065579}
   - {fileID: 7618396377151367342}
@@ -415,7 +446,7 @@ MonoBehaviour:
   m_Name: NotNode
   m_EditorClassIdentifier: 
   Guid: ee55d47631219c94bbf3af9882d8e3e1
-  Position: {x: 135, y: 1000}
+  Position: {x: 337.5, y: 1000}
   Child: {fileID: 6450067589437029129}
 --- !u!114 &-4785301937117893264
 MonoBehaviour:
@@ -447,7 +478,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: 22ae494c6343c374b822f0895c7e3563
-  Position: {x: 2430, y: 1000}
+  Position: {x: 2632.5, y: 1000}
 --- !u!114 &-4220731275233129056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +492,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: a0dfe3c0f3e169947bb9a738fd67cd0f
-  Position: {x: 1755, y: 875}
+  Position: {x: 1957.5, y: 875}
   faceType: 0
 --- !u!114 &-3746657477632350865
 MonoBehaviour:
@@ -476,7 +507,7 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: ede2e851da90fa7479df895a28d7e3ea
-  Position: {x: 270, y: 875}
+  Position: {x: 472.5, y: 875}
   targetDistance: 1
 --- !u!114 &-3739632162933567043
 MonoBehaviour:
@@ -491,7 +522,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 734fb53cf838a0947a7c97f4e4804a3c
-  Position: {x: -2700, y: 875}
+  Position: {x: -2902.5, y: 875}
   waitDuration: 0.2
 --- !u!114 &-3662278785668501697
 MonoBehaviour:
@@ -506,7 +537,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 15bbedab6f361d1498dfb026f80b6773
-  Position: {x: 2362.5, y: 875}
+  Position: {x: 2565, y: 875}
   children:
   - {fileID: -7081967718968173743}
   - {fileID: -4413995867996794592}
@@ -523,7 +554,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: cd9e4f94be75f77459ccfde2f01c44bc
-  Position: {x: 945, y: 875}
+  Position: {x: 1147.5, y: 875}
 --- !u!114 &-2928595895089002386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +568,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: 1492daeb5cf2d9d44959ee8aaffbcab4
-  Position: {x: 1890, y: 875}
+  Position: {x: 2092.5, y: 875}
 --- !u!114 &-2741924347763418388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +582,7 @@ MonoBehaviour:
   m_Name: ParallelNode
   m_EditorClassIdentifier: 
   Guid: f555d8643b973aa4da3142b0cbf38619
-  Position: {x: 2227.5, y: 750}
+  Position: {x: 2430, y: 750}
   children:
   - {fileID: 8429905189671409467}
   - {fileID: 1647622695949401407}
@@ -569,7 +600,7 @@ MonoBehaviour:
   m_Name: JumpNode
   m_EditorClassIdentifier: 
   Guid: 8dca731c905d1644b9d983c5c71b260a
-  Position: {x: -2430, y: 1000}
+  Position: {x: -2632.5, y: 1000}
 --- !u!114 &-2113129056493443996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +614,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 1cc2614fa843cda47ae577e9beb6fc3e
-  Position: {x: -2092.5, y: 1000}
+  Position: {x: -2295, y: 1000}
   children:
   - {fileID: 9024150214982742750}
   - {fileID: 66889617137269336}
@@ -618,7 +649,7 @@ MonoBehaviour:
   m_Name: RandomNode
   m_EditorClassIdentifier: 
   Guid: 08c4a4a4526f1184db91c23fe4472743
-  Position: {x: 0, y: 625}
+  Position: {x: 202.5, y: 625}
   children:
   - {fileID: 507184210537675477}
   - {fileID: 6541671813986506816}
@@ -636,7 +667,7 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: 95f38cb6b69fe6c4992d6424a4a9f35b
-  Position: {x: 2835, y: 500}
+  Position: {x: 3037.5, y: 500}
   targetDistance: 0.8
 --- !u!114 &-1596205811752434758
 MonoBehaviour:
@@ -651,7 +682,7 @@ MonoBehaviour:
   m_Name: JumpNode
   m_EditorClassIdentifier: 
   Guid: 3bb6eb07c877fc14595712334ec42262
-  Position: {x: 3375, y: 625}
+  Position: {x: 3577.5, y: 625}
 --- !u!114 &-1449592269726869930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +696,7 @@ MonoBehaviour:
   m_Name: RandomNode
   m_EditorClassIdentifier: 
   Guid: f1262dbea877b6b408368bd956386fcf
-  Position: {x: 1890, y: 625}
+  Position: {x: 2092.5, y: 625}
   children:
   - {fileID: -797455992374160398}
   - {fileID: -2741924347763418388}
@@ -682,7 +713,7 @@ MonoBehaviour:
   m_Name: EnemyAliveNode
   m_EditorClassIdentifier: 
   Guid: 3ce22dfe409a5ff4baaa23bdab848edd
-  Position: {x: -3375, y: 375}
+  Position: {x: -3577.5, y: 375}
 --- !u!114 &-1224949295573344217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +742,7 @@ MonoBehaviour:
   m_Name: PredictionNode
   m_EditorClassIdentifier: 
   Guid: ae92e08acdc1f464ab7ea815b1b68cac
-  Position: {x: -3105, y: 625}
+  Position: {x: -3307.5, y: 625}
   action: {fileID: 11400000, guid: 996e2cdcb35afc2418a5844ab3de826e, type: 2}
 --- !u!114 &-797455992374160398
 MonoBehaviour:
@@ -726,7 +757,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 8fc7dd16567d4e9439b2076369c25e75
-  Position: {x: 1620, y: 750}
+  Position: {x: 1822.5, y: 750}
   children:
   - {fileID: -6282498226017528204}
   - {fileID: 7041022202647188430}
@@ -746,7 +777,7 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: e3a0ad32e553f8b48bd2f5743c3a3e0b
-  Position: {x: 3240, y: 625}
+  Position: {x: 3442.5, y: 625}
   targetDistance: 0.8
 --- !u!114 &-292656456217724639
 MonoBehaviour:
@@ -761,7 +792,7 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: 3049727ad70ac5142842a3788e5db3b2
-  Position: {x: 810, y: 875}
+  Position: {x: 1012.5, y: 875}
   faceType: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -865,6 +896,12 @@ MonoBehaviour:
     - {fileID: -9021261362996050903}
     - {fileID: -6700906864699974684}
     - {fileID: 1436748493923859420}
+    - {fileID: 2606031669153627272}
+    - {fileID: 6592572890225912533}
+    - {fileID: 8608572571430892446}
+    - {fileID: -6493922508864661824}
+    - {fileID: -9080901470367899454}
+    - {fileID: 3241003374589775776}
 --- !u!114 &66889617137269336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +915,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: 6dcd04796874a7849af719b17fb7ed8f
-  Position: {x: -2025, y: 1125}
+  Position: {x: -2227.5, y: 1125}
 --- !u!114 &320789144729727464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,7 +929,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: eb7981f33b427964b818f0eee53415d6
-  Position: {x: -270, y: 1250}
+  Position: {x: -67.5, y: 1250}
 --- !u!114 &460398328285168294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +943,7 @@ MonoBehaviour:
   m_Name: FleeNode
   m_EditorClassIdentifier: 
   Guid: ce01420bdefe7bf42b6b4a0f2117c1b6
-  Position: {x: -135, y: 1000}
+  Position: {x: 67.5, y: 1000}
   targetDistance: 4
   movementBlockerLayers:
     serializedVersion: 2
@@ -924,7 +961,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 7ea62ae548207224f83765a0e67ff8f2
-  Position: {x: -607.5, y: 750}
+  Position: {x: -405, y: 750}
   children:
   - {fileID: 6689383562197944951}
   - {fileID: -6408015603258969091}
@@ -941,7 +978,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: 61996dd6ab2ffce45919e7f1ad569362
-  Position: {x: 2700, y: 500}
+  Position: {x: 2902.5, y: 500}
 --- !u!114 &636432052385636298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,7 +1010,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 9c4e63a87d9b2cf40a27bb20b0e36505
-  Position: {x: 742.5, y: 750}
+  Position: {x: 945, y: 750}
   children:
   - {fileID: -7661162697871511220}
   - {fileID: 2839411587748733840}
@@ -992,7 +1029,7 @@ MonoBehaviour:
   m_Name: RollNode
   m_EditorClassIdentifier: 
   Guid: 32c041ea5f32d104aa63eef2d00f2d77
-  Position: {x: -1755, y: 875}
+  Position: {x: -1957.5, y: 875}
 --- !u!114 &1436748493923859420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1006,7 +1043,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: dcc01b5d5e6c3534dbdf04240cf0d262
-  Position: {x: -1215, y: 625}
+  Position: {x: -1012.5, y: 625}
   waitDuration: 1
 --- !u!114 &1573937756976065579
 MonoBehaviour:
@@ -1021,7 +1058,7 @@ MonoBehaviour:
   m_Name: BlockNode
   m_EditorClassIdentifier: 
   Guid: 23928b7ebf3a6c4459aa56789d88276e
-  Position: {x: -1485, y: 1000}
+  Position: {x: -1687.5, y: 1000}
   blockDuration: 0.3
 --- !u!114 &1647622695949401407
 MonoBehaviour:
@@ -1036,7 +1073,7 @@ MonoBehaviour:
   m_Name: JumpNode
   m_EditorClassIdentifier: 
   Guid: 7874665c16d8b9f44afb61e07b0bdcd8
-  Position: {x: 2160, y: 875}
+  Position: {x: 2362.5, y: 875}
 --- !u!114 &1899421390184422724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,6 +1092,7 @@ MonoBehaviour:
   - {fileID: -7144568464074351043}
   - {fileID: 8108528429368661258}
   - {fileID: 7972895720458030732}
+  - {fileID: 2606031669153627272}
 --- !u!114 &2293849012044273339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,8 +1106,25 @@ MonoBehaviour:
   m_Name: FaceNode
   m_EditorClassIdentifier: 
   Guid: 18454a879c5d5b94f8f3df8c30153527
-  Position: {x: -1890, y: 875}
+  Position: {x: -2092.5, y: 875}
   faceType: 1
+--- !u!114 &2606031669153627272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52207d613dae8d34f91fa3bd32e67a93, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  Guid: df78a900215827a419eb84d307a31c76
+  Position: {x: -1282.5, y: 750}
+  children:
+  - {fileID: 6592572890225912533}
+  - {fileID: 8608572571430892446}
 --- !u!114 &2839411587748733840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,7 +1138,7 @@ MonoBehaviour:
   m_Name: RollNode
   m_EditorClassIdentifier: 
   Guid: 139889b0346365444be3678bf9711ae0
-  Position: {x: 675, y: 875}
+  Position: {x: 877.5, y: 875}
 --- !u!114 &3011452985247337661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,8 +1152,22 @@ MonoBehaviour:
   m_Name: PredictionNode
   m_EditorClassIdentifier: 
   Guid: 0a5d75a3e7f805c43b8618f7dc854665
-  Position: {x: 1215, y: 625}
+  Position: {x: 1417.5, y: 625}
   action: {fileID: 11400000, guid: 719e90e4ad0842144ae7bba2840c518e, type: 2}
+--- !u!114 &3241003374589775776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac6e3840752e4542a17a5e980cef2e4, type: 3}
+  m_Name: AttackNode
+  m_EditorClassIdentifier: 
+  Guid: ebbaa4640e9aff048b62eac972477d56
+  Position: {x: -1147.5, y: 1125}
 --- !u!114 &3379284114579452359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1181,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: c9540a26400a14c4d8851460270cf21e
-  Position: {x: -675, y: 1250}
+  Position: {x: -472.5, y: 1250}
   waitDuration: 0.35
 --- !u!114 &3807771926568289053
 MonoBehaviour:
@@ -1127,7 +1196,7 @@ MonoBehaviour:
   m_Name: FleeNode
   m_EditorClassIdentifier: 
   Guid: 87c640d745c83b14389f14d24aace071
-  Position: {x: -2970, y: 1000}
+  Position: {x: -3172.5, y: 1000}
   targetDistance: 3
   movementBlockerLayers:
     serializedVersion: 2
@@ -1145,7 +1214,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 3161bbf3be9599d4b88b6b4f05210c2e
-  Position: {x: 3037.5, y: 500}
+  Position: {x: 3240, y: 500}
   children:
   - {fileID: -6092590260435797530}
   - {fileID: -7223790366583465112}
@@ -1182,7 +1251,7 @@ MonoBehaviour:
   m_Name: RepeaterNode
   m_EditorClassIdentifier: 
   Guid: 65eff1459f340d74697477bd7791a97a
-  Position: {x: -337.5, y: 1000}
+  Position: {x: -135, y: 1000}
   Child: {fileID: 4453814780514473447}
   repeats: 3
   tickRate: 15
@@ -1199,7 +1268,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: f6d452ea0df10704782cf25c70f1e13a
-  Position: {x: -337.5, y: 1125}
+  Position: {x: -135, y: 1125}
   children:
   - {fileID: 6614576729208618570}
   - {fileID: 320789144729727464}
@@ -1216,7 +1285,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 7420ce1776ca9674e87e9c8b04e83211
-  Position: {x: -607.5, y: 1125}
+  Position: {x: -405, y: 1125}
   children:
   - {fileID: 3379284114579452359}
   - {fileID: -8230508175584223904}
@@ -1233,7 +1302,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 85a3704133d13a046bc3d9b1a026fc78
-  Position: {x: 0, y: 500}
+  Position: {x: 202.5, y: 500}
   children:
   - {fileID: 7304454145729315006}
   - {fileID: -1997271242009884856}
@@ -1251,7 +1320,7 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: 419dd6959d120d144b2e38a1e44e45c3
-  Position: {x: -2295, y: 1000}
+  Position: {x: -2497.5, y: 1000}
   targetDistance: 0.8
 --- !u!114 &6450067589437029129
 MonoBehaviour:
@@ -1266,7 +1335,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: a4e64ef708e6ecb41a013adff047ad86
-  Position: {x: 135, y: 1125}
+  Position: {x: 337.5, y: 1125}
   waitDuration: 1.5
 --- !u!114 &6541671813986506816
 MonoBehaviour:
@@ -1281,11 +1350,26 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: 9f875a0d31f15f443bfeebb9af02a491
-  Position: {x: 135, y: 750}
+  Position: {x: 337.5, y: 750}
   children:
   - {fileID: -8023839173249738032}
   - {fileID: -3746657477632350865}
   - {fileID: 8952621982354861851}
+--- !u!114 &6592572890225912533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76c8384ea9813b47ae73299ad8490c8, type: 3}
+  m_Name: BlockNode
+  m_EditorClassIdentifier: 
+  Guid: 3c9ffca9ecfb79f4fa36fb399a881e0b
+  Position: {x: -1417.5, y: 875}
+  blockDuration: 0.5
 --- !u!114 &6614576729208618570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,7 +1383,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 6ea81be5becdbad40bc750a6bf11cc2e
-  Position: {x: -405, y: 1250}
+  Position: {x: -202.5, y: 1250}
   waitDuration: 0.35
 --- !u!114 &6687307373248474107
 MonoBehaviour:
@@ -1314,7 +1398,7 @@ MonoBehaviour:
   m_Name: RandomNode
   m_EditorClassIdentifier: 
   Guid: 14d1d808da136e744aa5943ffa583b5e
-  Position: {x: 3105, y: 375}
+  Position: {x: 3307.5, y: 375}
   children:
   - {fileID: -1939602147898791974}
   - {fileID: 3809159134687017999}
@@ -1332,7 +1416,7 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 464e0ecdf7247ca458be220ab0e67892
-  Position: {x: -945, y: 875}
+  Position: {x: -742.5, y: 875}
   waitDuration: 0.22
 --- !u!114 &7041022202647188430
 MonoBehaviour:
@@ -1347,7 +1431,7 @@ MonoBehaviour:
   m_Name: RollNode
   m_EditorClassIdentifier: 
   Guid: 01578ba1d4aa5484faa39dbc1e82bbd2
-  Position: {x: 1485, y: 875}
+  Position: {x: 1687.5, y: 875}
 --- !u!114 &7304454145729315006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,7 +1445,7 @@ MonoBehaviour:
   m_Name: PredictionNode
   m_EditorClassIdentifier: 
   Guid: 0ca413705ae00ae43b995fb2a1986bb4
-  Position: {x: -1080, y: 625}
+  Position: {x: -877.5, y: 625}
   action: {fileID: 11400000, guid: 301c26729ff983a43af9ef00cc667335, type: 2}
 --- !u!114 &7537431418430955745
 MonoBehaviour:
@@ -1376,7 +1460,7 @@ MonoBehaviour:
   m_Name: ParallelNode
   m_EditorClassIdentifier: 
   Guid: 2bacdf2ec94ba3e42a72e28ebcdfb53d
-  Position: {x: 3307.5, y: 500}
+  Position: {x: 3510, y: 500}
   children:
   - {fileID: -733608683373956373}
   - {fileID: -1596205811752434758}
@@ -1393,7 +1477,7 @@ MonoBehaviour:
   m_Name: BlockNode
   m_EditorClassIdentifier: 
   Guid: b35865d41c717494388ad6a8527da0ba
-  Position: {x: -1350, y: 1000}
+  Position: {x: -1552.5, y: 1000}
   blockDuration: 0.6
 --- !u!114 &7972895720458030732
 MonoBehaviour:
@@ -1408,7 +1492,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: c59e7d697f4ff6c42ba50015b32a929e
-  Position: {x: -1485, y: 750}
+  Position: {x: -1687.5, y: 750}
   children:
   - {fileID: -6245594134015018813}
   - {fileID: -5015441082734383977}
@@ -1425,7 +1509,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Guid: c42654150a6c48b49a37bae16403641f
-  Position: {x: -1822.5, y: 750}
+  Position: {x: -2025, y: 750}
   children:
   - {fileID: 2293849012044273339}
   - {fileID: 986266274746140191}
@@ -1442,8 +1526,25 @@ MonoBehaviour:
   m_Name: ApproachNode
   m_EditorClassIdentifier: 
   Guid: 51f02e461029d9641913fe8d6bf07fdc
-  Position: {x: 2025, y: 875}
+  Position: {x: 2227.5, y: 875}
   targetDistance: 0.1
+--- !u!114 &8608572571430892446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769bc8ecdaa60744e814bdabcc1583e0, type: 3}
+  m_Name: RandomNode
+  m_EditorClassIdentifier: 
+  Guid: 49a97b01f625bdd4f93413c70d42e03a
+  Position: {x: -1215, y: 875}
+  children:
+  - {fileID: -9080901470367899454}
+  - {fileID: -6493922508864661824}
 --- !u!114 &8812700533087748349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1457,7 +1558,7 @@ MonoBehaviour:
   m_Name: ParallelNode
   m_EditorClassIdentifier: 
   Guid: 67dd7e204bbea2848b57c2332ed5141f
-  Position: {x: -2227.5, y: 875}
+  Position: {x: -2430, y: 875}
   children:
   - {fileID: -2724041604477821481}
   - {fileID: 6016732518875883550}
@@ -1475,7 +1576,7 @@ MonoBehaviour:
   m_Name: AttackNode
   m_EditorClassIdentifier: 
   Guid: f1334bcbc55f04747bc0b428ac7a17bf
-  Position: {x: 405, y: 875}
+  Position: {x: 607.5, y: 875}
 --- !u!114 &9024150214982742750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,5 +1590,5 @@ MonoBehaviour:
   m_Name: WaitNode
   m_EditorClassIdentifier: 
   Guid: 4ac24355869eab142b4decb2eae7d42d
-  Position: {x: -2160, y: 1125}
+  Position: {x: -2362.5, y: 1125}
   waitDuration: 0.25

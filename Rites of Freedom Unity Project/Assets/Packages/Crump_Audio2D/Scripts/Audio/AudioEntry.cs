@@ -39,6 +39,8 @@ public class AudioEntry : ScriptableObject, ICollection<AudioEntryVariation>
 
     public bool PlayOnAwake = false;
     public bool Loop = false;
+    [Tooltip("Audio entries marked as music are limited to only one active instance.")]
+    public bool IsMusic = false;
     public AudioMixerGroup Mixer;
 
     public List<AudioEntryVariation> Variations = new List<AudioEntryVariation>();

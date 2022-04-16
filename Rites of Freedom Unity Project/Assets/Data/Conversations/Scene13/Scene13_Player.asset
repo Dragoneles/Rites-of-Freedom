@@ -15,9 +15,9 @@ MonoBehaviour:
   Lines:
   - Text: ...
     Duration: 1.5
-  - Text: Hm, that's odd
+  - Text: Hm, that's odd.
     Duration: 1.5
-  - Text: He's usually here
+  - Text: He's usually here.
     Duration: 1.5
   - Text: .
     Duration: 1

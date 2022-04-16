@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene7_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Ah, there you are
+  - Text: Morning, Rookie.
     Duration: 1.5
   - Text: We're up first today. Let's get going.
     Duration: 2

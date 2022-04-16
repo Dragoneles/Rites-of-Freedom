@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Scene6_Companion
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Hey, did you hear the news?
+  - Text: Hey Rookie, did you hear the news?
     Duration: 1.5
-  - Text: Turns out the guys up top assigned us to a team
+  - Text: Turns out the guys up top assigned us to a team.
     Duration: 3.5
   - Text: Get some rest, alright?
     Duration: 1.5
-  - Text: I don't need you getting me killed tomorrow
+  - Text: I don't need you getting me killed tomorrow.
     Duration: 3

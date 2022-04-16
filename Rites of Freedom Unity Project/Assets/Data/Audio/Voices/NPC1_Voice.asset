@@ -15,6 +15,7 @@ MonoBehaviour:
   BaseVolume: 0.8
   BasePitch: 0.8
   StereoPan: 0
+  FadeOutLength: 1
   RandomPitchDown: -0.1
   RandomPitchUp: 0.1
   PlayOnAwake: 0

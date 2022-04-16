@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene3_2
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Not terrible, but a real opponent is going to hit back
+  - Text: Not terrible, but a real opponent is going to hit back.
     Duration: 3.5
-  - Text: Put up your shield, it's time to brush up on your blocking
+  - Text: Put up your shield, it's time to brush up on your blocking.
     Duration: 3.5

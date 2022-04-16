@@ -15,7 +15,5 @@ MonoBehaviour:
   Lines:
   - Text: That's quite enough!
     Duration: 1.5
-  - Text: Not bad, rookie
-    Duration: 1.5
-  - Text: Maybe you have what it takes after all
+  - Text: Not bad. Maybe you have what it takes after all.
     Duration: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene4_PlayerDefeat
   m_EditorClassIdentifier: 
   Lines:
-  - Text: Nice try, but you still have a lot of work to do, rookie
-    Duration: 3.5
-  - Text: Real opponents aren't going to be so merciful
+  - Text: Nice effort, but you still have a lot of work to do.
     Duration: 3
+  - Text: Losing a fight won't win you any mercy in the tournament.
+    Duration: 3.5

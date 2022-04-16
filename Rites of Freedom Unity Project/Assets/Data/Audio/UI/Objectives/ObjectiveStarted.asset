@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: ObjectiveStarted
   m_EditorClassIdentifier: 
-  BaseVolume: 0.9
+  BaseVolume: 1
   BasePitch: 1
-  StereoPan: 0
+  StereoPan: -0.4
   FadeOutLength: 1
   RandomPitchDown: 0
   RandomPitchUp: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
   Loop: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
-  - Clip: {fileID: 8300000, guid: cc9af983324fc8b4085dff5e993b3db4, type: 3}
+  - Clip: {fileID: 8300000, guid: c5344a4899666a64280e4e340916fb93, type: 3}

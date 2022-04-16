@@ -59,6 +59,18 @@ public class SceneLoader : MonoBehaviour
     }
 
     /// <summary>
+    /// Load the previous scene build index.
+    /// </summary>
+    public void LoadPreviousScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        int nextSceneIndex = currentSceneIndex - 1;
+
+        LoadScene(nextSceneIndex);
+    }
+
+    /// <summary>
     /// Reload the current scene.
     /// </summary>
     public void ReloadScene()
