@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Scene8_Opponent
   m_EditorClassIdentifier: 
   Lines:
-  - Text: What?!
-    Duration: 1
-  - Text: They let you two fight as a team?
+  - Text: Pah! Partners are for cowards.
+    Duration: 1.5
+  - Text: What, you're not strong enough to fight your own battles?
     Duration: 2.5
-  - Text: No matter, I'll crush you both anyway!
-    Duration: 3
+  - Text: I'm gonna crush you both to a pulp.
+    Duration: 1.8

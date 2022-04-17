@@ -19,7 +19,7 @@ using UnityEngine.Events;
 /// Base class for characters that can animate and receive attacks.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour, IAttackable
+public class Character : MonoBehaviour, IAttackable, INGramInvoker
 {
     [Header("Events")]
     /// <summary>
@@ -89,6 +89,20 @@ public class Character : MonoBehaviour, IAttackable
     public UnityEvent<Character> Attacked => attacked;
     private UnityEvent<Character> attacked = new();
 
+    // NGram invocation implemented through nGramInvoker member
+    event Action<NGramActionInvokedEventArgs> INGramInvoker.Invoked
+    {
+        add
+        {
+            nGramInvoker.Invoked += value;
+        }
+
+        remove
+        {
+            nGramInvoker.Invoked -= value;
+        }
+    }
+
     [Header("Stats")]
     public Vital Health = new Vital(100);
     public Vital Stamina = new Vital(80);
@@ -123,6 +137,9 @@ public class Character : MonoBehaviour, IAttackable
     private bool allowFriendlyFire = false;
 
     public Faction Faction;
+
+    [SerializeField]
+    private NGramInvoker nGramInvoker;
 
     public bool IsAttackable { get => canBeAttacked && !IsRolling; }
     public bool IsDead { get; private set; } = false;
@@ -465,4 +482,6 @@ public class Character : MonoBehaviour, IAttackable
         var eventArgs = new VitalChangedEventArgs(health, e.PreviousValue, e.CurrentValue);
         HealthChanged?.Invoke(eventArgs);
     }
+
+    public void Invoke(NGramAction action) => nGramInvoker.Invoke(action);
 }

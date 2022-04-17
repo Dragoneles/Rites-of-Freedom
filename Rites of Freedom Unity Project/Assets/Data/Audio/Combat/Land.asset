@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: Land
   m_EditorClassIdentifier: 
-  BaseVolume: 0.8
+  BaseVolume: 0.9
   BasePitch: 0.8
   StereoPan: 0
+  FadeOutLength: 1
   RandomPitchDown: -0.1
   RandomPitchUp: 0.1
   PlayOnAwake: 0
   Loop: 0
+  IsMusic: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
   - Clip: {fileID: 8300000, guid: a9099d8e8f233214785e9f3766c4fca0, type: 3}

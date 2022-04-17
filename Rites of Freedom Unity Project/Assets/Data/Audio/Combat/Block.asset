@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseVolume: 0.8
   BasePitch: 1
-  StereoPan: 0
+  StereoPan: 0.2
+  FadeOutLength: 1
   RandomPitchDown: -0.1
   RandomPitchUp: 0.1
   PlayOnAwake: 0
   Loop: 0
+  IsMusic: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
   - Clip: {fileID: 8300000, guid: ef0a037c4988050439419c4790b2e09b, type: 3}

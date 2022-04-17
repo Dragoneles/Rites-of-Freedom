@@ -435,6 +435,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8775b0f2545a2884b993c0ed6a3d2fd2, type: 2}
     - target: {fileID: 1511416008644732209, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: Health.value
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511416008644732209, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: Health.currentValue
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511416008644732209, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: Died.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -472,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2728246456856888776, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3619915920172756999, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: observedInputHandlers.Array.data[0]

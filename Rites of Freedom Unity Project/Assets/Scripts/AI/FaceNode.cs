@@ -45,6 +45,12 @@ public class FaceNode : LeafNode
     {
         target = Blackboard.Get(EnemyBehaviorTree.Target);
 
+        if (target == null)
+        {
+            successCondition = () => true;
+            return;
+        }
+
         switch (faceType)
         {
             case FaceType.TowardsEnemy:

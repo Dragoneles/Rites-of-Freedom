@@ -45,7 +45,7 @@ public class BlockNode : LeafNode
 
     protected override bool CheckNodeFailed()
     {
-        return self.IsDead;
+        return (self.IsDead);
     }
 
     protected override bool CheckNodeSucceeded()

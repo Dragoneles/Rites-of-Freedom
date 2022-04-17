@@ -149,6 +149,10 @@ PrefabInstance:
       propertyPath: observedInputHandlers.Array.data[0]
       value: 
       objectReference: {fileID: 8124792910165803235}
+    - target: {fileID: 8590640230803187253, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8985574447783745649, guid: 83b44135fcc8a984c87e57ae6560ba23, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -392,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec55d9a1d561bed4aa7e5d50361cd0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monitoredInvoker: {fileID: 0}
+  targetFinder: {fileID: 6124693306251358011}
   observedNGramActions:
   - {fileID: 11400000, guid: 996e2cdcb35afc2418a5844ab3de826e, type: 2}
   - {fileID: 11400000, guid: 301c26729ff983a43af9ef00cc667335, type: 2}

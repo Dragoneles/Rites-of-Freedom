@@ -23,6 +23,13 @@ public class PredictionNode : LeafNode
 
     private NGramPredictor predictor;
 
+    [Range(0f, 1f)]
+    [SerializeField]
+    [Tooltip("Chance to treat the NGram prediction as a success.")]
+    private float bypassChance = 0f;
+
+    private float bypassRoll = 0f;
+
     protected override void OnInitialize()
     {
         predictor = Blackboard.Get(EnemyBehaviorTree.Predictor);
@@ -30,11 +37,16 @@ public class PredictionNode : LeafNode
 
     protected override bool CheckNodeFailed()
     {
+        bypassRoll = Random.Range(0f, 1f);
+
         return !CheckNodeSucceeded();
     }
 
     protected override bool CheckNodeSucceeded()
     {
+        if (EvaluateBypassChance())
+            return true;
+
         if (action == null)
             return false;
 
@@ -42,5 +54,14 @@ public class PredictionNode : LeafNode
             return false;
 
         return action == predictor.PredictedAction;
+    }
+
+    private bool EvaluateBypassChance()
+    {
+        if (bypassRoll < bypassChance)
+            return true;
+
+        // default
+        return false;
     }
 }

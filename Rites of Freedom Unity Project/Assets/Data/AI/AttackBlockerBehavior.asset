@@ -103,7 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Guid: 1b6d541479a085e4d9fbbb75a11c5c84
   Position: {x: 0, y: 500}
-  enemyState: 0
+  targetState: 0
+  treatBlockAwayAsFailure: 1
 --- !u!114 &3073173538949594352
 MonoBehaviour:
   m_ObjectHideFlags: 0

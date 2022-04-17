@@ -23,7 +23,19 @@ public class TargetStateNode : LeafNode
     [SerializeField]
     private StateType targetState = StateType.Blocking;
 
+    [SerializeField]
+    [Tooltip(
+        "Whether to treat blocking as a failure if the target " +
+        "isn't facing the agent.")]
+    private bool treatBlockAwayAsFailure = true;
+
     private Character target;
+    private Character self;
+
+    protected override void OnInitialize()
+    {
+        self = Blackboard.Get(EnemyBehaviorTree.Self);
+    }
 
     protected override void OnNodeEntered()
     {
@@ -39,7 +51,15 @@ public class TargetStateNode : LeafNode
     {
         switch (targetState)
         {
-            case StateType.Blocking: return target.IsBlocking;
+            case StateType.Blocking:
+                if (!target.IsBlocking)
+                    return false;
+
+                if (treatBlockAwayAsFailure && TargetIsFacingAway())
+                    return false;
+
+                return true;
+
             case StateType.Rolling: return target.IsRolling;
             case StateType.Moving: return target.IsMoving;
             case StateType.Jumping: return target.IsJumping;
@@ -48,5 +68,10 @@ public class TargetStateNode : LeafNode
         }
 
         return false;
+    }
+
+    private bool TargetIsFacingAway()
+    {
+        return !target.IsFacingPoint(self.Position);
     }
 }

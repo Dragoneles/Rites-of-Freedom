@@ -18,10 +18,10 @@ using UnityEngine;
 /// </summary>
 public class NGramInvoker : MonoBehaviour
 {
-    public event EventHandler<NGramActionInvokedEventArgs> Invoked;
+    public event Action<NGramActionInvokedEventArgs> Invoked;
 
     public void Invoke(NGramAction action)
     {
-        Invoked?.Invoke(this, new NGramActionInvokedEventArgs(this, action));
+        Invoked?.Invoke(new NGramActionInvokedEventArgs(this, action));
     }
 }

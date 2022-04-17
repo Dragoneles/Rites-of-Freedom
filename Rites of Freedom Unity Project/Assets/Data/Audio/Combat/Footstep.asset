@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67849ae526526d24a936d5a80c806257, type: 3}
   m_Name: Footstep
   m_EditorClassIdentifier: 
-  BaseVolume: 0.45
+  BaseVolume: 0.55
   BasePitch: 1
-  StereoPan: 0
+  StereoPan: -0.1
+  FadeOutLength: 1
   RandomPitchDown: -0.1
   RandomPitchUp: 0.1
   PlayOnAwake: 0
   Loop: 0
+  IsMusic: 0
   Mixer: {fileID: 4629807470469930581, guid: 7cf488c0483a4394f82479b58009f289, type: 2}
   Variations:
   - Clip: {fileID: 8300000, guid: fd02097ce47d1044aa9ae174b733d2ff, type: 3}

@@ -133,9 +133,12 @@ namespace AI.BehaviorTree.Editor
 
             if (nodeView.Node is DecoratorNode decoratorNode)
             {
-                NodeView childNodeView = GetNodeViewOfNode(decoratorNode.Child);
-                childNodes.Add(childNodeView);
-                childNodes.AddRange(GetChildrenOfNodeView(childNodeView));
+                if (decoratorNode.Child != null)
+                {
+                    NodeView childNodeView = GetNodeViewOfNode(decoratorNode.Child);
+                    childNodes.Add(childNodeView);
+                    childNodes.AddRange(GetChildrenOfNodeView(childNodeView));
+                }
             }
             else if (nodeView.Node is CompositeNode compositeNode)
             {
