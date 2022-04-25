@@ -8,7 +8,6 @@
 *     Singleton object used to play audio clips from anywhere in the project.
 * 
 *******************************************************************************/
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +91,7 @@ public class AudioManager : MonoBehaviour
         // Calculate pitch variance
         float pitchDown = entry.RandomPitchDown;
         float pitchUp = entry.RandomPitchUp;
-        float pitchVariance = UnityEngine.Random.Range(pitchDown, pitchUp);
+        float pitchVariance = Random.Range(pitchDown, pitchUp);
 
         // Modify source pitch
         source.pitch = entry.BasePitch + pitchVariance;
@@ -105,7 +104,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void PlaySound(AudioEntry entry)
     {
-        int random = UnityEngine.Random.Range(0, entry.Count);
+        int random = Random.Range(0, entry.Count);
         PlaySound(entry, random);
     }
 
